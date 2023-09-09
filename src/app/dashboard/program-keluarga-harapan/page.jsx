@@ -3,36 +3,15 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Breadcrumbs from "/src/app/components/Breadcrumbs";
 import Typography from "@mui/joy/Typography";
+import Table from "src/app/components/Table";
 // icons
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import { FormControl, FormLabel, Input } from "@mui/joy";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function ProgramKeluargaHarapan() {
   return (
-    <Box
-      component="main"
-      className="MainContent"
-      sx={{
-        px: {
-          xs: 2,
-          md: 6,
-        },
-        pt: {
-          xs: "calc(12px + var(--Header-height))",
-          sm: "calc(12px + var(--Header-height))",
-          md: 3,
-        },
-        pb: {
-          xs: 2,
-          sm: 2,
-          md: 3,
-        },
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        minWidth: 0,
-        gap: 1,
-      }}
-    >
+    <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -69,6 +48,35 @@ export default function ProgramKeluargaHarapan() {
           Download PDF
         </Button>
       </Box>
-    </Box>
+      <Box
+        className="SearchAndFilters-tabletUp"
+        sx={{
+          borderRadius: "sm",
+          py: 2,
+          display: {
+            xs: "none",
+            sm: "flex",
+          },
+          flexWrap: "wrap",
+          gap: 1.5,
+          "& > *": {
+            minWidth: {
+              xs: "120px",
+              md: "160px",
+            },
+          },
+        }}
+      >
+        <FormControl sx={{ flex: 1 }} size="sm">
+          <FormLabel>Cari Keluarga Penerima PKH</FormLabel>
+          <Input
+            size="sm"
+            placeholder="Search"
+            startDecorator={<SearchIcon />}
+          />
+        </FormControl>
+      </Box>
+      <Table />
+    </>
   );
 }
