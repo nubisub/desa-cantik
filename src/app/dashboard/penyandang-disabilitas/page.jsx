@@ -8,7 +8,7 @@ export default function Page() {
         items={[
           {
             label: "Dashboard",
-            href: "/",
+            href: "/dashboard",
           },
           {
             label: "Penyandang Disabilitas",

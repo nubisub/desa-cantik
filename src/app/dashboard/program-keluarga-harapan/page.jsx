@@ -1,9 +1,9 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
-import Breadcrumbs from "/src/app/components/Breadcrumbs";
+import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "src/app/components/Table";
+import Table from "@/app/components/Table";
 // icons
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import { FormControl, FormLabel, Input } from "@mui/joy";
@@ -17,7 +17,7 @@ export default function ProgramKeluargaHarapan() {
           items={[
             {
               label: "Dashboard",
-              href: "/",
+              href: "/dashboard",
             },
             {
               label: "Program Keluarga Harapan",

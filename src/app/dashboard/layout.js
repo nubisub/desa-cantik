@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
             sx={{
               gridTemplateColumns: {
                 xs: "1fr",
-                sm: "minmax(64px, 200px) minmax(450px, 1fr)",
                 md: "minmax(160px, 260px) minmax(600px, 1fr)",
               },
             }}
