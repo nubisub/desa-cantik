@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
 import Table from "@mui/joy/Table";
@@ -307,7 +308,24 @@ const data = [
     Alamat: "37623 5th Street",
   },
 ];
-export default function TablePKH() {
+export default function TablePKH({ search }) {
+  const [rowData, setRowData] = useState(data);
+  useEffect(() => {
+    if (search) {
+      setRowData();
+      //   filter with NIK and kepala keluarga and alamat
+      const filteredData = data.filter((item) => {
+        return (
+          item.NIK.toLowerCase().includes(search.toLowerCase()) ||
+          item.Kepala.toLowerCase().includes(search.toLowerCase()) ||
+          item.Alamat.toLowerCase().includes(search.toLowerCase())
+        );
+      });
+      setRowData(filteredData);
+    } else {
+      setRowData(data);
+    }
+  }, [search]);
   return (
     <Sheet
       className="OrderTableContainer"
@@ -375,20 +393,10 @@ export default function TablePKH() {
             >
               Alamat
             </th>
-            {/*<th*/}
-            {/*  style={{*/}
-            {/*    width: 140,*/}
-            {/*    padding: "12px 6px",*/}
-            {/*    fontWeight: "500",*/}
-            {/*    fontSize: "1.1em",*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  {" "}*/}
-            {/*</th>*/}
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
+          {rowData.map((row, index) => (
             <tr key={index + 1}>
               <td>
                 <Typography sx={{ pl: "16px", fontWeight: "md" }}>
@@ -413,14 +421,6 @@ export default function TablePKH() {
                   {row.Alamat}
                 </Typography>
               </td>
-              {/*<td>*/}
-              {/*  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>*/}
-              {/*    <Link level="body-xs" component="button">*/}
-              {/*      Download*/}
-              {/*    </Link>*/}
-              {/*    /!*<RowMenu />*!/*/}
-              {/*  </Box>*/}
-              {/*</td>*/}
             </tr>
           ))}
         </tbody>

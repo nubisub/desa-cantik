@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -10,6 +11,7 @@ import { FormControl, FormLabel, Input } from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function ProgramKeluargaHarapan() {
+  const [search, setSearch] = React.useState("");
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -73,10 +75,12 @@ export default function ProgramKeluargaHarapan() {
             size="sm"
             placeholder="Search"
             startDecorator={<SearchIcon />}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </FormControl>
       </Box>
-      <Table />
+      <Table search={search} />
     </>
   );
 }
