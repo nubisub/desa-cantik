@@ -15,13 +15,11 @@ This project is designed to provide a seamless solution for managing and display
     - [Google Apps Script Setup](#google-apps-script-setup)
     - [Next.js Setup](#nextjs-setup)
     - [Firebase Setup](#firebase-setup)
-  - [Usage](#usage)
-  - [Deployment](#deployment)
   - [Contributing](#contributing)
   - [License](#license)
 
 ## Features
-![Desa Cantik](/docs/app-architecture.svg)
+![Desa Cantik](/docs/app-architecture.png)
 
 - **Google Sheets Database**: Utilize Google Sheets as a database to easily update and manage data.
 - **Google Apps Script**: Automate processes and data manipulation within Google Sheets.
@@ -57,20 +55,13 @@ This project is designed to provide a seamless solution for managing and display
 3. Configure Firebase authentication methods (e.g., email/password, Google sign-in) as per your requirements.
 4. Update the Firebase configuration in your Next.js application's `.env` file.
 
-
-
-## Usage
-
-
-## Deployment
-
 ## Roadmap
-- When data is bigger and need to be updated frequently, maybe we need to use database instead of google sheets because it will be slow to update the data
+When data is bigger and need to be updated frequently, maybe we need to use database instead of google sheets because it will be slow to update the data
 
 
 ## Contributing
+Feel free to contribute to this project.
 
-Provide guidelines for contributing to your project, including how to report issues and submit pull requests.
 
 ## License
 
