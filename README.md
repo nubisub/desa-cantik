@@ -1,41 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped
-with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Desa Cantik
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is designed to provide a seamless solution for managing and displaying data using Google Sheets as the database, Google Apps Script for automation, Next.js hosted on Vercel for the front-end, and Firebase for authentication. It allows easy data updates for your client while maintaining robust security and scalability.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Project Name](#desa-cantik)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Setup](#setup)
+    - [Google Sheets Setup](#google-sheets-setup)
+    - [Google Apps Script Setup](#google-apps-script-setup)
+    - [Next.js Setup](#nextjs-setup)
+    - [Firebase Setup](#firebase-setup)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+## Features
+![Desa Cantik](/docs/app-architecture.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and
-load Inter, a custom Google Font.
+- **Google Sheets Database**: Utilize Google Sheets as a database to easily update and manage data.
+- **Google Apps Script**: Automate processes and data manipulation within Google Sheets.
+- **Next.js Frontend**: Build a responsive and fast front-end using Next.js, hosted on Vercel.
+- **Firebase Authentication**: Secure your application with Firebase authentication.
 
-## Learn More
+## Setup
 
-To learn more about Next.js, take a look at the following resources:
+### Google Sheets Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a Google Sheet document or use an existing one as your database.
+2. Share the Google Sheet with the appropriate permissions to allow your client to update data.
+3. Note the Google Sheet's ID from the URL (e.g., `https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions
-are welcome!
+### Google Apps Script Setup
 
-## Deploy on Vercel
+1. Open your Google Sheet.
+2. Click on "Extensions" > "Apps Script" to open the Google Apps Script editor.
+3. Write the necessary scripts to interact with your Google Sheet data and perform any required automations.
 
-The easiest way to deploy your Next.js app is to use
-the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+### Next.js Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Run `npm install` to install project dependencies.
+4. Update the environment variables in a `.env` file to include your Firebase configuration.
+5. Customize the Next.js application to fetch data from Google Sheets and display it as needed.
 
-coba feature branch
+### Firebase Setup
+
+1. Set up a Firebase project on the [Firebase Console](https://console.firebase.google.com/).
+2. Obtain the Firebase configuration object (apiKey, authDomain, projectId, etc.).
+3. Configure Firebase authentication methods (e.g., email/password, Google sign-in) as per your requirements.
+4. Update the Firebase configuration in your Next.js application's `.env` file.
+
+## Roadmap
+When data is bigger and need to be updated frequently, maybe we need to use database instead of google sheets because it will be slow to update the data
+
+
+## Contributing
+Feel free to contribute to this project.
+
+
+## License
+
+This project is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
