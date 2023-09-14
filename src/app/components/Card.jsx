@@ -1,9 +1,9 @@
-import { CardContent, CircularProgress, SvgIcon } from "@mui/joy";
+import { Card, CardContent, CircularProgress, SvgIcon } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
 
-export default function Card(props) {
+export default function CardDashboard() {
   return (
-    <Card variant="solid" color="primary" invertedColors>
+    <Card variant="outlined" invertedColors>
       <CardContent orientation="horizontal">
         <CircularProgress size="lg" determinate value={20}>
           <SvgIcon>
