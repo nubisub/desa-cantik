@@ -4,6 +4,7 @@ import Navigation from "@/app/components/Navigation";
 import * as React from "react";
 import ColorScheme from "@/app/components/ColorScheme";
 import ThemeRegistry from "@/app/ThemeRegistry";
+import Header from "@/app/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,9 @@ export default function RootLayout({ children }) {
               },
             }}
           >
-            <Layout.Header>
+            <Header>
               <ColorScheme />
-            </Layout.Header>
+            </Header>
             <Layout.SideNav>
               <Navigation />
             </Layout.SideNav>

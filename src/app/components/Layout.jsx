@@ -1,13 +1,6 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Sheet from "@mui/joy/Sheet";
-import IconButton from "@mui/joy/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Link from "next/link";
-import Image from "next/image";
-import Typography from "@mui/joy/Typography";
-import Tooltip from "@mui/joy/Tooltip";
-import LogoutIcon from "@mui/icons-material/Logout";
 
 function Root(props) {
   return (
@@ -27,91 +20,6 @@ function Root(props) {
         ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
       ]}
     />
-  );
-}
-function Header(props) {
-  return (
-    <Box
-      component="header"
-      className="Header"
-      {...props}
-      sx={[
-        {
-          p: 2,
-          gap: 2,
-          bgcolor: "background.surface",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gridColumn: "1 / -1",
-          borderBottom: "1px solid",
-          borderColor: "divider",
-          position: "sticky",
-          top: 0,
-          zIndex: 1100,
-        },
-        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
-      ]}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 1.5,
-        }}
-      >
-        <IconButton
-          variant="outlined"
-          size="sm"
-          sx={{ display: { md: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Link href={"/"}>
-          <IconButton
-            size="sm"
-            variant="soft"
-            sx={{ display: { xs: "none", md: "inline-flex" }, p: 1 }}
-          >
-            <Image
-              src="/logo-bps.png"
-              width={25}
-              height={25}
-              alt="Picture of the author"
-            />
-          </IconButton>
-        </Link>
-        <Typography
-          sx={{
-            fontSize: "1.1em",
-          }}
-          component="h1"
-          fontWeight="500"
-        >
-          Desa Cantik Margoagung
-        </Typography>
-      </Box>
-
-      <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5 }}>
-        {props.children}
-        <Tooltip
-          title={"Keluar"}
-          arrow
-          color="danger"
-          placement="bottom"
-          size="sm"
-          variant="solid"
-        >
-          <Link href={"/"}>
-            <IconButton size="sm" variant="soft" color="danger">
-              <LogoutIcon />
-            </IconButton>
-          </Link>
-        </Tooltip>
-      </Box>
-    </Box>
   );
 }
 
@@ -230,7 +138,6 @@ function SideDrawer({ onClose, ...props }) {
 export default {
   Root,
   SideNav,
-  Header,
   SidePane,
   SideDrawer,
   Main,
