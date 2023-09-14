@@ -1,13 +1,13 @@
 import Sheet from "@mui/joy/Sheet";
 import Box from "@mui/joy/Box";
 import { dm_sans } from "@/app/utils/fonts";
-import Link from "next/link";
 import Button from "@mui/joy/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import { motion, useInView } from "framer-motion";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { useRef } from "react";
+import { signIn } from "next-auth/react";
 
 export default function Page1() {
   const ref = useRef(null);
@@ -44,27 +44,28 @@ export default function Page1() {
             Cantik]
           </span>
         </Box>
-        <Link href="/dashboard">
-          <Button
-            color="neutral"
+        <Button
+          onClick={() => {
+            signIn("github");
+          }}
+          color="neutral"
+          sx={{
+            "&:hover": {
+              bgcolor: "rgba(182,182,182,0.13)",
+            },
+            borderRadius: 100,
+            borderColor: "rgba(182,182,182,0.73)",
+          }}
+          size="lg"
+          variant="outlined"
+        >
+          Masuk
+          <LoginIcon
             sx={{
-              "&:hover": {
-                bgcolor: "rgba(182,182,182,0.13)",
-              },
-              borderRadius: 100,
-              borderColor: "rgba(182,182,182,0.73)",
+              ml: 1,
             }}
-            size="lg"
-            variant="outlined"
-          >
-            Masuk
-            <LoginIcon
-              sx={{
-                ml: 1,
-              }}
-            />
-          </Button>
-        </Link>
+          />
+        </Button>
       </Box>
       <Box
         sx={{
