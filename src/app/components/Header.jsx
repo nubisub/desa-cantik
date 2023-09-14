@@ -12,12 +12,17 @@ import { Drawer, ModalClose } from "@mui/joy";
 import List from "@mui/joy/List";
 import ListItemButton from "@mui/joy/ListItemButton";
 import Data from "./NavigationData";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ListItemContent from "@mui/joy/ListItemContent";
 import ListItem from "@mui/joy/ListItem";
 
 export default function Header(props) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const SignOut = () => {
+    router.push("/");
+  };
 
   const [open, setOpen] = React.useState(false);
   return (
@@ -60,9 +65,7 @@ export default function Header(props) {
             variant="outlined"
             size="sm"
             sx={{ display: { md: "none" } }}
-            onClick={() => {
-              setOpen(true);
-            }}
+            onClick={() => setOpen(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -101,11 +104,14 @@ export default function Header(props) {
             size="sm"
             variant="solid"
           >
-            <Link href={"/"}>
-              <IconButton size="sm" variant="soft" color="danger">
-                <LogoutIcon />
-              </IconButton>
-            </Link>
+            <IconButton
+              onClick={() => SignOut()}
+              size="sm"
+              variant="soft"
+              color="danger"
+            >
+              <LogoutIcon />
+            </IconButton>
           </Tooltip>
         </Box>
       </Box>

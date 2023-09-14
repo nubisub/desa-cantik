@@ -1,12 +1,9 @@
-import { Inter } from "next/font/google";
 import Layout from "@/app/components/Layout";
 import Navigation from "@/app/components/Navigation";
 import * as React from "react";
 import ColorScheme from "@/app/components/ColorScheme";
 import ThemeRegistry from "@/app/ThemeRegistry";
 import Header from "@/app/components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Desa Cantik : Margoagung",

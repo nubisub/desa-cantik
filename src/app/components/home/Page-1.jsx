@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { useRef } from "react";
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Page1() {
   const ref = useRef(null);
@@ -44,28 +44,27 @@ export default function Page1() {
             Cantik]
           </span>
         </Box>
-        <Button
-          onClick={() => {
-            signIn("github");
-          }}
-          color="neutral"
-          sx={{
-            "&:hover": {
-              bgcolor: "rgba(182,182,182,0.13)",
-            },
-            borderRadius: 100,
-            borderColor: "rgba(182,182,182,0.73)",
-          }}
-          size="lg"
-          variant="outlined"
-        >
-          Masuk
-          <LoginIcon
+        <Link href={"/dashboard"}>
+          <Button
+            color="neutral"
             sx={{
-              ml: 1,
+              "&:hover": {
+                bgcolor: "rgba(182,182,182,0.13)",
+              },
+              borderRadius: 100,
+              borderColor: "rgba(182,182,182,0.73)",
             }}
-          />
-        </Button>
+            size="lg"
+            variant="outlined"
+          >
+            Masuk
+            <LoginIcon
+              sx={{
+                ml: 1,
+              }}
+            />
+          </Button>
+        </Link>
       </Box>
       <Box
         sx={{
