@@ -11,30 +11,57 @@ import Typography from "@mui/joy/Typography";
 import { toast, Toaster } from "sonner";
 import Card from "@mui/joy/Card";
 import { useRouter } from "next/navigation";
-import AuthRoute from "../../components/AuthRoute";
 
-import { signIn } from "../../services/auth";
+import { signUp } from "../../services/auth";
 
 export default function Page() {
 	const [isLoading, setIsLoading] = useState();
 	const router = useRouter();
+	
+	// check if there is environment variable for allowSignUp if not set it to false
+	const allowSignUp = process.env.NEXT_PUBLIC_ALLOW_SIGNUP || false;
 
 	function handleLogin(e) {
 		setIsLoading(true);
 		e.preventDefault();
-		const { email, password } = e.target.elements;
+		const { email, password, passwordRepeat } = e.target.elements;
+		if (!allowSignUp) {
+			toast.error("Pendaftaran ditutup");
+			setIsLoading(false);
+			return;
+		}
+
+		if (password.value !== passwordRepeat.value) {
+			toast.error("Password tidak sama");
+			setIsLoading(false);
+
+			return;
+		}
+
 		if (!email.value || !password.value) {
 			toast.error("Email dan password harus diisi");
+			setIsLoading(false);
+
 			return;
 		}
 
 		if (!email.value.includes("@")) {
 			toast.error("Email harus valid");
+			setIsLoading(false);
+
 			return;
 		}
-		signIn(email.value, password.value)
+
+		if (password.value.length < 6) {
+			toast.error("Password minimal 6 karakter");
+			setIsLoading(false);
+
+			return;
+		}
+
+		signUp(email.value, password.value)
 			.then((userCredential) => {
-				toast.success("Login Berhasil, Selamat Datang Kembali :)");
+				toast.success("Akun berhasil dibuat, selamat datang :)");
 				// wait for 2 seconds
 				setTimeout(() => {
 					// after 2 seconds redirect to dashboard
@@ -44,15 +71,19 @@ export default function Page() {
 				// router.push("/dashboard");
 			})
 			.catch((error) => {
-				toast.error("Login gagal ", {
-					description: "Periksa kembali email dan password anda",
-				});
+				if (error.code === "auth/email-already-in-use") {
+					toast.error("Email sudah digunakan");
+				} else {
+					toast.error("Login gagal ", {
+						description: "Terjadi kesalahan, silahkan coba lagi"
+					});
+				}
 				setIsLoading(false);
 			});
 	}
 
 	return (
-		<AuthRoute>
+		<>
 			<Box>
 				<Toaster position="top-center" richColors closeButton />
 				<Box
@@ -92,10 +123,10 @@ export default function Page() {
 					>
 						<div>
 							<Typography component="h1" fontSize="xl2" fontWeight="lg">
-								Masuk ke Akun Anda
+								Buat Akun
 							</Typography>
 							<Typography level="body-sm" sx={{ my: 1, mb: 1 }}>
-								Selamat datang kembali
+								Selamat datang di Desa Cantik
 							</Typography>
 						</div>
 						<form onSubmit={handleLogin}>
@@ -107,6 +138,10 @@ export default function Page() {
 								<FormLabel>Password</FormLabel>
 								<Input type="password" name="password" />
 							</FormControl>
+							<FormControl required>
+								<FormLabel>Konfirmasi Password</FormLabel>
+								<Input type="password" name="passwordRepeat" />
+							</FormControl>
 							<Box
 								sx={{
 									display: "flex",
@@ -115,12 +150,12 @@ export default function Page() {
 									py: 1,
 								}}
 							>
-								<Link fontSize="sm" href="/auth/signup" fontWeight="lg">
-									Belum punya akun?
+								<Link fontSize="sm" href="/auth/signin" fontWeight="lg">
+									Sudah punya akun?
 								</Link>
 							</Box>
 							<Button type="submit" fullWidth loading={isLoading}>
-								Masuk
+								Buat Akun
 							</Button>
 						</form>
 					</Card>
@@ -131,6 +166,6 @@ export default function Page() {
 					</Box>
 				</Box>
 			</Box>
-		</AuthRoute>
+		</>
 	);
 }
