@@ -9,27 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Icons import
-import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import GroupsIcon from "@mui/icons-material/Groups";
-import ChildCareIcon from "@mui/icons-material/ChildCare";
-
-const Data = [
-  {
-    label: "Beranda",
-    href: "/dashboard",
-    icon: <FolderOpenIcon fontSize="small" />,
-  },
-  {
-    label: "Program Keluarga Harapan",
-    href: "/dashboard/program-keluarga-harapan",
-    icon: <GroupsIcon fontSize="small" />,
-  },
-  {
-    label: "Kasus Stunting/Disabilitas",
-    href: "/dashboard/penyandang-disabilitas",
-    icon: <ChildCareIcon fontSize="small" />,
-  },
-];
+import Data from "./NavigationData";
 
 export default function Navigation() {
   const pathname = usePathname();
