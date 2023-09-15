@@ -3,7 +3,7 @@ import Breadcrumbs from "@/app/components/BreadCrumbs";
 import Box from "@mui/joy/Box";
 import CardDashboard from "@/app/components/Card";
 
-export default function Home(children) {
+export default function Home() {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
