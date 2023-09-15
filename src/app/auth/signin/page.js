@@ -35,13 +35,9 @@ export default function Page() {
 		signIn(email.value, password.value)
 			.then((userCredential) => {
 				toast.success("Login Berhasil, Selamat Datang Kembali :)");
-				// wait for 2 seconds
 				setTimeout(() => {
-					// after 2 seconds redirect to dashboard
 					router.push("/dashboard");
-				}, 1000);
-
-				// router.push("/dashboard");
+				}, 5000);
 			})
 			.catch((error) => {
 				toast.error("Login gagal ", {

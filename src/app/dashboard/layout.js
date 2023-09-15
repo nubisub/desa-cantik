@@ -15,16 +15,16 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body>
-				<ThemeRegistry options={{ key: "joy" }}>
-					<Layout.Root
-						sx={{
-							gridTemplateColumns: {
-								xs: "1fr",
-								md: "minmax(160px, 260px) minmax(600px, 1fr)",
-							},
-						}}
-					>
-						<PrivateRoute>
+				<PrivateRoute>
+					<ThemeRegistry options={{ key: "joy" }}>
+						<Layout.Root
+							sx={{
+								gridTemplateColumns: {
+									xs: "1fr",
+									md: "minmax(160px, 260px) minmax(600px, 1fr)",
+								},
+							}}
+						>
 							<Header>
 								<ColorScheme />
 							</Header>
@@ -32,9 +32,9 @@ export default function RootLayout({ children }) {
 								<Navigation />
 							</Layout.SideNav>
 							<Layout.Main>{children}</Layout.Main>
-						</PrivateRoute>
-					</Layout.Root>
-				</ThemeRegistry>
+						</Layout.Root>
+					</ThemeRegistry>
+				</PrivateRoute>
 			</body>
 		</html>
 	);
