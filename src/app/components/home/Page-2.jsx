@@ -14,7 +14,7 @@ export default function Page2() {
     target: ref,
     offset: ["start end", "end end"],
   });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
 
   return (
@@ -29,7 +29,16 @@ export default function Page2() {
           justifyContent: "center",
         }}
       >
-        <Stack sx={{ width: "70%" }} direction="column" spacing={6}>
+        <Stack
+          sx={{
+            width: {
+              xs: "90%",
+              sm: "70%",
+            },
+          }}
+          direction="column"
+          spacing={6}
+        >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -52,18 +61,18 @@ export default function Page2() {
                   lineHeight: "100%",
                   letterSpacing: "-0.02em",
                   fontSize: "2rem",
+                  my: 6,
                   "@media (min-width:600px)": {
                     fontSize: "3rem",
                   },
                 }}
                 className={dm_sans.className}
               >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt dolores illum magni pariatur?
+                Kemiskinan : Sebuah Tantangan Global
               </Typography>
             </Box>
             <Stack
-              direction="row"
+              direction={window.innerWidth < 600 ? "column" : "row"}
               justifyContent="center"
               alignItems="start"
               spacing={6}
@@ -71,8 +80,9 @@ export default function Page2() {
               <NextImage
                 src="/stunting-image.jpg"
                 alt="Indonesian Child Image"
-                width={550}
-                height={300}
+                width={window.innerWidth < 600 ? 350 : 550}
+                height={window.innerWidth < 600 ? 300 : 330}
+                r
                 style={{ objectFit: "cover" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
@@ -82,26 +92,28 @@ export default function Page2() {
                 sx={{
                   fontWeight: "normal",
                   color: "#ffffff",
-                  fontSize: "2rem",
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.2rem",
+                  },
                   "@media (min-width:600px)": {
-                    fontSize: "1rem",
+                    fontSize: "1.1rem",
                   },
                 }}
                 className={dm_sans.className}
               >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deserunt dolores illum magni pariatur? Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. Aliquid aspernatur commodi
-                culpa ea esse exercitationem id laborum odio perferendis ratione
-                recusandae repellat, similique suscipit, ullam veniam veritatis
-                vero vitae voluptatem. Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Aspernatur cumque dolores ex exercitationem
-                expedita incidunt ipsum nemo numquam pariatur qui quidem quo
-                recusandae repellendus, tempora tempore temporibus ut vel
-                veritatis. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Accusamus alias assumenda commodi cum, enim ipsum iusto
-                molestiae mollitia natus, necessitatibus nostrum numquam odio
-                placeat quam quo sunt tenetur unde! Praesentium?
+                Kemiskinan, sebagai suatu masalah global, tetap menjadi isu yang
+                meresap dan melampaui batas-batas negara serta memengaruhi
+                banyak kehidupan. Ini mencakup kekurangan kebutuhan dasar,
+                termasuk makanan, air bersih, pendidikan, dan layanan kesehatan,
+                yang meninggalkan individu dan keluarga berjuang dengan rasa
+                rentan yang mendalam. Siklus kemiskinan sering kali menjebak
+                generasi-generasi, menghambat mobilitas sosial, dan
+                memperpanjang ketidaksetaraan. Namun, dalam realitas kelam ini,
+                cerita-cerita tentang ketahanan, tekad, dan harapan muncul saat
+                individu dan komunitas berusaha mengatasi kesulitan, menekankan
+                perlunya usaha kolektif dan solusi untuk mengurangi cengkeraman
+                kemiskinan yang berkepanjangan di masyarakat.
               </Typography>
             </Stack>
           </motion.div>
