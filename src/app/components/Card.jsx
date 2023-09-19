@@ -8,7 +8,7 @@ import Box from "@mui/joy/Box";
 import { lato } from "@/app/utils/fonts";
 import { Paid } from "@mui/icons-material";
 
-export default function CardDashboard() {
+export default function CardDashboard({ BLT, Disabilitas }) {
   return (
     <>
       <Card
@@ -73,7 +73,7 @@ export default function CardDashboard() {
               }}
               variant="h6"
             >
-              <span className={lato.className}>96</span>
+              <span className={lato.className}>{BLT}</span>
             </Typography>
           </CardContent>
           {/*<Divider orientation="horizontal" />*/}
@@ -157,7 +157,7 @@ export default function CardDashboard() {
               }}
               variant="h6"
             >
-              <span className={lato.className}>54</span>
+              <span className={lato.className}>{Disabilitas}</span>
             </Typography>
           </CardContent>
           <Box

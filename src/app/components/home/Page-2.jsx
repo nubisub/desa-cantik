@@ -48,8 +48,11 @@ export default function Page2() {
               scaleX: scaleX,
               scaleY: scaleY,
               bgColor: "#ff0000",
-              paddingBottom: "100px",
-              paddingTop: "100px",
+              paddingBottom: "50px",
+              "@media (min-width:600px)": {
+                paddingBottom: "100px",
+                paddingTop: "100px",
+              },
             }}
           >
             <Box>
@@ -82,7 +85,6 @@ export default function Page2() {
                 alt="Indonesian Child Image"
                 width={window.innerWidth < 600 ? 350 : 550}
                 height={window.innerWidth < 600 ? 300 : 330}
-                r
                 style={{ objectFit: "cover" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
@@ -119,11 +121,6 @@ export default function Page2() {
           </motion.div>
         </Stack>
       </Sheet>
-      <Box
-        sx={{
-          minHeight: "100vh",
-        }}
-      ></Box>
     </div>
   );
 }

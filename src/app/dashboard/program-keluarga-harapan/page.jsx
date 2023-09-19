@@ -1,17 +1,24 @@
-"use client";
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "@/app/components/Table";
+import Table from "@/app/dashboard/program-keluarga-harapan/Table";
 // icons
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
-import { FormControl, FormLabel, Input } from "@mui/joy";
-import SearchIcon from "@mui/icons-material/Search";
 
-export default function ProgramKeluargaHarapan() {
-  const [search, setSearch] = React.useState("");
+export const dynamic = "force-dynamic";
+
+async function getData() {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API + "?endpoint=daftar-penerima-blt"
+  );
+  return res.json();
+}
+
+export default async function ProgramKeluargaHarapan() {
+  const data = await getData();
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -50,37 +57,8 @@ export default function ProgramKeluargaHarapan() {
           Download PDF
         </Button>
       </Box>
-      <Box
-        className="SearchAndFilters-tabletUp"
-        sx={{
-          borderRadius: "sm",
-          py: 2,
-          display: {
-            xs: "none",
-            sm: "flex",
-          },
-          flexWrap: "wrap",
-          gap: 1.5,
-          "& > *": {
-            minWidth: {
-              xs: "120px",
-              md: "160px",
-            },
-          },
-        }}
-      >
-        <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Cari Keluarga Penerima PKH</FormLabel>
-          <Input
-            size="sm"
-            placeholder="Search"
-            startDecorator={<SearchIcon />}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </FormControl>
-      </Box>
-      <Table search={search} />
+
+      <Table data={data} />
     </>
   );
 }

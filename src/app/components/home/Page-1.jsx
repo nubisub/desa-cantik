@@ -66,12 +66,16 @@ export default function Page1() {
               borderRadius: 100,
               borderColor: "rgba(182,182,182,0.73)",
             }}
+            size={window.innerWidth < 600 ? "sm" : "lg"}
             variant="outlined"
           >
             Masuk
             <LoginIcon
               sx={{
-                ml: 1,
+                ml: {
+                  xs: 0,
+                  sm: 1,
+                },
               }}
             />
           </Button>
@@ -154,7 +158,7 @@ export default function Page1() {
               },
               mt: {
                 xs: 2,
-                sm: 0,
+                sm: 1,
               },
               width: {
                 xs: "100%",
@@ -164,10 +168,10 @@ export default function Page1() {
             }}
             className={dm_sans.className}
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
-            consequatur dolorum incidunt ipsa iure provident quasi repellendus
-            ut veritatis! Doloribus dolorum excepturi ipsam nam reiciendis
-            temporibus voluptates! Minima, nam, odit.
+            Tempat di mana data dan perubahan bertemu, fokus pada upaya
+            mengatasi kemiskinan dan pelaksanaan Program Keluarga Harapan (PKH).
+            Website ini juga memperhatikan penyandang disabilitas dan dampak
+            program inklusif terhadap masyarakat yang membutuhkan.
           </Typography>
         </motion.div>
       </Box>
