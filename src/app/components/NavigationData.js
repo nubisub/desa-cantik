@@ -15,7 +15,7 @@ const Data = [
     icon: <GroupsIcon fontSize="small" />,
   },
   {
-    label: "Kasus Stunting/Disabilitas",
+    label: "Penyandang Disabilitas",
     href: "/dashboard/penyandang-disabilitas",
     icon: <ChildCareIcon fontSize="small" />,
   },
