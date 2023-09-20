@@ -66,7 +66,6 @@ export default function Page1() {
               borderRadius: 100,
               borderColor: "rgba(182,182,182,0.73)",
             }}
-            size={window.innerWidth < 600 ? "sm" : "lg"}
             variant="outlined"
           >
             Masuk

@@ -1,11 +1,9 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
-import Button from "@mui/joy/Button";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/penyandang-disabilitas/Table";
 // icons
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 
 export const dynamic = "force-dynamic";
 
@@ -62,13 +60,13 @@ export default async function ProgramKeluargaHarapan() {
         }}
       >
         <Typography level="h2">Daftar Penyandang Disabilitas</Typography>
-        <Button
-          color="primary"
-          startDecorator={<DownloadRoundedIcon />}
-          size="sm"
-        >
-          Download PDF
-        </Button>
+        {/*<Button*/}
+        {/*  color="primary"*/}
+        {/*  startDecorator={<DownloadRoundedIcon />}*/}
+        {/*  size="sm"*/}
+        {/*>*/}
+        {/*  Download PDF*/}
+        {/*</Button>*/}
       </Box>
 
       <Table

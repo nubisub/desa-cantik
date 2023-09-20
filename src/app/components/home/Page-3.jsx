@@ -58,6 +58,14 @@ export default function Page2() {
               <Typography
                 component="h1"
                 sx={{
+                  mt: {
+                    xs: 6,
+                    md: 6,
+                  },
+                  mb: {
+                    xs: 2,
+                    md: 3,
+                  },
                   fontWeight: "normal",
                   color: "text.primary",
                   lineHeight: "100%",
@@ -73,11 +81,17 @@ export default function Page2() {
                 Program Keluarga Harapan
               </Typography>
             </Box>
-            <Stack
-              direction={window.innerWidth < 600 ? "column" : "row"}
-              justifyContent="center"
-              alignItems="start"
-              spacing={6}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                gap: 2,
+                flexDirection: {
+                  xs: "column",
+                  sm: "row",
+                },
+              }}
             >
               <Typography
                 component="h1"
@@ -109,13 +123,14 @@ export default function Page2() {
               <NextImage
                 src="/program-keluarga-harapan.jpg"
                 alt="Indonesian Child Image"
-                width={window.innerWidth < 600 ? 350 : 550}
-                height={window.innerWidth < 600 ? 300 : 330}
-                style={{ objectFit: "cover" }}
+                width={0}
+                height={0}
+                layout="responsive"
+                style={{ objectFit: "cover", maxWidth: "450px" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
               />
-            </Stack>
+            </Box>
           </motion.div>
         </Stack>
       </Sheet>
@@ -175,11 +190,16 @@ export default function Page2() {
                 Disabilitas
               </Typography>
             </Box>
-            <Stack
-              direction={window.innerWidth < 600 ? "column" : "row"}
-              justifyContent="center"
-              alignItems="start"
-              spacing={6}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                flexDirection: {
+                  xs: "column",
+                  sm: "row",
+                },
+              }}
             >
               <Typography
                 component="h1"
@@ -189,6 +209,10 @@ export default function Page2() {
                   fontSize: {
                     xs: "1rem",
                     sm: "1.2rem",
+                  },
+                  mb: {
+                    xs: 16,
+                    md: 0,
                   },
                   "@media (min-width:600px)": {
                     fontSize: "1.1rem",
@@ -211,7 +235,7 @@ export default function Page2() {
                 yang lebih adil, ramah disabilitas, dan penuh makna bagi semua
                 orang.
               </Typography>
-            </Stack>
+            </Box>
           </div>
         </Stack>
       </Box>

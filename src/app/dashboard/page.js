@@ -8,7 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import Chart from "@/app/components/Chart";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 async function getDataBLT() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-penerima-blt"
@@ -17,15 +17,21 @@ async function getDataBLT() {
 }
 async function getDataDisabilitas() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-disabilitas",
-    { cache: "no-cache" }
+    process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-disabilitas"
   );
   return res.json();
 }
 
+async function getDataChart() {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API + "?endpoint=chart-disabilitas"
+  );
+  return res.json();
+}
 export default async function Home() {
   const dataBLT = await getDataBLT();
   const dataDisabilitas = await getDataDisabilitas();
+  const chartDisabilitas = await getDataChart();
 
   return (
     <>
@@ -65,7 +71,7 @@ export default async function Home() {
           sx={{
             height: {
               xs: 400,
-              sm: 500,
+              sm: 400,
               xl: 500,
             },
             width: "100%",
@@ -114,7 +120,7 @@ export default async function Home() {
                 />
               </Tooltip>
             </CardContent>
-            <Chart />
+            <Chart chartData={chartDisabilitas} />
           </CardContent>
         </Card>
       </Box>

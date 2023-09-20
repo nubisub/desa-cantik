@@ -64,7 +64,14 @@ export default function Page2() {
                   lineHeight: "100%",
                   letterSpacing: "-0.02em",
                   fontSize: "2rem",
-                  my: 6,
+                  mt: {
+                    xs: 6,
+                    md: 6,
+                  },
+                  mb: {
+                    xs: 2,
+                    md: 3,
+                  },
                   "@media (min-width:600px)": {
                     fontSize: "3rem",
                   },
@@ -74,24 +81,33 @@ export default function Page2() {
                 Kemiskinan : Sebuah Tantangan Global
               </Typography>
             </Box>
-            <Stack
-              direction={window.innerWidth < 600 ? "column" : "row"}
-              justifyContent="center"
-              alignItems="start"
-              spacing={6}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                flexDirection: {
+                  xs: "column",
+                  sm: "row",
+                },
+                gap: 3,
+              }}
             >
               <NextImage
                 src="/stunting-image.jpg"
                 alt="Indonesian Child Image"
-                width={window.innerWidth < 600 ? 350 : 550}
-                height={window.innerWidth < 600 ? 300 : 330}
-                style={{ objectFit: "cover" }}
+                width={0}
+                height={0}
+                layout="responsive"
+                style={{ objectFit: "cover", maxWidth: "500px" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
               />
+
               <Typography
                 component="h1"
                 sx={{
+                  minWidth: "360px",
                   fontWeight: "normal",
                   color: "#ffffff",
                   fontSize: {
@@ -117,7 +133,7 @@ export default function Page2() {
                 perlunya usaha kolektif dan solusi untuk mengurangi cengkeraman
                 kemiskinan yang berkepanjangan di masyarakat.
               </Typography>
-            </Stack>
+            </Box>
           </motion.div>
         </Stack>
       </Sheet>

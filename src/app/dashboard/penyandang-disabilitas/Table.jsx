@@ -47,7 +47,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
     setTempData(filteredData);
     setRowData(filteredData.slice(0, 10));
     setPage(1);
-  }, [search, filterKemiskinan, filterKedisabilitasan]);
+  }, [search, filterKemiskinan, filterKedisabilitasan, data.data]);
 
   const renderPageNumbers = () => {
     let pages = [];
@@ -159,6 +159,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
             </Option>
             {listKemiskinan.map((item) => (
               <Option
+                key={item.Kemiskinan}
                 onClick={() => setFilterKemiskinan(item.Kemiskinan)}
                 value={item.Kemiskinan}
               >
