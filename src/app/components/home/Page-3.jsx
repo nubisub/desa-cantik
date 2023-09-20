@@ -1,4 +1,3 @@
-import Sheet from "@mui/joy/Sheet";
 import * as React from "react";
 import { useRef } from "react";
 import Box from "@mui/joy/Box";
@@ -19,7 +18,7 @@ export default function Page2() {
 
   return (
     <div>
-      <Sheet
+      <Box
         sx={{
           minHeight: "100vh",
           display: "flex",
@@ -133,7 +132,7 @@ export default function Page2() {
             </Box>
           </motion.div>
         </Stack>
-      </Sheet>
+      </Box>
       <Box
         sx={{
           maxHeight: "130vh",

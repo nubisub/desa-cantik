@@ -7,35 +7,35 @@ import Header from "@/app/components/Header";
 import PrivateRoute from "../components/PrivateRoute";
 
 export const metadata = {
-	title: "Desa Cantik : Margoagung",
-	description: "Desa Cantik Margoagung Kabupaten Sleman",
+  title: "Dashboard | Desa Cantik - Margoagung",
+  description: "Desa Cantik Margoagung Kabupaten Sleman",
 };
 
 export default function RootLayout({ children }) {
-	return (
-		<html lang="en">
-			<body>
-				<PrivateRoute>
-					<ThemeRegistry options={{ key: "joy" }}>
-						<Layout.Root
-							sx={{
-								gridTemplateColumns: {
-									xs: "1fr",
-									md: "minmax(160px, 260px) minmax(600px, 1fr)",
-								},
-							}}
-						>
-							<Header>
-								<ColorScheme />
-							</Header>
-							<Layout.SideNav>
-								<Navigation />
-							</Layout.SideNav>
-							<Layout.Main>{children}</Layout.Main>
-						</Layout.Root>
-					</ThemeRegistry>
-				</PrivateRoute>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>
+        <PrivateRoute>
+          <ThemeRegistry options={{ key: "joy" }}>
+            <Layout.Root
+              sx={{
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  md: "minmax(160px, 260px) minmax(600px, 1fr)",
+                },
+              }}
+            >
+              <Header>
+                <ColorScheme />
+              </Header>
+              <Layout.SideNav>
+                <Navigation />
+              </Layout.SideNav>
+              <Layout.Main>{children}</Layout.Main>
+            </Layout.Root>
+          </ThemeRegistry>
+        </PrivateRoute>
+      </body>
+    </html>
+  );
 }

@@ -1,4 +1,3 @@
-import Sheet from "@mui/joy/Sheet";
 import * as React from "react";
 import { useRef } from "react";
 import Box from "@mui/joy/Box";
@@ -19,7 +18,7 @@ export default function Page2() {
 
   return (
     <div>
-      <Sheet
+      <Box
         sx={{
           minHeight: "100vh",
           bgcolor: "#060039",
@@ -120,23 +119,24 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Kemiskinan, sebagai suatu masalah global, tetap menjadi isu yang
-                meresap dan melampaui batas-batas negara serta memengaruhi
-                banyak kehidupan. Ini mencakup kekurangan kebutuhan dasar,
-                termasuk makanan, air bersih, pendidikan, dan layanan kesehatan,
-                yang meninggalkan individu dan keluarga berjuang dengan rasa
-                rentan yang mendalam. Siklus kemiskinan sering kali menjebak
-                generasi-generasi, menghambat mobilitas sosial, dan
-                memperpanjang ketidaksetaraan. Namun, dalam realitas kelam ini,
-                cerita-cerita tentang ketahanan, tekad, dan harapan muncul saat
-                individu dan komunitas berusaha mengatasi kesulitan, menekankan
-                perlunya usaha kolektif dan solusi untuk mengurangi cengkeraman
-                kemiskinan yang berkepanjangan di masyarakat.
+                Kemiskinan adalah tantangan global yang kompleks. Kemiskinan
+                struktural, salah satu bentuknya, menciptakan kesenjangan
+                ekonomi yang sulit diatasi karena faktor-faktor seperti akses
+                pendidikan dan pekerjaan yang adil tidak merata. Untuk mengatasi
+                masalah ini, diperlukan upaya kolaboratif yang fokus pada
+                perubahan struktural dalam sistem ekonomi dan sosial. Melalui
+                kebijakan yang bijak dan kesadaran akan ketidaksetaraan
+                struktural, kita dapat membangun masyarakat yang lebih inklusif
+                dan berdaya tahan, di mana setiap individu memiliki peluang yang
+                sama untuk berkembang dan berkontribusi secara positif. Dengan
+                demikian, mengatasi kemiskinan struktural bukan hanya sebuah
+                tujuan, tetapi juga investasi penting bagi masa depan yang lebih
+                baik bagi semua orang.
               </Typography>
             </Box>
           </motion.div>
         </Stack>
-      </Sheet>
+      </Box>
     </div>
   );
 }

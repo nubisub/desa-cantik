@@ -1,0 +1,11 @@
+#coba, .progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #3C91E6 ;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  transform-origin: 0%;
+}

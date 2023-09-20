@@ -6,6 +6,7 @@ import Table from "@/app/dashboard/program-keluarga-harapan/Table";
 // icons
 
 // export const dynamic = "force-dynamic";
+export const revalidate = 1800;
 //
 async function getData() {
   const res = await fetch(

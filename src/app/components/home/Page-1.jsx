@@ -1,4 +1,3 @@
-import Sheet from "@mui/joy/Sheet";
 import Box from "@mui/joy/Box";
 import { dm_sans } from "@/app/utils/fonts";
 import Button from "@mui/joy/Button";
@@ -15,7 +14,7 @@ export default function Page1() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <Sheet
+    <Box
       sx={{
         minHeight: "100vh",
         bgcolor: "#EFEEED",
@@ -169,11 +168,11 @@ export default function Page1() {
           >
             Tempat di mana data dan perubahan bertemu, fokus pada upaya
             mengatasi kemiskinan dan pelaksanaan Program Keluarga Harapan (PKH).
-            Website ini juga memperhatikan penyandang disabilitas dan dampak
-            program inklusif terhadap masyarakat yang membutuhkan.
+            Memperhatikan penyandang disabilitas dan dampak program inklusif
+            terhadap masyarakat yang membutuhkan.
           </Typography>
         </motion.div>
       </Box>
-    </Sheet>
+    </Box>
   );
 }

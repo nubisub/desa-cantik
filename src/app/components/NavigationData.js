@@ -1,7 +1,7 @@
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import GroupsIcon from "@mui/icons-material/Groups";
-import ChildCareIcon from "@mui/icons-material/ChildCare";
 import * as React from "react";
+import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 
 const Data = [
   {
@@ -17,7 +17,7 @@ const Data = [
   {
     label: "Penyandang Disabilitas",
     href: "/dashboard/penyandang-disabilitas",
-    icon: <ChildCareIcon fontSize="small" />,
+    icon: <AccessibleForwardIcon fontSize="small" />,
   },
 ];
 
