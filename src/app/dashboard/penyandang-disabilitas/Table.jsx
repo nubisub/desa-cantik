@@ -14,10 +14,10 @@ import Option from "@mui/joy/Option";
 
 export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
   console.log(listKemiskinan);
-  const [rowData, setRowData] = useState(data.data);
-  const [tempData, setTempData] = useState(data.data);
+  const [rowData, setRowData] = useState(data);
+  const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(data.data.length);
+  const [rowSum, setRowSum] = useState(data.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -27,7 +27,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
 
   useEffect(() => {
     //     filter data with search, filterKemiskinan, filterKedisabilitasan
-    const filteredData = data.data.filter((item) => {
+    const filteredData = data.filter((item) => {
       if (filterKemiskinan === "") {
         return (
           (item.Nama.toLowerCase().includes(search.toLowerCase()) ||
@@ -48,7 +48,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
     setTempData(filteredData);
     setRowData(filteredData.slice(0, 10));
     setPage(1);
-  }, [search, filterKemiskinan, filterKedisabilitasan, data.data]);
+  }, [search, filterKemiskinan, filterKedisabilitasan, data]);
 
   const renderPageNumbers = () => {
     let pages = [];

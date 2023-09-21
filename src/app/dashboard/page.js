@@ -19,7 +19,7 @@ async function getDataBLT() {
 }
 async function getDataDisabilitas() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-disabilitas"
+    process.env.NEXT_PUBLIC_HOST + "/api/disabilitas/jumlah"
   );
   return res.json();
 }
@@ -34,7 +34,6 @@ export default async function Home() {
   const dataBLT = await getDataBLT();
   const dataDisabilitas = await getDataDisabilitas();
   const chartDisabilitas = await getDataChart();
-
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -61,7 +60,7 @@ export default async function Home() {
       >
         <CardDashboard
           BLT={dataBLT?.data}
-          Disabilitas={dataDisabilitas?.data}
+          Disabilitas={dataDisabilitas?.count}
         />
       </Box>
       <Box
