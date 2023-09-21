@@ -8,7 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import Chart from "@/app/components/Chart";
 
-export const revalidate = 1800;
+export const revalidate = 10;
 
 // export const dynamic = "force-dynamic";
 async function getDataBLT() {

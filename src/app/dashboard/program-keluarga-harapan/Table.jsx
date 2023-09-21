@@ -6,12 +6,27 @@ import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
 import Avatar from "@mui/joy/Avatar";
-import { FormControl, FormLabel, Input } from "@mui/joy";
+import Modal from "@mui/joy/Modal";
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  FormControl,
+  FormLabel,
+  Input,
+  ModalDialog,
+} from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/joy/Button";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
+import IconButton from "@mui/joy/IconButton";
+import Tooltip from "@mui/joy/Tooltip";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { Transition } from "react-transition-group";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { toast, Toaster } from "sonner";
 // const data = [
 //   {
 //     NIK: "246.10.249.100/12",
@@ -28,6 +43,21 @@ export default function TablePKH({ data }) {
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
   const [searchedData, setSearchedData] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [hapus, setHapus] = React.useState("");
+
+  const handleHapusButton = (e) => {
+    console.log(e);
+    setHapus(e);
+    setOpen(true);
+  };
+
+  const handleHapus = (e) => {
+    console.log(e);
+    setOpen(false);
+
+    toast.success("Data Berhasil Dihapus");
+  };
 
   const renderPageNumbers = () => {
     let pages = [];
@@ -100,6 +130,8 @@ export default function TablePKH({ data }) {
   }, [page]);
   return (
     <>
+      <Toaster position="top-center" richColors closeButton />
+
       <Box
         className="SearchAndFilters-tabletUp"
         sx={{
@@ -170,7 +202,7 @@ export default function TablePKH({ data }) {
               </th>
               <th
                 style={{
-                  width: 150,
+                  width: 170,
                   padding: "12px 6px",
                   fontWeight: "500",
                   fontSize: "1.1em",
@@ -199,6 +231,14 @@ export default function TablePKH({ data }) {
               >
                 Alamat
               </th>
+              <th
+                style={{
+                  width: 50,
+                  padding: "12px 6px",
+                  fontWeight: "500",
+                  fontSize: "1.1em",
+                }}
+              ></th>
             </tr>
           </thead>
           <tbody>
@@ -229,6 +269,25 @@ export default function TablePKH({ data }) {
                   <Typography sx={{ textTransform: "capitalize" }}>
                     {row.Alamat}
                   </Typography>
+                </td>
+                <td>
+                  <Tooltip
+                    title={"Hapus"}
+                    arrow
+                    color="danger"
+                    placement="right"
+                    size="sm"
+                    variant="solid"
+                  >
+                    <IconButton
+                      onClick={() => handleHapusButton(row.NIK)}
+                      size="sm"
+                      variant="soft"
+                      color="danger"
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
+                  </Tooltip>
                 </td>
               </tr>
             ))}
@@ -288,6 +347,69 @@ export default function TablePKH({ data }) {
           Next
         </Button>
       </Box>
+      <Transition in={open} timeout={400}>
+        {(state) => (
+          <Modal
+            keepMounted
+            open={!["exited", "exiting"].includes(state)}
+            onClose={() => setOpen(false)}
+            slotProps={{
+              backdrop: {
+                sx: {
+                  opacity: 0,
+                  backdropFilter: "none",
+                  transition: `opacity 400ms, backdrop-filter 400ms`,
+                  ...{
+                    entering: { opacity: 1, backdropFilter: "blur(8px)" },
+                    entered: { opacity: 1, backdropFilter: "blur(8px)" },
+                  }[state],
+                },
+              },
+            }}
+            sx={{
+              visibility: state === "exited" ? "hidden" : "visible",
+            }}
+          >
+            <ModalDialog
+              sx={{
+                opacity: 0,
+                transition: `opacity 300ms`,
+                ...{
+                  entering: { opacity: 1 },
+                  entered: { opacity: 1 },
+                }[state],
+              }}
+              variant="outlined"
+              role="alertdialog"
+            >
+              <DialogTitle>
+                <WarningRoundedIcon />
+                Konfirmasi
+              </DialogTitle>
+              <Divider />
+              <DialogContent>
+                Apakah anda yakin ingin menghapus data ini?
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="solid"
+                  color="danger"
+                  onClick={() => handleHapus()}
+                >
+                  Hapus
+                </Button>
+                <Button
+                  variant="plain"
+                  color="neutral"
+                  onClick={() => setOpen(false)}
+                >
+                  Kembali
+                </Button>
+              </DialogActions>
+            </ModalDialog>
+          </Modal>
+        )}
+      </Transition>
     </>
   );
 }

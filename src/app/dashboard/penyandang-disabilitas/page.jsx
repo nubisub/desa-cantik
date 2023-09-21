@@ -6,7 +6,7 @@ import Table from "@/app/dashboard/penyandang-disabilitas/Table";
 // icons
 
 // export const dynamic = "force-dynamic";
-export const revalidate = 1800;
+export const revalidate = 5;
 async function getData() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API + "?endpoint=daftar-disabilitas"
