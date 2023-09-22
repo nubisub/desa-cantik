@@ -9,20 +9,20 @@ import Table from "@/app/dashboard/penyandang-disabilitas/Table";
 export const revalidate = 5;
 async function getData() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=daftar-disabilitas"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`
   );
   return res.json();
 }
 async function getDataFilterKedisabilitasan() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=list-disabilitas"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`
   );
   return res.json();
 }
 
 async function getDataFilterKemiskinan() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=list-kemiskinan"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-kemiskinan`
   );
   return res.json();
 }
@@ -70,8 +70,8 @@ export default async function ProgramKeluargaHarapan() {
       </Box>
 
       <Table
-        listKemiskinan={listKemiskinan.data}
-        listDisabilitas={listDisabilitas.data}
+        listKemiskinan={listKemiskinan}
+        listDisabilitas={listDisabilitas}
         data={data}
       />
     </>

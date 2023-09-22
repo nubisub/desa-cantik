@@ -12,29 +12,35 @@ export const revalidate = 10;
 
 // export const dynamic = "force-dynamic";
 async function getDataBLT() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-penerima-blt"
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`);
   return res.json();
 }
 async function getDataDisabilitas() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=jumlah-disabilitas"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/jumlah`
   );
   return res.json();
 }
 
 async function getDataChart() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=chart-disabilitas"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/chart`
   );
   return res.json();
 }
-export default async function Home() {
-  const dataBLT = await getDataBLT();
-  const dataDisabilitas = await getDataDisabilitas();
-  const chartDisabilitas = await getDataChart();
 
+async function getTipeDisabilitas() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`
+  );
+  return res.json();
+}
+
+export default async function Home() {
+  const countBantuan = await getDataBLT();
+  const countDisabilitas = await getDataDisabilitas();
+  const chartDisabilitas = await getDataChart();
+  const tipeDisabilitas = await getTipeDisabilitas();
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -60,8 +66,8 @@ export default async function Home() {
         }}
       >
         <CardDashboard
-          BLT={dataBLT?.data}
-          Disabilitas={dataDisabilitas?.data}
+          BLT={countBantuan?.count}
+          Disabilitas={countDisabilitas?.count}
         />
       </Box>
       <Box
@@ -122,7 +128,10 @@ export default async function Home() {
                 />
               </Tooltip>
             </CardContent>
-            <Chart chartData={chartDisabilitas} />
+            <Chart
+              tipeDisabilitas={tipeDisabilitas}
+              chartData={chartDisabilitas}
+            />
           </CardContent>
         </Card>
       </Box>
