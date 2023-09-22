@@ -9,20 +9,20 @@ import Table from "@/app/dashboard/penyandang-disabilitas/Table";
 export const revalidate = 5;
 async function getData() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_HOST + "/api/disabilitas/data"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`
   );
   return res.json();
 }
 async function getDataFilterKedisabilitasan() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_HOST + "/api/disabilitas/tipe-disabilitas"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`
   );
   return res.json();
 }
 
 async function getDataFilterKemiskinan() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_HOST + "/api/disabilitas/tipe-kemiskinan"
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-kemiskinan`
   );
   return res.json();
 }

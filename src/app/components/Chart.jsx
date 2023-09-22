@@ -4,60 +4,14 @@ import { useColorScheme } from "@mui/joy/styles";
 import Box from "@mui/joy/Box";
 import { ResponsiveBar } from "@nivo/bar";
 
-const data = {
-  Fisik: {
-    "Eks Kronis (Kusta, Stroke)": 3,
-    "Tubuh Punggung (Bungkuk)": 1,
-    Wicara: 4,
-    "Tubuh Kaki": 9,
-    Netra: 1,
-    Rungu: 1,
-    "Tubuh Tangan": 4,
-    "Disabilitas Lain": 1,
-  },
-  Mental: { "Psikososial (Psikotik)": 29 },
-  Intelektual: { "Down Sysdrom": 3 },
-  "Ganda/Multi": { "Lumpuh Layu/Kaku": 3, "Rungu Wicara": 1 },
-  Sensorik: { Hiperaktif: 1, Autis: 1 },
-};
-
-export default function Chart({ chartData }) {
+export default function Chart({ chartData, tipeDisabilitas }) {
   const { mode, systemMode } = useColorScheme();
-  const data = chartData.data;
+  const data = chartData;
+  // make array of my object tipeDisabilitas with Kedisabilitasan value
+  const jenisUnique = tipeDisabilitas.map((e) => e.Kedisabilitasan);
+
   const keys = Object.keys(data);
 
-  const data3 = keys.map((key) => {
-    const obj = {};
-    obj["disabilitas"] = key;
-    obj["Jumlah"] = Object.values(data[key]).reduce((a, b) => a + b, 0);
-    obj["Jenis"] = Object.keys(data[key]).map((k) => {
-      return {
-        jenis: k,
-        jumlah: data[key][k],
-      };
-    });
-
-    return obj;
-  });
-
-  // get array unique values of object in jenis
-  const jenis = data3.map((d) => d.Jenis).flat();
-  const jenisUnique = [...new Set(jenis.map((j) => j.jenis))];
-
-  // make data3 to be like data
-  data3.forEach((d) => {
-    jenisUnique.forEach((j) => {
-      d[j] = d.Jenis.filter((jenis) => jenis.jenis === j).map(
-        (jenis) => jenis.jumlah
-      )[0];
-    });
-    //   if undefined, set to 0
-    jenisUnique.forEach((j) => {
-      if (d[j] === undefined) {
-        d[j] = 0;
-      }
-    });
-  });
   const theme = {
     axis: {
       fontSize: "14px",
@@ -91,9 +45,9 @@ export default function Chart({ chartData }) {
       }}
     >
       <ResponsiveBar
-        data={data3}
+        data={data}
         keys={jenisUnique}
-        indexBy={"disabilitas"}
+        indexBy={"JenisDisabilitas"}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
         valueScale={{ type: "linear" }}

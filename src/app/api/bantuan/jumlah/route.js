@@ -11,7 +11,7 @@ export async function GET(request) {
   const getMetaData = await sheets.spreadsheets.values.get({
     auth,
     spreadsheetId,
-    range: "Disabilitas!A:Z",
+    range: "BLT!A:Z",
   });
 
   // get count of my data

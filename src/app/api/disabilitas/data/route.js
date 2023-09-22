@@ -30,9 +30,9 @@ import auth from "@/app/services/google";
 //    Kemiskinan: "XXXXXXXXXXXXXXXX",
 //    Kedisabilitasan: "XXXXXXXXXXXXXXXX"
 //  }],
+export const revalidate = 5;
 export async function GET(request) {
   const spreadsheetId = process.env.GOOGLE_SPREASHEET_ID;
-
   const sheets = google.sheets({ version: "v4", auth });
 
   const includedColumns = [

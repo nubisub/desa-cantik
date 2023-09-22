@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import auth from "@/app/services/google";
 
+export const revalidate = 86400;
 export async function GET(request) {
   const spreadsheetId = process.env.GOOGLE_SPREASHEET_ID;
 

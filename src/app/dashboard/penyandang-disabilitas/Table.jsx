@@ -133,7 +133,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
             >
               Semua
             </Option>
-            {listDisabilitas.map((item) => (
+            {listDisabilitas?.map((item) => (
               <Option
                 key={item.Kedisabilitasan}
                 onClick={() => setFilterKedisabilitasan(item.Kedisabilitasan)}

@@ -9,9 +9,7 @@ import Add from "./Add";
 export const revalidate = 5;
 //
 async function getData() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API + "?endpoint=daftar-penerima-blt"
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`);
   return res.json();
 }
 

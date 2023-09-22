@@ -38,7 +38,7 @@ import { toast, Toaster } from "sonner";
 export default function TablePKH({ data }) {
   const [rowData, setRowData] = useState([]);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(data.data.length);
+  const [rowSum, setRowSum] = useState(data.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -94,7 +94,7 @@ export default function TablePKH({ data }) {
   useEffect(() => {
     if (search) {
       //   filter with NIK and NAMA keluarga and alamat
-      const filteredData = data.data.filter((item) => {
+      const filteredData = data.filter((item) => {
         return (
           item.NIK.toLowerCase().includes(search.toLowerCase()) ||
           item.KepalaKeluarga.toLowerCase().includes(search.toLowerCase()) ||
@@ -110,14 +110,14 @@ export default function TablePKH({ data }) {
       setRowData(filteredData.slice(start, end));
       setMaxPage(Math.ceil(filteredData.length / 10));
     } else {
-      setRowData(data.data);
-      setRowSum(data.data.length);
-      setTotalPage(Math.ceil(data.data.length / 10));
+      setRowData(data);
+      setRowSum(data.length);
+      setTotalPage(Math.ceil(data.length / 10));
       setPage(1);
       const start = (page - 1) * 10;
       const end = page * 10;
-      setRowData(data.data.slice(start, end));
-      setMaxPage(Math.ceil(data.data.length / 10));
+      setRowData(data.slice(start, end));
+      setMaxPage(Math.ceil(data.length / 10));
     }
   }, [search]);
 
@@ -125,7 +125,7 @@ export default function TablePKH({ data }) {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(data.data.slice(start, end));
+    setRowData(data.slice(start, end));
     setMaxPage(Math.ceil(rowSum / 10));
   }, [page]);
   return (
