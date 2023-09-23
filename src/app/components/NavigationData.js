@@ -19,6 +19,11 @@ const Data = [
     href: "/dashboard/penyandang-disabilitas",
     icon: <AccessibleForwardIcon fontSize="small" />,
   },
+  {
+    label: "Atur Pengguna",
+    href: "/dashboard/atur-pengguna",
+    icon: <AccessibleForwardIcon fontSize="small" />,
+  },
 ];
 
 export default Data;
