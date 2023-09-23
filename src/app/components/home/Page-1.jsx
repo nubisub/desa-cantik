@@ -51,11 +51,7 @@ export default function Page1() {
             Cantik]
           </span>
         </Box>
-        <Link
-          href={
-            currentUser?.currentUser === null ? "/auth/signin" : "/dashboard"
-          }
-        >
+        <Link href={"/dashboard"}>
           <Button
             color="neutral"
             sx={{

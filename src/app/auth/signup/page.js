@@ -11,17 +11,28 @@ import Typography from "@mui/joy/Typography";
 import { toast, Toaster } from "sonner";
 import Card from "@mui/joy/Card";
 import { useRouter } from "next/navigation";
-
-import { signUp } from "../../services/auth";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState();
   const router = useRouter();
+  const { data, status } = useSession();
+  console.log(data);
 
   // check if there is environment variable for allowSignUp if not set it to false
   const allowSignUp = process.env.NEXT_PUBLIC_ALLOW_SIGNUP || false;
+  const handleSignup = async (email, password) => {
+    const response = await signIn("firebase", {
+      email,
+      password,
+      callbackUrl: "/", // Redirect to profile after signup
+    });
 
+    if (response.error) {
+      console.log(response.error);
+    }
+  };
   function handleLogin(e) {
     setIsLoading(true);
     e.preventDefault();
@@ -60,32 +71,35 @@ export default function Page() {
       return;
     }
 
-    signUp(email.value, password.value)
-      .then((userCredential) => {
-        toast.success("Akun berhasil dibuat, selamat datang :)");
-        // wait for 2 seconds
-        setTimeout(() => {
-          // after 2 seconds redirect to dashboard
-          router.push("/dashboard");
-        }, 1000);
-
-        // router.push("/dashboard");
-      })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          toast.error("Email sudah digunakan");
-        } else {
-          toast.error("Login gagal ", {
-            description: "Terjadi kesalahan, silahkan coba lagi",
-          });
-        }
-        setIsLoading(false);
-      });
+    // signUp(email.value, password.value)
+    //   .then((userCredential) => {
+    //     toast.success("Akun berhasil dibuat, selamat datang :)");
+    //     // wait for 2 seconds
+    //     setTimeout(() => {
+    //       // after 2 seconds redirect to dashboard
+    //       router.push("/dashboard");
+    //     }, 1000);
+    //
+    //     // router.push("/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     if (error.code === "auth/email-already-in-use") {
+    //       toast.error("Email sudah digunakan");
+    //     } else {
+    //       toast.error("Login gagal ", {
+    //         description: "Terjadi kesalahan, silahkan coba lagi",
+    //       });
+    //     }
+    //     setIsLoading(false);
+    //   });
+    handleSignup(email.value, password.value);
   }
 
   return (
     <>
       <Box>
+        <button onClick={() => signIn("google")}>click</button>
+        <button onClick={() => signOut()}>out</button>
         <Toaster position="top-center" richColors closeButton />
         <Box
           sx={{
