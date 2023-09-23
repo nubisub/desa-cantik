@@ -1,22 +1,25 @@
-// "use client";
-import * as React from "react";
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "@/app/dashboard/program-keluarga-harapan/Table";
-// export const dynamic = "force-dynamic";
-export const revalidate = 1;
-//
+import Table from "@/app/dashboard/atur-pengguna/Table";
+import Page from "./Wrapper";
+// icons
+export const dynamic = "force-dynamic";
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`);
+  return res.json();
+}
+async function getDataFilterRoles() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/roles`);
   return res.json();
 }
 
-export default async function ProgramKeluargaHarapan() {
-  const data = await getData();
-  // const [open, setOpen] = React.useState(false);
+export default async function AturPengguna() {
+  const dataPengguna = await getData();
+  const listRoles = await getDataFilterRoles();
+
   return (
-    <>
+    <Page>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -25,8 +28,8 @@ export default async function ProgramKeluargaHarapan() {
               href: "/dashboard",
             },
             {
-              label: "Program Keluarga Harapan",
-              href: "/program-keluarga-harapan",
+              label: "Atur Pengguna",
+              href: "/atur-pengguna",
             },
           ]}
         />
@@ -42,12 +45,10 @@ export default async function ProgramKeluargaHarapan() {
           justifyContent: "space-between",
         }}
       >
-        <Typography level="h2">
-          Daftar Penerima Program Keluarga Harapan
-        </Typography>
+        <Typography level="h2">Atur Pengguna</Typography>
       </Box>
 
-      <Table data={data} />
-    </>
+      <Table listRoles={listRoles.roles} data={dataPengguna.users} />
+    </Page>
   );
 }

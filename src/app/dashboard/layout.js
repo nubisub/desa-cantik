@@ -4,7 +4,6 @@ import * as React from "react";
 import ColorScheme from "@/app/components/ColorScheme";
 import ThemeRegistry from "@/app/ThemeRegistry";
 import Header from "@/app/components/Header";
-import PrivateRoute from "../components/PrivateRoute";
 
 export const metadata = {
   title: "Dashboard | Desa Cantik - Margoagung",
@@ -15,26 +14,24 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <PrivateRoute>
-          <ThemeRegistry options={{ key: "joy" }}>
-            <Layout.Root
-              sx={{
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  md: "minmax(160px, 260px) minmax(600px, 1fr)",
-                },
-              }}
-            >
-              <Header>
-                <ColorScheme />
-              </Header>
-              <Layout.SideNav>
-                <Navigation />
-              </Layout.SideNav>
-              <Layout.Main>{children}</Layout.Main>
-            </Layout.Root>
-          </ThemeRegistry>
-        </PrivateRoute>
+        <ThemeRegistry options={{ key: "joy" }}>
+          <Layout.Root
+            sx={{
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "minmax(160px, 260px) minmax(600px, 1fr)",
+              },
+            }}
+          >
+            <Header>
+              <ColorScheme />
+            </Header>
+            <Layout.SideNav>
+              <Navigation />
+            </Layout.SideNav>
+            <Layout.Main>{children}</Layout.Main>
+          </Layout.Root>
+        </ThemeRegistry>
       </body>
     </html>
   );

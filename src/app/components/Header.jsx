@@ -16,7 +16,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import ListItemContent from "@mui/joy/ListItemContent";
 import ListItem from "@mui/joy/ListItem";
 import { auth } from "@/app/services/firebase";
-import { signOut } from "firebase/auth";
+import { signOut } from "next-auth/react";
 
 export default function Header(props) {
   const pathname = usePathname();
@@ -109,7 +109,7 @@ export default function Header(props) {
             variant="solid"
           >
             <IconButton
-              onClick={() => SignOut()}
+              onClick={() => signOut({ callbackUrl: "/" })}
               size="sm"
               variant="soft"
               color="danger"

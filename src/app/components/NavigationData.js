@@ -2,12 +2,18 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import GroupsIcon from "@mui/icons-material/Groups";
 import * as React from "react";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const Data = [
   {
     label: "Beranda",
     href: "/dashboard",
     icon: <FolderOpenIcon fontSize="small" />,
+  },
+  {
+    label: "Atur Pengguna",
+    href: "/dashboard/atur-pengguna",
+    icon: <AdminPanelSettingsIcon fontSize="small" />,
   },
   {
     label: "Program Keluarga Harapan",

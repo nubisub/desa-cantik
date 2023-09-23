@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 import { useEffect, useState } from "react";
 import Table from "@mui/joy/Table";
 import Sheet from "@mui/joy/Sheet";
@@ -43,8 +42,8 @@ export default function TablePKH({ data }) {
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
   const [searchedData, setSearchedData] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const [hapus, setHapus] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [hapus, setHapus] = useState("");
 
   const handleHapusButton = (e) => {
     console.log(e);

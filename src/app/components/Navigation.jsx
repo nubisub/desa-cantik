@@ -10,8 +10,11 @@ import { usePathname } from "next/navigation";
 
 // Icons import
 import Data from "./NavigationData";
+import { useSession } from "next-auth/react";
 
 export default function Navigation() {
+  const { data, status } = useSession();
+
   const pathname = usePathname();
   return (
     <List
@@ -34,6 +37,14 @@ export default function Navigation() {
           }}
         >
           {Data.map((item, index) => {
+            //   skip if item label = "Atur Pengguna" and user role != "admin"
+            if (
+              item.label === "Atur Pengguna" &&
+              data?.user?.role !== "Admin"
+            ) {
+              return null;
+            }
+
             return (
               <ListItem key={index}>
                 <Link
