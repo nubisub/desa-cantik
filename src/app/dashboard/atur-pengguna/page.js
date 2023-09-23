@@ -1,28 +1,27 @@
-import * as React from "react";
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/atur-pengguna/Table";
+import Page from "./wrapper";
 // icons
+export const revalidate = 1;
 
 // export const dynamic = "force-dynamic";
-export const revalidate = 5;
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`);
   return res.json();
 }
 async function getDataFilterRoles() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/roles`);
-
   return res.json();
 }
 
-export default async function ProgramKeluargaHarapan() {
-  const data = await getData();
+export default async function AturPengguna() {
+  const dataPengguna = await getData();
   const listRoles = await getDataFilterRoles();
 
   return (
-    <>
+    <Page>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -49,16 +48,9 @@ export default async function ProgramKeluargaHarapan() {
         }}
       >
         <Typography level="h2">Atur Pengguna</Typography>
-        {/*<Button*/}
-        {/*  color="primary"*/}
-        {/*  startDecorator={<DownloadRoundedIcon />}*/}
-        {/*  size="sm"*/}
-        {/*>*/}
-        {/*  Download PDF*/}
-        {/*</Button>*/}
       </Box>
 
-      <Table listRoles={listRoles.roles} data={data.users} />
-    </>
+      <Table listRoles={listRoles.roles} data={dataPengguna.users} />
+    </Page>
   );
 }
