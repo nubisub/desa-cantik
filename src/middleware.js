@@ -14,4 +14,11 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ["/dashboard/:path*"] };
+export const config = {
+  matcher: [
+    "/dashboard/:path*",
+    "/api/bantuan/:path*",
+    "/api/disabilitas/:path*",
+    "/api/pengguna/:path*",
+  ],
+};
