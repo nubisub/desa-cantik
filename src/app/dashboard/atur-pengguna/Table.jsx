@@ -13,6 +13,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Option from "@mui/joy/Option";
 import Avatar from "@mui/joy/Avatar";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { toast, Toaster } from "sonner";
 
 export default function TablePKH({ data, listRoles, listDisabilitas }) {
   const [rowData, setRowData] = useState(data);
@@ -24,6 +25,41 @@ export default function TablePKH({ data, listRoles, listDisabilitas }) {
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
   const [searchedData, setSearchedData] = useState([]);
   const [filterRoles, setFilterRoles] = useState("");
+
+  function updateRole(email, role) {
+    fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/roles`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        role,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === "success") {
+          // change row data
+          const newData = rowData.map((item) => {
+            if (item.email === email) {
+              return {
+                ...item,
+                role,
+              };
+            }
+            return item;
+          });
+          setRowData(newData);
+          toast.success("Berhasil mengubah role pengguna");
+        } else {
+          toast.error("Gagal mengubah role pengguna");
+        }
+      })
+      .catch((err) => {
+        toast.error("Gagal mengubah role pengguna");
+      });
+  }
 
   useEffect(() => {
     //     filter data with search, filterKemiskinan, filterKedisabilitasan
@@ -193,7 +229,7 @@ export default function TablePKH({ data, listRoles, listDisabilitas }) {
               </th>
               <th
                 style={{
-                  width: 220,
+                  width: 100,
                   padding: "12px 6px",
                   fontWeight: "500",
                   fontSize: "1.1em",
@@ -236,6 +272,7 @@ export default function TablePKH({ data, listRoles, listDisabilitas }) {
                 </td>
                 <td>
                   <Select
+                    disabled={row.role === "Admin"}
                     defaultValue={row.role || "Guest"}
                     indicator={<KeyboardArrowDown />}
                     sx={{
@@ -249,7 +286,11 @@ export default function TablePKH({ data, listRoles, listDisabilitas }) {
                     }}
                   >
                     {listRoles?.map((item) => (
-                      <Option value={item.role || "Guest"} key={item.role}>
+                      <Option
+                        onClick={() => updateRole(row.email, item.role)}
+                        value={item.role || "Guest"}
+                        key={item.role}
+                      >
                         {item.role}
                       </Option>
                     ))}
@@ -298,6 +339,7 @@ export default function TablePKH({ data, listRoles, listDisabilitas }) {
           Next
         </Button>
       </Box>
+      <Toaster position="top-center" richColors closeButton />
     </>
   );
 }

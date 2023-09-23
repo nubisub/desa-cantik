@@ -11,25 +11,13 @@ import Stack from "@mui/joy/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import { Transition } from "react-transition-group";
 import { ModalClose } from "@mui/joy";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
 
 export default function Add() {
   const [open, setOpen] = React.useState(false);
   const [NIK, setNIK] = React.useState("");
   const [nama, setNama] = React.useState("");
   const [alamat, setAlamat] = React.useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      NIK: NIK,
-      nama: nama,
-      alamat: alamat,
-    };
-    console.log(data);
-    toast.success("Data Berhasil Ditambahkan");
-    setOpen(false);
-  };
 
   React.useEffect(() => {
     if (open) {
@@ -100,32 +88,19 @@ export default function Add() {
               >
                 Tambah Daftar Penerima BLT
               </DialogTitle>
-              <form onSubmit={handleSubmit}>
+              <form>
                 <Stack spacing={2}>
                   <FormControl>
                     <FormLabel>Nomor Induk Kependudukan</FormLabel>
-                    <Input
-                      onChange={setNIK(event.target.value)}
-                      value={NIK}
-                      autoFocus
-                      required
-                    />
+                    <Input value={NIK} autoFocus required />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Nama Kepala Keluarga</FormLabel>
-                    <Input
-                      onChange={setNama(event.target.value)}
-                      value={nama}
-                      required
-                    />
+                    <Input value={nama} required />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Alamat</FormLabel>
-                    <Input
-                      onChange={setAlamat(event.target.value)}
-                      value={alamat}
-                      required
-                    />
+                    <Input value={alamat} required />
                   </FormControl>
                   <Button type="submit">Submit</Button>
                 </Stack>

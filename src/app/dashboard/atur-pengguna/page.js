@@ -2,11 +2,9 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/atur-pengguna/Table";
-import Page from "./wrapper";
+import Page from "./Wrapper";
 // icons
-export const revalidate = 1;
-
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`);
   return res.json();

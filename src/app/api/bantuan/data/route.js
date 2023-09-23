@@ -40,5 +40,5 @@ export async function GET(request) {
     });
     return mappedRow;
   });
-  return NextResponse.json(user);
+  return NextResponse.json(mappedData);
 }

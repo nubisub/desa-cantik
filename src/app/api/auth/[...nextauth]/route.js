@@ -25,7 +25,16 @@ export const authOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
-    async jwt(token, user, account, profile, isNewUser) {
+    async session({ session, token, user }) {
+      console.log(token);
+      session.user.id = token.sub;
+      session.user.role = token.role;
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token = { ...token, role: user.role };
+      }
       return token;
     },
   },
