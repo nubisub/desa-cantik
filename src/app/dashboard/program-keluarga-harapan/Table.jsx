@@ -44,6 +44,7 @@ export default function TablePKH({ data }) {
   const [searchedData, setSearchedData] = useState([]);
   const [open, setOpen] = useState(false);
   const [hapus, setHapus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleHapusButton = (e) => {
     console.log(e);
@@ -51,11 +52,26 @@ export default function TablePKH({ data }) {
     setOpen(true);
   };
 
-  const handleHapus = (e) => {
-    console.log(e);
+  const handleHapus = async (e) => {
+    setLoading(true);
+    toast.loading("Loading");
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          index: hapus,
+        }),
+      }
+    );
+    if (res.ok) {
+      toast.success("Data Berhasil Dihapus");
+    }
     setOpen(false);
-
-    toast.success("Data Berhasil Dihapus");
+    setLoading(false);
   };
 
   const renderPageNumbers = () => {
@@ -95,9 +111,9 @@ export default function TablePKH({ data }) {
       //   filter with NIK and NAMA keluarga and alamat
       const filteredData = data.filter((item) => {
         return (
-          item.NIK.toLowerCase().includes(search.toLowerCase()) ||
-          item.KepalaKeluarga.toLowerCase().includes(search.toLowerCase()) ||
-          item.Alamat.toLowerCase().includes(search.toLowerCase())
+          item.NIK?.toLowerCase().includes(search.toLowerCase()) ||
+          item.KepalaKeluarga?.toLowerCase().includes(search.toLowerCase()) ||
+          item.Alamat?.toLowerCase().includes(search.toLowerCase())
         );
       });
       setRowData(filteredData);
@@ -129,8 +145,6 @@ export default function TablePKH({ data }) {
   }, [page]);
   return (
     <>
-      <Toaster position="top-center" richColors closeButton />
-
       <Box
         className="SearchAndFilters-tabletUp"
         sx={{
@@ -251,7 +265,7 @@ export default function TablePKH({ data }) {
                 <td>
                   <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                     <Avatar size="sm">
-                      {row.KepalaKeluarga.split(" ").map((item) => item[0])}
+                      {row.KepalaKeluarga?.split(" ").map((item) => item[0])}
                     </Avatar>
                     <div>
                       <Typography sx={{ textTransform: "capitalize" }}>
@@ -279,7 +293,7 @@ export default function TablePKH({ data }) {
                     variant="solid"
                   >
                     <IconButton
-                      onClick={() => handleHapusButton(row.NIK)}
+                      onClick={() => handleHapusButton(row.indexRow)}
                       size="sm"
                       variant="soft"
                       color="danger"
@@ -393,6 +407,7 @@ export default function TablePKH({ data }) {
                 <Button
                   variant="solid"
                   color="danger"
+                  loading={loading}
                   onClick={() => handleHapus()}
                 >
                   Hapus
@@ -400,6 +415,7 @@ export default function TablePKH({ data }) {
                 <Button
                   variant="plain"
                   color="neutral"
+                  disabled={loading}
                   onClick={() => setOpen(false)}
                 >
                   Kembali
@@ -409,6 +425,7 @@ export default function TablePKH({ data }) {
           </Modal>
         )}
       </Transition>
+      <Toaster position="top-center" richColors closeButton />
     </>
   );
 }

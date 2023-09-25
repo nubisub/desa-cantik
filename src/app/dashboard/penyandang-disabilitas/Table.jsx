@@ -13,7 +13,6 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Option from "@mui/joy/Option";
 
 export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
-  console.log(listKemiskinan);
   const [rowData, setRowData] = useState(data);
   const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");

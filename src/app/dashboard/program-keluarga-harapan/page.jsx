@@ -4,6 +4,7 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/program-keluarga-harapan/Table";
+import Add from "@/app/dashboard/program-keluarga-harapan/Add";
 // export const dynamic = "force-dynamic";
 export const revalidate = 1;
 //
@@ -45,8 +46,8 @@ export default async function ProgramKeluargaHarapan() {
         <Typography level="h2">
           Daftar Penerima Program Keluarga Harapan
         </Typography>
+        <Add />
       </Box>
-
       <Table data={data} />
     </>
   );

@@ -11,21 +11,56 @@ import Stack from "@mui/joy/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import { Transition } from "react-transition-group";
 import { ModalClose } from "@mui/joy";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
 
 export default function Add() {
   const [open, setOpen] = React.useState(false);
   const [NIK, setNIK] = React.useState("");
-  const [nama, setNama] = React.useState("");
-  const [alamat, setAlamat] = React.useState("");
+  const [KepalaKeluarga, setKepalaKeluarga] = React.useState("");
+  const [Alamat, setAlamat] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (open) {
       setNIK("");
-      setNama("");
+      setKepalaKeluarga("");
       setAlamat("");
     }
   }, [open]);
+
+  const handleSubmit = async (e) => {
+    //   if nik is not 16 digit number
+    e.preventDefault();
+    if (!/^\d{16}$/.test(NIK)) {
+      toast.error("NIK harus 16 digit angka");
+      return;
+    }
+    toast.loading("Loading...");
+    setLoading(true);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          NIK,
+          KepalaKeluarga,
+          Alamat,
+        }),
+      }
+    );
+    if (res.ok) {
+      setOpen(false);
+      setNIK("");
+      setKepalaKeluarga("");
+      setAlamat("");
+      toast.success("Data Berhasil Ditambahkan");
+    }
+    setOpen(false);
+    setLoading(false);
+  };
 
   return (
     <>
@@ -88,21 +123,36 @@ export default function Add() {
               >
                 Tambah Daftar Penerima BLT
               </DialogTitle>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Stack spacing={2}>
                   <FormControl>
                     <FormLabel>Nomor Induk Kependudukan</FormLabel>
-                    <Input value={NIK} autoFocus required />
+                    <Input
+                      value={NIK}
+                      onChange={(e) => setNIK(e.target.value)}
+                      autoFocus
+                      required
+                    />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Nama Kepala Keluarga</FormLabel>
-                    <Input value={nama} required />
+                    <Input
+                      onChange={(e) => setKepalaKeluarga(e.target.value)}
+                      value={KepalaKeluarga}
+                      required
+                    />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Alamat</FormLabel>
-                    <Input value={alamat} required />
+                    <Input
+                      onChange={(e) => setAlamat(e.target.value)}
+                      value={Alamat}
+                      required
+                    />
                   </FormControl>
-                  <Button type="submit">Submit</Button>
+                  <Button loading={loading} type="submit">
+                    Submit
+                  </Button>
                 </Stack>
               </form>
             </ModalDialog>
