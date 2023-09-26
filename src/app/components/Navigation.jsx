@@ -46,13 +46,15 @@ export default function Navigation() {
             }
             if (
               item.label === "Program Keluarga Harapan" &&
-              data?.user?.role === "Guest"
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
             ) {
               return null;
             }
             if (
               item.label === "Penyandang Disabilitas" &&
-              data?.user?.role === "Guest"
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
             ) {
               return null;
             }
