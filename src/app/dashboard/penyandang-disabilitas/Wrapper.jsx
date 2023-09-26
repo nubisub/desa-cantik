@@ -8,7 +8,7 @@ const Page = ({ children }) => {
   if (status === "loading") {
     return <div>Loading...</div>;
   }
-  if (data.user.role === "Guest") {
+  if (data.user.role === "Guest" || data.user.role === "") {
     router.push("/dashboard");
   } else {
     return <>{children}</>;
