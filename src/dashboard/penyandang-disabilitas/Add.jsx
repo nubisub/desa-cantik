@@ -121,7 +121,7 @@ export default function Add() {
                   fontSize: "1.25em",
                 }}
               >
-                Tambah Daftar Penerima BLT
+                Tambah Daftar Penyandang Disabilitas
               </DialogTitle>
               <form onSubmit={handleSubmit}>
                 <Stack spacing={2}>
@@ -135,7 +135,15 @@ export default function Add() {
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Nama Kepala Keluarga</FormLabel>
+                    <FormLabel>Nama</FormLabel>
+                    <Input
+                      onChange={(e) => setKepalaKeluarga(e.target.value)}
+                      value={KepalaKeluarga}
+                      required
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Nomor Kartu Keluarga</FormLabel>
                     <Input
                       onChange={(e) => setKepalaKeluarga(e.target.value)}
                       value={KepalaKeluarga}

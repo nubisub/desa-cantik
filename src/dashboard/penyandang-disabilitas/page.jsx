@@ -3,10 +3,12 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/penyandang-disabilitas/Table";
+import Add from "@/app/dashboard/penyandang-disabilitas/Add";
 // icons
+import Page from "./Wrapper";
 
 // export const dynamic = "force-dynamic";
-export const revalidate = 5;
+export const revalidate = 1;
 async function getData() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`
@@ -33,7 +35,7 @@ export default async function ProgramKeluargaHarapan() {
   const listDisabilitas = await getDataFilterKedisabilitasan();
 
   return (
-    <>
+    <Page>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -60,13 +62,7 @@ export default async function ProgramKeluargaHarapan() {
         }}
       >
         <Typography level="h2">Daftar Penyandang Disabilitas</Typography>
-        {/*<Button*/}
-        {/*  color="primary"*/}
-        {/*  startDecorator={<DownloadRoundedIcon />}*/}
-        {/*  size="sm"*/}
-        {/*>*/}
-        {/*  Download PDF*/}
-        {/*</Button>*/}
+        <Add />
       </Box>
 
       <Table
@@ -74,6 +70,6 @@ export default async function ProgramKeluargaHarapan() {
         listDisabilitas={listDisabilitas}
         data={data}
       />
-    </>
+    </Page>
   );
 }

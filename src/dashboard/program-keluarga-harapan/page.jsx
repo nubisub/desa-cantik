@@ -5,6 +5,8 @@ import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 import Table from "@/app/dashboard/program-keluarga-harapan/Table";
 import Add from "@/app/dashboard/program-keluarga-harapan/Add";
+import Page from "./Wrapper";
+
 // export const dynamic = "force-dynamic";
 export const revalidate = 1;
 //
@@ -15,9 +17,10 @@ async function getData() {
 
 export default async function ProgramKeluargaHarapan() {
   const data = await getData();
+
   // const [open, setOpen] = React.useState(false);
   return (
-    <>
+    <Page>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -49,6 +52,6 @@ export default async function ProgramKeluargaHarapan() {
         <Add />
       </Box>
       <Table data={data} />
-    </>
+    </Page>
   );
 }

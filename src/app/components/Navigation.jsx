@@ -44,7 +44,18 @@ export default function Navigation() {
             ) {
               return null;
             }
-
+            if (
+              item.label === "Program Keluarga Harapan" &&
+              data?.user?.role === "Guest"
+            ) {
+              return null;
+            }
+            if (
+              item.label === "Penyandang Disabilitas" &&
+              data?.user?.role === "Guest"
+            ) {
+              return null;
+            }
             return (
               <ListItem key={index}>
                 <Link

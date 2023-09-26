@@ -26,6 +26,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Transition } from "react-transition-group";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { toast, Toaster } from "sonner";
+import { useSession } from "next-auth/react";
+
 // const data = [
 //   {
 //     NIK: "246.10.249.100/12",
@@ -34,10 +36,12 @@ import { toast, Toaster } from "sonner";
 //   },
 // ];
 
-export default function TablePKH({ data }) {
+export default function TablePKH({ data: dataPKH }) {
+  const { data, status } = useSession();
+
   const [rowData, setRowData] = useState([]);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(data.length);
+  const [rowSum, setRowSum] = useState(dataPKH.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -69,6 +73,8 @@ export default function TablePKH({ data }) {
     );
     if (res.ok) {
       toast.success("Data Berhasil Dihapus");
+    } else {
+      toast.error("Data Gagal Dihapus");
     }
     setOpen(false);
     setLoading(false);
@@ -109,7 +115,7 @@ export default function TablePKH({ data }) {
   useEffect(() => {
     if (search) {
       //   filter with NIK and NAMA keluarga and alamat
-      const filteredData = data.filter((item) => {
+      const filteredData = dataPKH.filter((item) => {
         return (
           item.NIK?.toLowerCase().includes(search.toLowerCase()) ||
           item.KepalaKeluarga?.toLowerCase().includes(search.toLowerCase()) ||
@@ -125,14 +131,14 @@ export default function TablePKH({ data }) {
       setRowData(filteredData.slice(start, end));
       setMaxPage(Math.ceil(filteredData.length / 10));
     } else {
-      setRowData(data);
-      setRowSum(data.length);
-      setTotalPage(Math.ceil(data.length / 10));
+      setRowData(dataPKH);
+      setRowSum(dataPKH.length);
+      setTotalPage(Math.ceil(dataPKH.length / 10));
       setPage(1);
       const start = (page - 1) * 10;
       const end = page * 10;
-      setRowData(data.slice(start, end));
-      setMaxPage(Math.ceil(data.length / 10));
+      setRowData(dataPKH.slice(start, end));
+      setMaxPage(Math.ceil(dataPKH.length / 10));
     }
   }, [search]);
 
@@ -140,7 +146,7 @@ export default function TablePKH({ data }) {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(data.slice(start, end));
+    setRowData(dataPKH.slice(start, end));
     setMaxPage(Math.ceil(rowSum / 10));
   }, [page]);
   return (
@@ -284,23 +290,25 @@ export default function TablePKH({ data }) {
                   </Typography>
                 </td>
                 <td>
-                  <Tooltip
-                    title={"Hapus"}
-                    arrow
-                    color="danger"
-                    placement="right"
-                    size="sm"
-                    variant="solid"
-                  >
-                    <IconButton
-                      onClick={() => handleHapusButton(row.indexRow)}
-                      size="sm"
-                      variant="soft"
+                  {data.user.role === "Viewer" ? null : (
+                    <Tooltip
+                      title={"Hapus"}
+                      arrow
                       color="danger"
+                      placement="right"
+                      size="sm"
+                      variant="solid"
                     >
-                      <DeleteOutlineIcon />
-                    </IconButton>
-                  </Tooltip>
+                      <IconButton
+                        onClick={() => handleHapusButton(row.indexRow)}
+                        size="sm"
+                        variant="soft"
+                        color="danger"
+                      >
+                        <DeleteOutlineIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
                 </td>
               </tr>
             ))}
