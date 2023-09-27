@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardContent } from "@mui/joy";
 import Typography from "@mui/joy/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -7,8 +8,38 @@ import IconButton from "@mui/joy/IconButton";
 import Box from "@mui/joy/Box";
 import { lato } from "@/app/utils/fonts";
 import { Paid } from "@mui/icons-material";
+import useSWR from "swr";
+
+const noPointer = { cursor: "default" };
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const getJumlahBLT = () => {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`,
+    fetcher
+  );
+  return {
+    dataBantuan: data,
+    error: error,
+    isLoadingBantuan: isLoading,
+  };
+};
+
+const getJumlahDisabilitas = () => {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/jumlah`,
+    fetcher
+  );
+  return {
+    dataDisabilitas: data,
+    error: error,
+    isLoadingDisabilitas: isLoading,
+  };
+};
 
 export default function CardDashboard({ BLT, Disabilitas }) {
+  const { dataBantuan, isLoadingBantuan } = getJumlahBLT();
+  const { dataDisabilitas, isLoadingDisabilitas } = getJumlahDisabilitas();
   return (
     <>
       <Card
@@ -73,7 +104,11 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               }}
               variant="h6"
             >
-              <span className={lato.className}>{BLT}</span>
+              {isLoadingBantuan ? (
+                <span className={lato.className}>-</span>
+              ) : (
+                <span className={lato.className}>{dataBantuan?.count}</span>
+              )}
             </Typography>
           </CardContent>
           {/*<Divider orientation="horizontal" />*/}
@@ -85,7 +120,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               alignItems: "flex-start",
             }}
           >
-            <IconButton color="primary" variant="soft">
+            <IconButton style={noPointer} color="primary" variant="soft">
               <Paid
                 sx={{
                   fontSize: "1.5rem",
@@ -144,7 +179,6 @@ export default function CardDashboard({ BLT, Disabilitas }) {
                 <InfoOutlinedIcon
                   sx={{
                     fontSize: "1.1rem",
-                    cursor: "pointer",
                   }}
                 />
               </Tooltip>
@@ -157,7 +191,11 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               }}
               variant="h6"
             >
-              <span className={lato.className}>{Disabilitas}</span>
+              {isLoadingDisabilitas ? (
+                <span className={lato.className}>-</span>
+              ) : (
+                <span className={lato.className}>{dataDisabilitas?.count}</span>
+              )}
             </Typography>
           </CardContent>
           <Box
@@ -168,7 +206,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               alignItems: "flex-start",
             }}
           >
-            <IconButton color="warning" variant="soft">
+            <IconButton style={noPointer} color="warning" variant="soft">
               <AccessibleIcon
                 sx={{
                   fontSize: "1.5rem",

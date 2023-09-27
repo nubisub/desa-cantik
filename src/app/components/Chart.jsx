@@ -3,14 +3,47 @@ import * as React from "react";
 import { useColorScheme } from "@mui/joy/styles";
 import Box from "@mui/joy/Box";
 import { ResponsiveBar } from "@nivo/bar";
+import useSWR from "swr";
 
-export default function Chart({ chartData, tipeDisabilitas }) {
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const getChartData = () => {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/chart`,
+    fetcher
+  );
+  return {
+    chartData: data,
+    error: error,
+    isLoadingChartData: isLoading,
+  };
+};
+
+const getTipeDisabilitas = () => {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`,
+    fetcher
+  );
+  return {
+    tipeDisabilitas: data,
+    error: error,
+    isLoadingTipeDisabilitas: isLoading,
+  };
+};
+
+export default function Chart() {
   const { mode, systemMode } = useColorScheme();
-  const data = chartData;
-  // make array of my object tipeDisabilitas with Kedisabilitasan value
-  const jenisUnique = tipeDisabilitas.map((e) => e.Kedisabilitasan);
+  const { tipeDisabilitas, isLoadingTipeDisabilitas } = getTipeDisabilitas();
+  const { chartData, isLoadingChartData } = getChartData();
 
-  const keys = Object.keys(data);
+  if (isLoadingChartData || isLoadingTipeDisabilitas) {
+    return <div>Loading...</div>;
+  }
+
+  const data = chartData;
+
+  // make array of my object tipeDisabilitas with Kedisabilitasan value
+  const jenisUnique = tipeDisabilitas?.map((e) => e.Kedisabilitasan);
 
   const theme = {
     axis: {
