@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { useRef } from "react";
 import Box from "@mui/joy/Box";
@@ -32,7 +33,10 @@ export default function Page2() {
           sx={{
             width: {
               xs: "90%",
-              sm: "70%",
+              sm: "90%",
+              md: "85%",
+              lg: "75%",
+              xl: "70%",
             },
           }}
           direction="column"
@@ -98,7 +102,7 @@ export default function Page2() {
                 width={0}
                 height={0}
                 layout="responsive"
-                style={{ objectFit: "cover", maxWidth: "500px" }}
+                style={{ objectFit: "cover", maxWidth: "400px" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
               />
@@ -128,10 +132,7 @@ export default function Page2() {
                 kebijakan yang bijak dan kesadaran akan ketidaksetaraan
                 struktural, kita dapat membangun masyarakat yang lebih inklusif
                 dan berdaya tahan, di mana setiap individu memiliki peluang yang
-                sama untuk berkembang dan berkontribusi secara positif. Dengan
-                demikian, mengatasi kemiskinan struktural bukan hanya sebuah
-                tujuan, tetapi juga investasi penting bagi masa depan yang lebih
-                baik bagi semua orang.
+                sama untuk berkembang dan berkontribusi secara positif.
               </Typography>
             </Box>
           </motion.div>
