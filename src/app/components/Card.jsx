@@ -13,7 +13,7 @@ import useSWR from "swr";
 const noPointer = { cursor: "default" };
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const getJumlahBLT = () => {
+const GetJumlahBLT = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`,
     fetcher
@@ -25,7 +25,7 @@ const getJumlahBLT = () => {
   };
 };
 
-const getJumlahDisabilitas = () => {
+const GetJumlahDisabilitas = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/jumlah`,
     fetcher
@@ -38,8 +38,8 @@ const getJumlahDisabilitas = () => {
 };
 
 export default function CardDashboard({ BLT, Disabilitas }) {
-  const { dataBantuan, isLoadingBantuan } = getJumlahBLT();
-  const { dataDisabilitas, isLoadingDisabilitas } = getJumlahDisabilitas();
+  const { dataBantuan, isLoadingBantuan } = GetJumlahBLT();
+  const { dataDisabilitas, isLoadingDisabilitas } = GetJumlahDisabilitas();
   return (
     <>
       <Card

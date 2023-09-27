@@ -7,7 +7,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import Chart from "@/app/components/Chart";
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>

@@ -26,6 +26,10 @@ export default function Navigation() {
           sm: "inherit",
           md: "fixed",
         },
+        minWidth: {
+          sm: "inherit",
+          md: "225px",
+        },
         top: 80,
       }}
     >

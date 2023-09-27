@@ -27,6 +27,21 @@ import { Transition } from "react-transition-group";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { toast, Toaster } from "sonner";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const GetData = () => {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
+    fetcher
+  );
+  return {
+    dataBantuan: data,
+    error: error,
+    isLoadingPKH: isLoading,
+  };
+};
 
 // const data = [
 //   {
@@ -36,7 +51,7 @@ import { useSession } from "next-auth/react";
 //   },
 // ];
 
-export default function TablePKH({ data: dataPKH }) {
+export default function TablePKH({ dataPKH }) {
   const { data, status } = useSession();
 
   const [rowData, setRowData] = useState([]);

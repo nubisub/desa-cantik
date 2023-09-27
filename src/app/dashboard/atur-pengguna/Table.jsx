@@ -15,7 +15,7 @@ import Avatar from "@mui/joy/Avatar";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import { toast, Toaster } from "sonner";
 
-export default function TablePKH({ data, listRoles, listDisabilitas }) {
+export default function TablePKH({ data, listRoles }) {
   const [rowData, setRowData] = useState(data);
   const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");

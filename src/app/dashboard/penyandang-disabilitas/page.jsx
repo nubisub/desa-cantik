@@ -2,9 +2,9 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "@/app/dashboard/penyandang-disabilitas/Table";
 // icons
 import Page from "./Wrapper";
+import WrapperData from "@/app/dashboard/penyandang-disabilitas/WrapperData";
 
 // export const dynamic = "force-dynamic";
 export const revalidate = 1;
@@ -64,11 +64,12 @@ export default async function ProgramKeluargaHarapan() {
         {/*<Add />*/}
       </Box>
 
-      <Table
-        listKemiskinan={listKemiskinan}
-        listDisabilitas={listDisabilitas}
-        data={data}
-      />
+      {/*<Table*/}
+      {/*  listKemiskinan={listKemiskinan}*/}
+      {/*  listDisabilitas={listDisabilitas}*/}
+      {/*  data={data}*/}
+      {/*/>*/}
+      <WrapperData />
     </Page>
   );
 }

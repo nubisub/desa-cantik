@@ -7,7 +7,7 @@ import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const getChartData = () => {
+const GetChartData = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/chart`,
     fetcher
@@ -19,7 +19,7 @@ const getChartData = () => {
   };
 };
 
-const getTipeDisabilitas = () => {
+const GetTipeDisabilitas = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`,
     fetcher
@@ -33,8 +33,8 @@ const getTipeDisabilitas = () => {
 
 export default function Chart() {
   const { mode, systemMode } = useColorScheme();
-  const { tipeDisabilitas, isLoadingTipeDisabilitas } = getTipeDisabilitas();
-  const { chartData, isLoadingChartData } = getChartData();
+  const { tipeDisabilitas, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
+  const { chartData, isLoadingChartData } = GetChartData();
 
   if (isLoadingChartData || isLoadingTipeDisabilitas) {
     return <div>Loading...</div>;

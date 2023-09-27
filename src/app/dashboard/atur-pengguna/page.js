@@ -1,10 +1,10 @@
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "@/app/dashboard/atur-pengguna/Table";
 import Page from "./Wrapper";
+import WrapperData from "@/app/dashboard/atur-pengguna/WrapperData";
+
 // icons
-export const dynamic = "force-dynamic";
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`);
   return res.json();
@@ -48,7 +48,8 @@ export default async function AturPengguna() {
         <Typography level="h2">Atur Pengguna</Typography>
       </Box>
 
-      <Table listRoles={listRoles.roles} data={dataPengguna.users} />
+      {/*<Table listRoles={listRoles.roles} data={dataPengguna.users} />*/}
+      <WrapperData />
     </Page>
   );
 }

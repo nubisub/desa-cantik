@@ -3,9 +3,9 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Table from "@/app/dashboard/program-keluarga-harapan/Table";
 import Add from "@/app/dashboard/program-keluarga-harapan/Add";
 import Page from "./Wrapper";
+import WrapperData from "@/app/dashboard/program-keluarga-harapan/WrapperData";
 
 // export const dynamic = "force-dynamic";
 export const revalidate = 1;
@@ -15,9 +15,7 @@ async function getData() {
   return res.json();
 }
 
-export default async function ProgramKeluargaHarapan() {
-  const data = await getData();
-
+export default function ProgramKeluargaHarapan() {
   // const [open, setOpen] = React.useState(false);
   return (
     <Page>
@@ -51,7 +49,7 @@ export default async function ProgramKeluargaHarapan() {
         </Typography>
         <Add />
       </Box>
-      <Table data={data} />
+      <WrapperData />
     </Page>
   );
 }
