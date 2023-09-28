@@ -37,6 +37,11 @@ export default function Chart({ chartData, tipeDisabilitas }) {
   const { mode, systemMode } = useColorScheme();
   const { tipeDisabilitasSWR, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
   const { chartDataSWR, isLoadingChartData } = GetChartData();
+  // get window width
+  const [windowWidth, setWindowWidth] = React.useState(0);
+  React.useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
   const data = isLoadingChartData ? chartData : chartDataSWR;
   const dataTipeDisabilitas = isLoadingTipeDisabilitas
@@ -78,10 +83,16 @@ export default function Chart({ chartData, tipeDisabilitas }) {
       }}
     >
       <ResponsiveBar
+        layout={windowWidth < 600 ? "horizontal" : "vertical"}
         data={data}
         keys={jenisUnique}
         indexBy={"JenisDisabilitas"}
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        margin={{
+          top: 50,
+          right: windowWidth < 600 ? 30 : 170,
+          bottom: 50,
+          left: 60,
+        }}
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
@@ -141,31 +152,35 @@ export default function Chart({ chartData, tipeDisabilitas }) {
           from: "color",
           modifiers: [["darker", 1.6]],
         }}
-        legends={[
-          {
-            itemTextColor: mode === "dark" ? "#fff" : "#000",
-            dataFrom: "keys",
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 120,
-            translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 100,
-            itemHeight: 20,
-            itemDirection: "left-to-right",
-            itemOpacity: 0.85,
-            symbolSize: 20,
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemOpacity: 1,
+        legends={
+          windowWidth < 600
+            ? []
+            : [
+                {
+                  itemTextColor: mode === "dark" ? "#fff" : "#000",
+                  dataFrom: "keys",
+                  anchor: "bottom-right",
+                  direction: "column",
+                  justify: false,
+                  translateX: 120,
+                  translateY: 0,
+                  itemsSpacing: 2,
+                  itemWidth: 100,
+                  itemHeight: 20,
+                  itemDirection: "left-to-right",
+                  itemOpacity: 0.85,
+                  symbolSize: 20,
+                  effects: [
+                    {
+                      on: "hover",
+                      style: {
+                        itemOpacity: 1,
+                      },
+                    },
+                  ],
                 },
-              },
-            ],
-          },
-        ]}
+              ]
+        }
         role="application"
         ariaLabel="Ragam Penyandang Disabilitas"
         barAriaLabel={(e) => e.id + ": " + e.formattedValue + e.indexValue}

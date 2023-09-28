@@ -8,7 +8,7 @@ export default withAuth(
     // Just Admin can access this page
     // Pages that just Admin can access:
     if (
-      req.nextUrl.pathname === "/dashboard/atur-pengguna" &&
+      req.nextUrl.pathname === "/dashboard/kelola-pengguna" &&
       role !== "Admin"
     ) {
       return NextResponse.redirect(new URL("/dashboard", req.url));

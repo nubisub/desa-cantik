@@ -5,15 +5,29 @@ import Table from "@mui/joy/Table";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
-import { FormControl, FormLabel, Input, Select, selectClasses } from "@mui/joy";
+import {
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Drawer,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  ModalClose,
+  Select,
+  Stack,
+} from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/joy/Button";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Option from "@mui/joy/Option";
 import Avatar from "@mui/joy/Avatar";
-import { KeyboardArrowDown } from "@mui/icons-material";
 import { toast, Toaster } from "sonner";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import IconButton from "@mui/joy/IconButton";
+import Tooltip from "@mui/joy/Tooltip";
 
 export default function TablePKH({ data, listRoles }) {
   const [rowData, setRowData] = useState(data);
@@ -25,8 +39,35 @@ export default function TablePKH({ data, listRoles }) {
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
   const [searchedData, setSearchedData] = useState([]);
   const [filterRoles, setFilterRoles] = useState("");
+  const [listRole, setListRole] = useState(listRoles);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRole, setSelectedRole] = useState("");
+  const [change, setChange] = useState("");
+  const [loadingUpdateRole, setLoadingUpdateRole] = useState(false);
 
-  function updateRole(email, role) {
+  const handleChange = (event, newValue) => {
+    setChange(newValue);
+  };
+
+  function selectRow(row) {
+    setChange(row.role);
+    setSelectedRole(row.role);
+    setSelectedRow(row);
+    setDrawerOpen(true);
+  }
+
+  function updateRole(email, role, oldRole) {
+    setLoadingUpdateRole(true);
+
+    if (role === oldRole) {
+      toast.error("Role tidak berubah");
+      setDrawerOpen(false);
+      setLoadingUpdateRole(false);
+      return;
+    }
+
+    toast.loading("Mengubah role pengguna ... ");
     fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/roles`, {
       method: "PUT",
       headers: {
@@ -52,8 +93,14 @@ export default function TablePKH({ data, listRoles }) {
           });
           setRowData(newData);
           toast.success("Berhasil mengubah role pengguna");
+
+          setDrawerOpen(false);
+          setLoadingUpdateRole(false);
         } else {
           toast.error("Gagal mengubah role pengguna");
+
+          setDrawerOpen(false);
+          setLoadingUpdateRole(false);
         }
       })
       .catch((err) => {
@@ -62,7 +109,7 @@ export default function TablePKH({ data, listRoles }) {
   }
 
   useEffect(() => {
-    //     filter data with search, filterKemiskinan, filterKedisabilitasan
+    setRowData([]);
     const filteredData = data.filter((item) => {
       return (
         (item.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -85,6 +132,10 @@ export default function TablePKH({ data, listRoles }) {
           onClick={() => setPage(i)}
           sx={{
             borderRadius: "50%",
+            display: {
+              xs: "none",
+              md: "initial",
+            },
           }}
           key={i}
           size="sm"
@@ -122,10 +173,7 @@ export default function TablePKH({ data, listRoles }) {
         sx={{
           borderRadius: "sm",
           py: 2,
-          display: {
-            xs: "none",
-            sm: "flex",
-          },
+          display: "flex",
           flexWrap: "wrap",
           gap: 1.5,
           "& > *": {
@@ -172,7 +220,7 @@ export default function TablePKH({ data, listRoles }) {
         className="OrderTableContainer"
         variant="outlined"
         sx={{
-          display: { xs: "none", sm: "initial" },
+          display: "initial",
           width: "100%",
           borderRadius: "sm",
           flexShrink: 1,
@@ -237,6 +285,14 @@ export default function TablePKH({ data, listRoles }) {
               >
                 Role
               </th>
+              <th
+                style={{
+                  width: 50,
+                  padding: "12px 6px",
+                  fontWeight: "500",
+                  fontSize: "1.1em",
+                }}
+              ></th>
             </tr>
           </thead>
           <tbody>
@@ -271,33 +327,29 @@ export default function TablePKH({ data, listRoles }) {
                   <Typography>{row.email}</Typography>
                 </td>
                 <td>
-                  <Select
-                    disabled={row.role === "Admin"}
-                    defaultValue={row.role || "Guest"}
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                      width: 120,
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: "0.2s",
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: "rotate(-180deg)",
-                        },
-                      },
-                    }}
+                  <Typography sx={{ textTransform: "capitalize" }}>
+                    {row.role || "Guest"}
+                  </Typography>
+                </td>
+                <td>
+                  <Tooltip
+                    arrow
+                    title="Kelola Akun"
+                    placement="left"
+                    size="sm"
+                    variant="outlined"
                   >
-                    {listRoles?.map((item) => (
-                      <Option
-                        onClick={() => updateRole(row.email, item.role)}
-                        value={item.role || "Guest"}
-                        key={item.role}
-                      >
-                        {item.role}
-                      </Option>
-                    ))}
-                  </Select>
-                  {/*<Typography sx={{ textTransform: "capitalize" }}>*/}
-                  {/*  {row.role || "Guest"}*/}
-                  {/*</Typography>*/}
+                    <IconButton
+                      onClick={() => {
+                        selectRow(row);
+                      }}
+                      color={"primary"}
+                      size={"sm"}
+                      variant={"soft"}
+                    >
+                      <ManageAccountsIcon />
+                    </IconButton>
+                  </Tooltip>
                 </td>
               </tr>
             ))}
@@ -309,10 +361,7 @@ export default function TablePKH({ data, listRoles }) {
         sx={{
           pt: 2,
           gap: 1,
-          display: {
-            xs: "none",
-            md: "flex",
-          },
+          display: "flex",
         }}
       >
         <Button
@@ -339,6 +388,101 @@ export default function TablePKH({ data, listRoles }) {
           Next
         </Button>
       </Box>
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        size="md"
+        variant="plain"
+        onClose={() => setDrawerOpen(false)}
+        slotProps={{
+          content: {
+            sx: {
+              bgcolor: "transparent",
+              p: { md: 3, sm: 0 },
+              boxShadow: "none",
+            },
+          },
+        }}
+      >
+        <Sheet
+          sx={{
+            borderRadius: "md",
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            height: "100%",
+            overflow: "auto",
+          }}
+        >
+          <DialogTitle>Kelola Akun</DialogTitle>
+          <ModalClose />
+          <Divider sx={{ mt: "auto" }} />
+          <DialogContent sx={{ gap: 2 }}>
+            <FormControl orientation="horizontal">
+              <Box sx={{ flex: 1, pr: 1 }}>
+                <FormLabel sx={{ typography: "title-sm" }}>Nama</FormLabel>
+                <FormHelperText sx={{ typography: "body-sm" }}>
+                  {selectedRow?.name}
+                </FormHelperText>
+              </Box>
+            </FormControl>
+
+            <FormControl orientation="horizontal">
+              <Box sx={{ flex: 1, mt: 1, mr: 1 }}>
+                <FormLabel sx={{ typography: "title-sm" }}>Email</FormLabel>
+                <FormHelperText sx={{ typography: "body-sm" }}>
+                  {selectedRow?.email}
+                </FormHelperText>
+              </Box>
+            </FormControl>
+
+            <FormControl orientation="horizontal">
+              <Box sx={{ flex: 1, mt: 1, mr: 1, gap: 1 }}>
+                <FormLabel sx={{ typography: "title-sm" }}>Role</FormLabel>
+                <Select
+                  disabled={change === "Admin"}
+                  value={change}
+                  onChange={handleChange}
+                >
+                  {listRole?.map((item) => (
+                    <Option key={item.role} value={item.role}>
+                      {item.role}
+                    </Option>
+                  ))}
+                </Select>
+              </Box>
+            </FormControl>
+          </DialogContent>
+
+          <Divider sx={{ mt: "auto" }} />
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            useFlexGap
+            spacing={1}
+          >
+            <Button
+              disabled={loadingUpdateRole}
+              onClick={() => {
+                setDrawerOpen(false);
+              }}
+              variant="outlined"
+              color="neutral"
+            >
+              Batalkan
+            </Button>
+            <Button
+              loading={loadingUpdateRole}
+              onClick={() => {
+                updateRole(selectedRow.email, change, selectedRole);
+              }}
+            >
+              Terapkan
+            </Button>
+          </Stack>
+        </Sheet>
+      </Drawer>
       <Toaster position="top-center" richColors closeButton />
     </>
   );

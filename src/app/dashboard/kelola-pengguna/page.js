@@ -1,22 +1,11 @@
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import WrapperData from "@/app/dashboard/atur-pengguna/WrapperData";
+import WrapperData from "@/app/dashboard/kelola-pengguna/WrapperData";
 
 // icons
-async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`);
-  return res.json();
-}
-async function getDataFilterRoles() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pengguna/roles`);
-  return res.json();
-}
 
-export default async function AturPengguna() {
-  const dataPengguna = await getData();
-  const listRoles = await getDataFilterRoles();
-
+export default async function KelolaPengguna() {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -27,8 +16,8 @@ export default async function AturPengguna() {
               href: "/dashboard",
             },
             {
-              label: "Atur Pengguna",
-              href: "/atur-pengguna",
+              label: "Kelola Pengguna",
+              href: "/kelola-pengguna",
             },
           ]}
         />
@@ -44,7 +33,7 @@ export default async function AturPengguna() {
           justifyContent: "space-between",
         }}
       >
-        <Typography level="h2">Atur Pengguna</Typography>
+        <Typography level="h2">Kelola Pengguna</Typography>
       </Box>
       <WrapperData />
     </>

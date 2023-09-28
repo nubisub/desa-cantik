@@ -24,24 +24,9 @@ import { Transition } from "react-transition-group";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { toast, Toaster } from "sonner";
 import { useSession } from "next-auth/react";
-import useSWR from "swr";
 import Tooltip from "@mui/joy/Tooltip";
 import IconButton from "@mui/joy/IconButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
-const fetcher = (url) => fetch(url).then((r) => r.json());
-
-const GetData = () => {
-  const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
-    fetcher
-  );
-  return {
-    dataBantuan: data,
-    error: error,
-    isLoadingPKH: isLoading,
-  };
-};
 
 // const data = [
 //   {
@@ -72,7 +57,7 @@ export default function TablePKH({ dataPKH }) {
 
   const handleHapus = async (e) => {
     setLoading(true);
-    toast.loading("Loading");
+    toast.loading("Menghapus Data...");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
       {

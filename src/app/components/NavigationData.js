@@ -11,8 +11,8 @@ const Data = [
     icon: <FolderOpenIcon fontSize="small" />,
   },
   {
-    label: "Atur Pengguna",
-    href: "/dashboard/atur-pengguna",
+    label: "Kelola Pengguna",
+    href: "/dashboard/kelola-pengguna",
     icon: <AdminPanelSettingsIcon fontSize="small" />,
   },
   {

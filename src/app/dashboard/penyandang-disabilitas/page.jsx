@@ -5,28 +5,6 @@ import Typography from "@mui/joy/Typography";
 // icons
 import WrapperData from "@/app/dashboard/penyandang-disabilitas/WrapperData";
 
-// export const dynamic = "force-dynamic";
-export const revalidate = 1;
-async function getData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`
-  );
-  return res.json();
-}
-async function getDataFilterKedisabilitasan() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`
-  );
-  return res.json();
-}
-
-async function getDataFilterKemiskinan() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-kemiskinan`
-  );
-  return res.json();
-}
-
 export default async function ProgramKeluargaHarapan() {
   return (
     <>

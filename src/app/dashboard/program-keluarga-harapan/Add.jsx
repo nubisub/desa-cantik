@@ -38,7 +38,7 @@ export default function Add() {
       toast.error("NIK harus 16 digit angka");
       return;
     }
-    toast.loading("Loading...");
+    toast.loading("Menambah Data...");
     setLoading(true);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,

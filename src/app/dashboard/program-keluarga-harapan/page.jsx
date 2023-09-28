@@ -6,14 +6,6 @@ import Typography from "@mui/joy/Typography";
 import Add from "@/app/dashboard/program-keluarga-harapan/Add";
 import WrapperData from "@/app/dashboard/program-keluarga-harapan/WrapperData";
 
-// export const dynamic = "force-dynamic";
-export const revalidate = 1;
-//
-async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`);
-  return res.json();
-}
-
 export default function ProgramKeluargaHarapan() {
   // const [open, setOpen] = React.useState(false);
   return (

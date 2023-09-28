@@ -43,7 +43,7 @@ export default function Navigation() {
           {Data.map((item, index) => {
             //   skip if item label = "Atur Pengguna" and user role != "admin"
             if (
-              item.label === "Atur Pengguna" &&
+              item.label === "Kelola Pengguna" &&
               data?.user?.role !== "Admin"
             ) {
               return null;

@@ -7,7 +7,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import Chart from "@/app/components/Chart";
 
-export const revalidate = 86400; // revalidate at most every 30 seconds
+export const revalidate = 1800;
 async function getDataBLT() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`);
   return res.json();
