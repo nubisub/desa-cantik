@@ -3,7 +3,6 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 // icons
-import Page from "./Wrapper";
 import WrapperData from "@/app/dashboard/penyandang-disabilitas/WrapperData";
 
 // export const dynamic = "force-dynamic";
@@ -29,12 +28,8 @@ async function getDataFilterKemiskinan() {
 }
 
 export default async function ProgramKeluargaHarapan() {
-  const data = await getData();
-  const listKemiskinan = await getDataFilterKemiskinan();
-  const listDisabilitas = await getDataFilterKedisabilitasan();
-
   return (
-    <Page>
+    <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -70,6 +65,6 @@ export default async function ProgramKeluargaHarapan() {
       {/*  data={data}*/}
       {/*/>*/}
       <WrapperData />
-    </Page>
+    </>
   );
 }

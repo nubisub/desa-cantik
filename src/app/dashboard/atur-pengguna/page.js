@@ -1,7 +1,6 @@
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Page from "./Wrapper";
 import WrapperData from "@/app/dashboard/atur-pengguna/WrapperData";
 
 // icons
@@ -19,7 +18,7 @@ export default async function AturPengguna() {
   const listRoles = await getDataFilterRoles();
 
   return (
-    <Page>
+    <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Breadcrumbs
           items={[
@@ -47,9 +46,7 @@ export default async function AturPengguna() {
       >
         <Typography level="h2">Atur Pengguna</Typography>
       </Box>
-
-      {/*<Table listRoles={listRoles.roles} data={dataPengguna.users} />*/}
       <WrapperData />
-    </Page>
+    </>
   );
 }
