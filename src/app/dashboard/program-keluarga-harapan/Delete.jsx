@@ -4,7 +4,11 @@ import { useSession } from "next-auth/react";
 const Page = ({ children }) => {
   const { data, status } = useSession();
 
-  if (data.user.role === "Viewer") {
+  if (status === "loading") {
+    return <></>;
+  }
+
+  if (data.user?.role === "Viewer") {
     return <></>;
   } else {
     return <>{children}</>;

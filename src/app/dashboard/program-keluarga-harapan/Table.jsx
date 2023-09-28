@@ -20,14 +20,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/joy/Button";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import IconButton from "@mui/joy/IconButton";
-import Tooltip from "@mui/joy/Tooltip";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Transition } from "react-transition-group";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { toast, Toaster } from "sonner";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
+import Tooltip from "@mui/joy/Tooltip";
+import IconButton from "@mui/joy/IconButton";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -304,7 +304,7 @@ export default function TablePKH({ dataPKH }) {
                   </Typography>
                 </td>
                 <td>
-                  {data.user.role === "Viewer" ? null : (
+                  {data.user?.role === "Viewer" ? null : (
                     <Tooltip
                       title={"Hapus"}
                       arrow

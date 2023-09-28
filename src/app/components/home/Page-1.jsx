@@ -203,7 +203,7 @@ export default function Page1() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.5 }}
       >
         <Box
           sx={{
@@ -217,9 +217,8 @@ export default function Page1() {
           }}
         >
           <NextImage
-            draggable={false}
             src="/bg-home.png"
-            alt="Assets Image"
+            alt="Indonesian Child Image"
             width={0}
             height={0}
             layout="responsive"
@@ -238,7 +237,7 @@ export default function Page1() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
         <Box
           sx={{
@@ -252,9 +251,8 @@ export default function Page1() {
           }}
         >
           <NextImage
-            draggable={false}
             src="/bg-home2.png"
-            alt="Assets Image"
+            alt="Indonesian Child Image"
             width={0}
             height={0}
             layout="responsive"

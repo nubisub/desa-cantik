@@ -65,6 +65,10 @@ export default function Add() {
     setLoading(false);
   };
 
+  if (status === "loading") {
+    return null;
+  }
+
   if (data.user.role === "Viewer") {
     return null;
   }
