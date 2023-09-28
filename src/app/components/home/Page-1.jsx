@@ -8,7 +8,6 @@ import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { useRef } from "react";
 import Link from "next/link";
-import { useAuth } from "../../context/AuthContext";
 import NextImage from "next/image";
 
 const bounceTransition = {
@@ -25,7 +24,6 @@ const bounceTransition = {
   },
 };
 export default function Page1() {
-  const currentUser = useAuth();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (

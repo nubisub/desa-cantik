@@ -1,20 +1,11 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import auth from "@/app/services/google";
-import { auth2 } from "@/app/services/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
 
 export const revalidate = 5;
 export async function GET(request) {
-  const user = await onAuthStateChanged(auth2, (user) => {
-    if (user) {
-      return user;
-    } else {
-      return null;
-    }
-  });
   const spreadsheetId = process.env.GOOGLE_SPREASHEET_ID;
   const sheets = google.sheets({ version: "v4", auth });
 
