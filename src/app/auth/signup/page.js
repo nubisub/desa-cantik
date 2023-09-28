@@ -18,7 +18,6 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState();
   const router = useRouter();
   const { data, status } = useSession();
-  console.log(data);
 
   // check if there is environment variable for allowSignUp if not set it to false
   const allowSignUp = process.env.NEXT_PUBLIC_ALLOW_SIGNUP || false;
@@ -30,7 +29,6 @@ export default function Page() {
     });
 
     if (response.error) {
-      console.log(response.error);
     }
   };
   function handleLogin(e) {

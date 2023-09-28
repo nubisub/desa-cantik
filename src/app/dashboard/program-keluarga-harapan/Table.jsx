@@ -66,7 +66,6 @@ export default function TablePKH({ dataPKH }) {
   const [loading, setLoading] = useState(false);
 
   const handleHapusButton = (e) => {
-    console.log(e);
     setHapus(e);
     setOpen(true);
   };

@@ -29,7 +29,6 @@ export default function WrapperData() {
   if (isLoadingPKH) {
     return <div>Loading...</div>;
   }
-  console.log(dataBantuan);
   return (
     <>
       <Table dataPKH={dataBantuan} />

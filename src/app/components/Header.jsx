@@ -16,9 +16,11 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import ListItemContent from "@mui/joy/ListItemContent";
 import ListItem from "@mui/joy/ListItem";
 import { auth } from "@/app/services/firebase";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Header(props) {
+  const { data, status } = useSession();
+
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
@@ -153,6 +155,27 @@ export default function Header(props) {
           }}
         >
           {Data.map((item, index) => {
+            //   skip if item label = "Atur Pengguna" and user role != "admin"
+            if (
+              item.label === "Atur Pengguna" &&
+              data?.user?.role !== "Admin"
+            ) {
+              return null;
+            }
+            if (
+              item.label === "Program Keluarga Harapan" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
+            if (
+              item.label === "Penyandang Disabilitas" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
             return (
               <ListItem key={index}>
                 <Link

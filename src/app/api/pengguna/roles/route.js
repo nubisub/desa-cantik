@@ -28,7 +28,6 @@ export async function PUT(request) {
       role: role === "Admin" ? "Admin" : role,
     });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({
       status: "error",
       message: "Role gagal diubah",

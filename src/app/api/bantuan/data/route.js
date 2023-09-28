@@ -83,7 +83,6 @@ export async function POST(request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       {
         message: "Insert Data Failed",
@@ -99,7 +98,7 @@ export async function POST(request) {
 export async function DELETE(request) {
   try {
     const { index } = await request.json();
-    console.log(index);
+
     const serviceAccountAuth = new JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
       key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
@@ -125,7 +124,6 @@ export async function DELETE(request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       {
         message: "Delete Data Failed",
