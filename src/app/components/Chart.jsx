@@ -10,10 +10,11 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const GetChartData = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/chart`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: false }
   );
   return {
-    chartData: data,
+    chartDataSWR: data,
     error: error,
     isLoadingChartData: isLoading,
   };
@@ -22,28 +23,27 @@ const GetChartData = () => {
 const GetTipeDisabilitas = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`,
-    fetcher
+    fetcher,
+    { refreshInterval: 300000, revalidateOnFocus: false }
   );
   return {
-    tipeDisabilitas: data,
+    tipeDisabilitasSWR: data,
     error: error,
     isLoadingTipeDisabilitas: isLoading,
   };
 };
 
-export default function Chart() {
+export default function Chart({ chartData, tipeDisabilitas }) {
   const { mode, systemMode } = useColorScheme();
-  const { tipeDisabilitas, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
-  const { chartData, isLoadingChartData } = GetChartData();
+  const { tipeDisabilitasSWR, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
+  const { chartDataSWR, isLoadingChartData } = GetChartData();
 
-  if (isLoadingChartData || isLoadingTipeDisabilitas) {
-    return <div>Loading...</div>;
-  }
+  const data = isLoadingChartData ? chartData : chartDataSWR;
+  const dataTipeDisabilitas = isLoadingTipeDisabilitas
+    ? tipeDisabilitas
+    : tipeDisabilitasSWR;
 
-  const data = chartData;
-
-  // make array of my object tipeDisabilitas with Kedisabilitasan value
-  const jenisUnique = tipeDisabilitas?.map((e) => e.Kedisabilitasan);
+  const jenisUnique = dataTipeDisabilitas.map((e) => e.Kedisabilitasan);
 
   const theme = {
     axis: {

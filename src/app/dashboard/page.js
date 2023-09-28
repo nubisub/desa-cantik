@@ -7,7 +7,36 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import Chart from "@/app/components/Chart";
 
-export default function Home() {
+export const revalidate = 86400; // revalidate at most every 30 seconds
+async function getDataBLT() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`);
+  return res.json();
+}
+async function getDataDisabilitas() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/jumlah`
+  );
+  return res.json();
+}
+
+async function getDataChart() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/chart`
+  );
+  return res.json();
+}
+
+async function getTipeDisabilitas() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`
+  );
+  return res.json();
+}
+export default async function Home() {
+  const countBantuan = await getDataBLT();
+  const countDisabilitas = await getDataDisabilitas();
+  const chartDisabilitas = await getDataChart();
+  const tipeDisabilitas = await getTipeDisabilitas();
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -32,7 +61,10 @@ export default function Home() {
           gap: 2,
         }}
       >
-        <CardDashboard />
+        <CardDashboard
+          BLT={countBantuan?.count}
+          Disabilitas={countDisabilitas?.count}
+        />
       </Box>
       <Box
         sx={{
@@ -92,7 +124,10 @@ export default function Home() {
                 />
               </Tooltip>
             </CardContent>
-            <Chart />
+            <Chart
+              tipeDisabilitas={tipeDisabilitas}
+              chartData={chartDisabilitas}
+            />
           </CardContent>
         </Card>
       </Box>

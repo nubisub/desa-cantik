@@ -16,7 +16,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const GetJumlahBLT = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/jumlah`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: false }
   );
   return {
     dataBantuan: data,
@@ -28,7 +29,8 @@ const GetJumlahBLT = () => {
 const GetJumlahDisabilitas = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/jumlah`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: false }
   );
   return {
     dataDisabilitas: data,
@@ -105,7 +107,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               variant="h6"
             >
               {isLoadingBantuan ? (
-                <span className={lato.className}>-</span>
+                <span className={lato.className}>{BLT}</span>
               ) : (
                 <span className={lato.className}>{dataBantuan?.count}</span>
               )}
@@ -192,7 +194,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
               variant="h6"
             >
               {isLoadingDisabilitas ? (
-                <span className={lato.className}>-</span>
+                <span className={lato.className}>{Disabilitas}</span>
               ) : (
                 <span className={lato.className}>{dataDisabilitas?.count}</span>
               )}
