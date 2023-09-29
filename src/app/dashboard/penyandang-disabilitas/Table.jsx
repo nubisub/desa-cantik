@@ -5,35 +5,107 @@ import Table from "@mui/joy/Table";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
-import { FormControl, FormLabel, Input, Select } from "@mui/joy";
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  FormControl,
+  FormLabel,
+  Input,
+  ModalDialog,
+  Select,
+} from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/joy/Button";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Option from "@mui/joy/Option";
+import Tooltip from "@mui/joy/Tooltip";
+import IconButton from "@mui/joy/IconButton";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useSession } from "next-auth/react";
+import Modal from "@mui/joy/Modal";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { Transition } from "react-transition-group";
+import { toast } from "sonner";
 
-export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
-  const [rowData, setRowData] = useState(data);
-  const [tempData, setTempData] = useState(data);
+export default function TablePKH({
+  data: dataDisabilitas,
+  listKemiskinan,
+  listDisabilitas,
+  mutateData,
+}) {
+  const { data, status } = useSession();
+  const [loading, setLoading] = useState(false);
+
+  const [rowData, setRowData] = useState(dataDisabilitas);
+  const [tempData, setTempData] = useState(dataDisabilitas);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(data.length);
+  const [rowSum, setRowSum] = useState(dataDisabilitas.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
   const [searchedData, setSearchedData] = useState([]);
   const [filterKemiskinan, setFilterKemiskinan] = useState("");
   const [filterKedisabilitasan, setFilterKedisabilitasan] = useState("");
+  const [open, setOpen] = useState(false);
+  const [hapus, setHapus] = useState("");
+  const [valueFilterKedisabilitasan, setValueFilterKedisabilitasan] =
+    useState("Semua");
+  const [valueFilterKemiskinan, setValueFilterKemiskinan] = useState("Semua");
+  const handleHapusButton = (e) => {
+    setHapus(e);
+    console.log(e);
+    setOpen(true);
+  };
+
+  const handleHapus = async (e) => {
+    setLoading(true);
+    toast.loading("Menghapus Data...");
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          index: hapus,
+        }),
+      }
+    );
+    if (res.ok) {
+      toast.success("Data Berhasil Dihapus");
+      const newData = dataDisabilitas.filter((item) => item.indexRow !== hapus);
+      //   reset indexRow object of newData
+      const newDataWithIndex = newData.map((item, index) => {
+        return { ...item, indexRow: index + 1 };
+      });
+      mutateData(newDataWithIndex, false);
+      setPage(1);
+      setSearch("");
+      setFilterKemiskinan("");
+      setValueFilterKedisabilitasan("Semua");
+      setValueFilterKemiskinan("Semua");
+      setFilterKedisabilitasan("");
+    } else {
+      toast.error("Data Gagal Dihapus");
+    }
+    setOpen(false);
+    setLoading(false);
+  };
 
   useEffect(() => {
     //     filter data with search, filterKemiskinan, filterKedisabilitasan
-    const filteredData = data.filter((item) => {
+    const filteredData = dataDisabilitas.filter((item) => {
       if (filterKemiskinan === "") {
         return (
           (item.Nama.toLowerCase().includes(search.toLowerCase()) ||
             item.NIK.toLowerCase().includes(search.toLowerCase()) ||
             item.NOKK.toLowerCase().includes(search.toLowerCase()) ||
             item.Alamat.toLowerCase().includes(search.toLowerCase())) &&
-          item.Kedisabilitasan.includes(filterKedisabilitasan)
+          item.Kedisabilitasan?.includes(filterKedisabilitasan)
         );
       }
       return (
@@ -47,7 +119,7 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
     setTempData(filteredData);
     setRowData(filteredData.slice(0, 10));
     setPage(1);
-  }, [search, filterKemiskinan, filterKedisabilitasan, data]);
+  }, [search, filterKemiskinan, filterKedisabilitasan]);
 
   const renderPageNumbers = () => {
     let pages = [];
@@ -122,20 +194,26 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
           <FormLabel>Kedisabilitasan</FormLabel>
           <Select
             size="sm"
-            defaultValue="Semua"
+            value={valueFilterKedisabilitasan}
             slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
           >
             <Option
               default
               value={"Semua"}
-              onClick={() => setFilterKedisabilitasan("")}
+              onClick={() => {
+                setFilterKedisabilitasan("");
+                setValueFilterKedisabilitasan("Semua");
+              }}
             >
               Semua
             </Option>
             {listDisabilitas?.map((item) => (
               <Option
                 key={item.Kedisabilitasan}
-                onClick={() => setFilterKedisabilitasan(item.Kedisabilitasan)}
+                onClick={() => {
+                  setFilterKedisabilitasan(item.Kedisabilitasan);
+                  setValueFilterKedisabilitasan(item.Kedisabilitasan);
+                }}
                 value={item.Kedisabilitasan}
               >
                 {item.Kedisabilitasan}
@@ -146,21 +224,27 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
         <FormControl size="sm">
           <FormLabel>Kemiskinan</FormLabel>
           <Select
-            defaultValue="Semua"
+            value={valueFilterKemiskinan}
             size="sm"
             slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
           >
             <Option
               default
               value={"Semua"}
-              onClick={() => setFilterKemiskinan("")}
+              onClick={() => {
+                setFilterKemiskinan("");
+                setValueFilterKemiskinan("Semua");
+              }}
             >
               Semua
             </Option>
             {listKemiskinan.map((item) => (
               <Option
                 key={item.Kemiskinan}
-                onClick={() => setFilterKemiskinan(item.Kemiskinan)}
+                onClick={() => {
+                  setFilterKemiskinan(item.Kemiskinan);
+                  setValueFilterKemiskinan(item.Kemiskinan);
+                }}
                 value={item.Kemiskinan}
               >
                 {item.Kemiskinan}
@@ -267,6 +351,14 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
               >
                 Kemiskinan
               </th>
+              <th
+                style={{
+                  width: 60,
+                  padding: "12px 6px",
+                  fontWeight: "500",
+                  fontSize: "1.1em",
+                }}
+              ></th>
             </tr>
           </thead>
           <tbody>
@@ -314,6 +406,27 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
                   <Typography sx={{ textTransform: "capitalize" }}>
                     {row.Kemiskinan}
                   </Typography>
+                </td>
+                <td>
+                  {data.user?.role === "Viewer" ? null : (
+                    <Tooltip
+                      title={"Hapus"}
+                      arrow
+                      color="danger"
+                      placement="right"
+                      size="sm"
+                      variant="solid"
+                    >
+                      <IconButton
+                        onClick={() => handleHapusButton(row.indexRow)}
+                        size="sm"
+                        variant="soft"
+                        color="danger"
+                      >
+                        <DeleteOutlineIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
                 </td>
               </tr>
             ))}
@@ -373,6 +486,71 @@ export default function TablePKH({ data, listKemiskinan, listDisabilitas }) {
           Next
         </Button>
       </Box>
+      <Transition in={open} timeout={400}>
+        {(state) => (
+          <Modal
+            keepMounted
+            open={!["exited", "exiting"].includes(state)}
+            onClose={() => setOpen(false)}
+            slotProps={{
+              backdrop: {
+                sx: {
+                  opacity: 0,
+                  backdropFilter: "none",
+                  transition: `opacity 400ms, backdrop-filter 400ms`,
+                  ...{
+                    entering: { opacity: 1, backdropFilter: "blur(8px)" },
+                    entered: { opacity: 1, backdropFilter: "blur(8px)" },
+                  }[state],
+                },
+              },
+            }}
+            sx={{
+              visibility: state === "exited" ? "hidden" : "visible",
+            }}
+          >
+            <ModalDialog
+              sx={{
+                opacity: 0,
+                transition: `opacity 300ms`,
+                ...{
+                  entering: { opacity: 1 },
+                  entered: { opacity: 1 },
+                }[state],
+              }}
+              variant="outlined"
+              role="alertdialog"
+            >
+              <DialogTitle>
+                <WarningRoundedIcon />
+                Konfirmasi
+              </DialogTitle>
+              <Divider />
+              <DialogContent>
+                Apakah anda yakin ingin menghapus data ini?
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="solid"
+                  color="danger"
+                  loading={loading}
+                  onClick={() => handleHapus()}
+                >
+                  Hapus
+                </Button>
+                <Button
+                  variant="plain"
+                  color="neutral"
+                  disabled={loading}
+                  onClick={() => setOpen(false)}
+                >
+                  Kembali
+                </Button>
+              </DialogActions>
+            </ModalDialog>
+          </Modal>
+        )}
+      </Transition>
     </>
   );
 }

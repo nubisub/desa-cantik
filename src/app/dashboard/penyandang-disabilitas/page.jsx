@@ -36,12 +36,6 @@ export default async function ProgramKeluargaHarapan() {
         <Typography level="h2">Daftar Penyandang Disabilitas</Typography>
         {/*<Add />*/}
       </Box>
-
-      {/*<Table*/}
-      {/*  listKemiskinan={listKemiskinan}*/}
-      {/*  listDisabilitas={listDisabilitas}*/}
-      {/*  data={data}*/}
-      {/*/>*/}
       <WrapperData />
     </>
   );

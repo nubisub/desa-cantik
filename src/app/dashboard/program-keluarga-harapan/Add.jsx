@@ -114,7 +114,7 @@ export default function Add() {
             <ModalDialog
               sx={{
                 minWidth: {
-                  xs: "100%",
+                  xs: "90%",
                   sm: "50%",
                   md: "40%",
                   lg: "30%",

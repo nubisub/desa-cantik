@@ -77,9 +77,9 @@ export default function TablePKH({ dataPKH, mutateData }) {
       const newDataWithIndex = newData.map((item, index) => {
         return { ...item, indexRow: index + 1 };
       });
-      console.log(newDataWithIndex);
       mutateData(newDataWithIndex, false);
       setPage(1);
+      setSearch("");
     } else {
       toast.error("Data Gagal Dihapus");
     }
