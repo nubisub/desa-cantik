@@ -15,7 +15,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export const GetData = () => {
   const { data, error, isLoading, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: true }
   );
   return {
     mutateData: mutate,

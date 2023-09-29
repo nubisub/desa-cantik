@@ -7,7 +7,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const GetData = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/pengguna/data`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: true }
   );
   return {
     dataUser: data,

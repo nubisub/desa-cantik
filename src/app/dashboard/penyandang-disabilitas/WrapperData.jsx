@@ -5,11 +5,13 @@ import Table from "./Table";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const GetData = () => {
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/data`,
-    fetcher
+    fetcher,
+    { refreshInterval: 15000, revalidateOnFocus: true }
   );
   return {
+    mutateData: mutate,
     dataDisabilitas: data,
     error: error,
     isLoadingDisabilitas: isLoading,
@@ -18,7 +20,8 @@ const GetData = () => {
 const GetFilterKedisabilitasan = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-disabilitas`,
-    fetcher
+    fetcher,
+    { refreshInterval: 60000, revalidateOnFocus: false }
   );
   return {
     dataFilterKedisabilitasan: data,
@@ -30,7 +33,8 @@ const GetFilterKedisabilitasan = () => {
 const GetFilterKemiskinan = () => {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/disabilitas/tipe-kemiskinan`,
-    fetcher
+    fetcher,
+    { refreshInterval: 60000, revalidateOnFocus: false }
   );
   return {
     dataFilterKemiskinan: data,
@@ -40,7 +44,7 @@ const GetFilterKemiskinan = () => {
 };
 
 export default function WrapperData() {
-  const { dataDisabilitas, isLoadingDisabilitas } = GetData();
+  const { dataDisabilitas, isLoadingDisabilitas, mutateData } = GetData();
   const { dataFilterKedisabilitasan, isLoadingFilterKedisabilitasan } =
     GetFilterKedisabilitasan();
   const { dataFilterKemiskinan, isLoadingFilterKemiskinan } =
@@ -62,6 +66,7 @@ export default function WrapperData() {
         data={dataDisabilitas}
         listKemiskinan={dataFilterKemiskinan}
         listDisabilitas={dataFilterKedisabilitasan}
+        mutateData={mutateData}
       />
     </>
   );

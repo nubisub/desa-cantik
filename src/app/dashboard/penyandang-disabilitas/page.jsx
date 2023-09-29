@@ -4,6 +4,7 @@ import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 // icons
 import WrapperData from "@/app/dashboard/penyandang-disabilitas/WrapperData";
+import Add from "@/app/dashboard/penyandang-disabilitas/Add";
 
 export default async function ProgramKeluargaHarapan() {
   return (
@@ -34,14 +35,8 @@ export default async function ProgramKeluargaHarapan() {
         }}
       >
         <Typography level="h2">Daftar Penyandang Disabilitas</Typography>
-        {/*<Add />*/}
+        <Add />
       </Box>
-
-      {/*<Table*/}
-      {/*  listKemiskinan={listKemiskinan}*/}
-      {/*  listDisabilitas={listDisabilitas}*/}
-      {/*  data={data}*/}
-      {/*/>*/}
       <WrapperData />
     </>
   );

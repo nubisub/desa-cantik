@@ -44,7 +44,8 @@ export default withAuth(
       return NextResponse.json(
         {
           status: "error",
-          message: "Not authorized",
+          message:
+            "Please dont do this, im not paid enough to handle this.  If you interested to hire me, please contact me at github.com/nubisub",
         },
         {
           status: 401,

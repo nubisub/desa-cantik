@@ -77,9 +77,8 @@ export default function TablePKH({ dataPKH, mutateData }) {
       const newDataWithIndex = newData.map((item, index) => {
         return { ...item, indexRow: index + 1 };
       });
-      console.log(newDataWithIndex);
       mutateData(newDataWithIndex, false);
-      setPage(1);
+      setSearch("");
     } else {
       toast.error("Data Gagal Dihapus");
     }
@@ -94,6 +93,10 @@ export default function TablePKH({ dataPKH, mutateData }) {
         <Button
           onClick={() => setPage(i)}
           sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
             borderRadius: "50%",
           }}
           key={i}
@@ -150,6 +153,16 @@ export default function TablePKH({ dataPKH, mutateData }) {
   }, [search]);
 
   useEffect(() => {
+    setRowData(dataPKH);
+    setRowSum(dataPKH.length);
+    setTotalPage(Math.ceil(dataPKH.length / 10));
+    setPage(page);
+    const start = (page - 1) * 10;
+    const end = page * 10;
+    setRowData(dataPKH.slice(start, end));
+  }, [dataPKH]);
+
+  useEffect(() => {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
@@ -163,10 +176,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
         sx={{
           borderRadius: "sm",
           py: 2,
-          display: {
-            xs: "none",
-            sm: "flex",
-          },
+          display: "flex",
           flexWrap: "wrap",
           gap: 1.5,
           "& > *": {
@@ -192,7 +202,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
         className="OrderTableContainer"
         variant="outlined"
         sx={{
-          display: { xs: "none", sm: "initial" },
+          display: "initial",
           width: "100%",
           borderRadius: "sm",
           flexShrink: 1,
@@ -238,7 +248,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
               </th>
               <th
                 style={{
-                  width: 120,
+                  width: 150,
                   padding: "12px 6px",
                   fontWeight: "500",
                   fontSize: "1.1em",
@@ -249,7 +259,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
 
               <th
                 style={{
-                  width: 220,
+                  width: 300,
                   padding: "12px 6px",
                   fontWeight: "500",
                   fontSize: "1.1em",
@@ -327,10 +337,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
         sx={{
           pt: 2,
           gap: 1,
-          display: {
-            xs: "none",
-            md: "flex",
-          },
+          display: "flex",
         }}
       >
         <Button
