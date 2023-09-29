@@ -12,12 +12,13 @@ const data = [
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const GetData = () => {
-  const { data, error, isLoading } = useSWR(
+export const GetData = () => {
+  const { data, error, isLoading, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
     fetcher
   );
   return {
+    mutateData: mutate,
     dataBantuan: data,
     error: error,
     isLoadingPKH: isLoading,
@@ -25,13 +26,13 @@ const GetData = () => {
 };
 
 export default function WrapperData() {
-  const { dataBantuan, isLoadingPKH } = GetData();
+  const { dataBantuan, isLoadingPKH, mutateData } = GetData();
   if (isLoadingPKH) {
     return <div>Loading...</div>;
   }
   return (
     <>
-      <Table dataPKH={dataBantuan} />
+      <Table dataPKH={dataBantuan} mutateData={mutateData} />
     </>
   );
 }

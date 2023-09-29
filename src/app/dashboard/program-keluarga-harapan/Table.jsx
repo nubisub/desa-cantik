@@ -36,7 +36,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 //   },
 // ];
 
-export default function TablePKH({ dataPKH }) {
+export default function TablePKH({ dataPKH, mutateData }) {
   const { data, status } = useSession();
 
   const [rowData, setRowData] = useState([]);
@@ -72,6 +72,14 @@ export default function TablePKH({ dataPKH }) {
     );
     if (res.ok) {
       toast.success("Data Berhasil Dihapus");
+      const newData = dataPKH.filter((item) => item.indexRow !== hapus);
+      //   reset indexRow object of newData
+      const newDataWithIndex = newData.map((item, index) => {
+        return { ...item, indexRow: index + 1 };
+      });
+      console.log(newDataWithIndex);
+      mutateData(newDataWithIndex, false);
+      setPage(1);
     } else {
       toast.error("Data Gagal Dihapus");
     }
@@ -151,7 +159,7 @@ export default function TablePKH({ dataPKH }) {
   return (
     <>
       <Box
-        className="SearchAndFilters-tabletUp"
+        className="SearchAndFonilters-tabletUp"
         sx={{
           borderRadius: "sm",
           py: 2,

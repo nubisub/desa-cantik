@@ -55,11 +55,14 @@ export default function Add() {
       }
     );
     if (res.ok) {
+      toast.success("Data Berhasil Ditambahkan");
+
       setOpen(false);
       setNIK("");
       setKepalaKeluarga("");
       setAlamat("");
-      toast.success("Data Berhasil Ditambahkan");
+      // refresh page window
+      window.location.reload();
     }
     setOpen(false);
     setLoading(false);

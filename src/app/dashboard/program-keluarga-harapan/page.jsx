@@ -7,7 +7,6 @@ import Add from "@/app/dashboard/program-keluarga-harapan/Add";
 import WrapperData from "@/app/dashboard/program-keluarga-harapan/WrapperData";
 
 export default function ProgramKeluargaHarapan() {
-  // const [open, setOpen] = React.useState(false);
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
