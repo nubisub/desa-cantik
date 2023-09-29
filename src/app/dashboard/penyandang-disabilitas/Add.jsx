@@ -2,58 +2,56 @@
 import * as React from "react";
 import Button from "@mui/joy/Button";
 import AddIcon from "@mui/icons-material/Add";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
 import Link from "next/link";
 
 export default function Add() {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [NIK, setNIK] = React.useState("");
-  const [KepalaKeluarga, setKepalaKeluarga] = React.useState("");
-  const [Alamat, setAlamat] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+  // const [drawerOpen, setDrawerOpen] = React.useState(false); const [NIK, setNIK] = React.useState(""); const
+  // [KepalaKeluarga, setKepalaKeluarga] = React.useState(""); const [Alamat, setAlamat] = React.useState(""); const
+  // [loading, setLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    if (open) {
-      setNIK("");
-      setKepalaKeluarga("");
-      setAlamat("");
-    }
-  }, [open]);
+  // React.useEffect(() => {
+  //   if (open) {
+  //     setNIK("");
+  //     setKepalaKeluarga("");
+  //     setAlamat("");
+  //   }
+  // }, [open]);
 
-  const handleSubmit = async (e) => {
-    //   if nik is not 16 digit number
-    e.preventDefault();
-    if (!/^\d{16}$/.test(NIK)) {
-      toast.error("NIK harus 16 digit angka");
-      return;
-    }
-    toast.loading("Loading...");
-    setLoading(true);
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          NIK,
-          KepalaKeluarga,
-          Alamat,
-        }),
-      }
-    );
-    if (res.ok) {
-      setDrawerOpen(false);
-      setNIK("");
-      setKepalaKeluarga("");
-      setAlamat("");
-      toast.success("Data Berhasil Ditambahkan");
-    }
-    setDrawerOpen(false);
-    setLoading(false);
-  };
-  const SPID = process.env.GOOGLE_SPREADSHEET_SHEET2;
+  // const handleSubmit = async (e) => {
+  //   //   if nik is not 16 digit number
+  //   e.preventDefault();
+  //   if (!/^\d{16}$/.test(NIK)) {
+  //     toast.error("NIK harus 16 digit angka");
+  //     return;
+  //   }
+  //   toast.loading("Loading...");
+  //   setLoading(true);
+  //   const res = await fetch(
+  //     `${process.env.NEXT_PUBLIC_HOST}/api/bantuan/data`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         NIK,
+  //         KepalaKeluarga,
+  //         Alamat,
+  //       }),
+  //     }
+  //   );
+  //   if (res.ok) {
+  //     setDrawerOpen(false);
+  //     setNIK("");
+  //     setKepalaKeluarga("");
+  //     setAlamat("");
+  //     toast.success("Data Berhasil Ditambahkan");
+  //   }
+  //   setDrawerOpen(false);
+  //   setLoading(false);
+  // };
+  // const SPID = process.env.GOOGLE_SPREADSHEET_SHEET2;
 
   return (
     <>
