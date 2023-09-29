@@ -29,7 +29,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import IconButton from "@mui/joy/IconButton";
 import Tooltip from "@mui/joy/Tooltip";
 
-export default function TablePKH({ data, listRoles }) {
+export default function TablePKH({ data, listRoles, mutateData }) {
   const [rowData, setRowData] = useState(data);
   const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");
@@ -92,6 +92,7 @@ export default function TablePKH({ data, listRoles }) {
             return item;
           });
           setRowData(newData);
+          mutateData(newData, false);
           toast.success("Berhasil mengubah role pengguna");
 
           setDrawerOpen(false);
