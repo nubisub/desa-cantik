@@ -56,7 +56,6 @@ export default function TablePKH({
   const [valueFilterKemiskinan, setValueFilterKemiskinan] = useState("Semua");
   const handleHapusButton = (e) => {
     setHapus(e);
-    console.log(e);
     setOpen(true);
   };
 
@@ -128,6 +127,10 @@ export default function TablePKH({
         <Button
           onClick={() => setPage(i)}
           sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
             borderRadius: "50%",
           }}
           key={i}
@@ -154,6 +157,17 @@ export default function TablePKH({
   };
 
   useEffect(() => {
+    setRowData(dataDisabilitas);
+    setTempData(dataDisabilitas);
+    setRowSum(dataDisabilitas.length);
+    setTotalPage(Math.ceil(dataDisabilitas.length / 10));
+    setPage(page);
+    const start = (page - 1) * 10;
+    const end = page * 10;
+    setRowData(dataDisabilitas.slice(start, end));
+  }, [dataDisabilitas]);
+
+  useEffect(() => {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
@@ -166,10 +180,7 @@ export default function TablePKH({
         sx={{
           borderRadius: "sm",
           py: 2,
-          display: {
-            xs: "none",
-            sm: "flex",
-          },
+          display: "flex",
           flexWrap: "wrap",
           gap: 1.5,
           "& > *": {
@@ -180,7 +191,15 @@ export default function TablePKH({
           },
         }}
       >
-        <FormControl sx={{ flex: 1 }} size="sm">
+        <FormControl
+          sx={{
+            flex: {
+              xs: "1 1 100%",
+              md: "1",
+            },
+          }}
+          size="sm"
+        >
           <FormLabel>Cari Penyandang Disabilitas</FormLabel>
           <Input
             size="sm"
@@ -240,6 +259,7 @@ export default function TablePKH({
             </Option>
             {listKemiskinan.map((item) => (
               <Option
+                sx={{ textTransform: "capitalize" }}
                 key={item.Kemiskinan}
                 onClick={() => {
                   setFilterKemiskinan(item.Kemiskinan);
@@ -257,7 +277,7 @@ export default function TablePKH({
         className="OrderTableContainer"
         variant="outlined"
         sx={{
-          display: { xs: "none", sm: "initial" },
+          display: "initial",
           width: "100%",
           borderRadius: "sm",
           flexShrink: 1,
@@ -438,10 +458,7 @@ export default function TablePKH({
         sx={{
           pt: 2,
           gap: 1,
-          display: {
-            xs: "none",
-            md: "flex",
-          },
+          display: "flex",
         }}
       >
         <Button

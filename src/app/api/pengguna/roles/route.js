@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { database } from "@/app/services/firebase";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(request) {
   const rolesCol = collection(database, "roles");
   const usersSnapshot = await getDocs(rolesCol);

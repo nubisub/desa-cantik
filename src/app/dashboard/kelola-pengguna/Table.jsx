@@ -267,7 +267,7 @@ export default function TablePKH({ data, listRoles }) {
 
               <th
                 style={{
-                  width: 140,
+                  width: 240,
                   padding: "12px 6px",
                   fontWeight: "500",
                   fontSize: "1.1em",

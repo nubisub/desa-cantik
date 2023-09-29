@@ -2,7 +2,6 @@ import { Stack } from "@mui/joy";
 import { data } from "@/app/components/FooterData";
 import Link from "next/link";
 import Typography from "@mui/joy/Typography";
-import { dm_sans } from "@/app/utils/fonts";
 import Box from "@mui/joy/Box";
 
 export default function Footer() {
@@ -48,7 +47,6 @@ export default function Footer() {
             textAlign: "center",
             color: "#ffffff",
           }}
-          className={dm_sans.className}
         >
           © 2023 - {new Date().getFullYear()} BPS Kabupaten Sleman - All Rights
           Reserved
