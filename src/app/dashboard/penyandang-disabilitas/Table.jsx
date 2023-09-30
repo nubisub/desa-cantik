@@ -467,6 +467,7 @@ export default function TablePKH({
           pt: 2,
           gap: 1,
           display: "flex",
+          alignItems: "center",
         }}
       >
         <Button
@@ -480,6 +481,17 @@ export default function TablePKH({
           Previous
         </Button>
         <Box sx={{ flex: 1 }} />
+        <Typography
+          sx={{
+            display: {
+              xs: "block",
+              md: "none",
+            },
+            fontSize: "0.8em",
+          }}
+        >
+          {page * 10 - 9} - {page * 10} dari {rowSum}
+        </Typography>
         {renderPageNumbers()}
         {/*iterate */}
 

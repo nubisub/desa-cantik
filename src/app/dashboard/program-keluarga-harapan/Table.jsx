@@ -300,7 +300,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
                     </Avatar>
                     <div>
                       <Typography sx={{ textTransform: "capitalize" }}>
-                        {row.KepalaKeluarga}
+                        {row.KepalaKeluarga?.toLowerCase()}
                       </Typography>
                     </div>
                   </Box>
@@ -311,7 +311,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
 
                 <td>
                   <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Alamat}
+                    {row.Alamat?.toLowerCase()}
                   </Typography>
                 </td>
                 <td>
@@ -346,6 +346,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
           pt: 2,
           gap: 1,
           display: "flex",
+          alignItems: "center",
         }}
       >
         <Button
@@ -359,6 +360,17 @@ export default function TablePKH({ dataPKH, mutateData }) {
           Previous
         </Button>
         <Box sx={{ flex: 1 }} />
+        <Typography
+          sx={{
+            display: {
+              xs: "block",
+              md: "none",
+            },
+            fontSize: "0.8em",
+          }}
+        >
+          {page * 10 - 9} - {page * 10} dari {rowSum}
+        </Typography>
         {renderPageNumbers()}
         {/*iterate */}
 

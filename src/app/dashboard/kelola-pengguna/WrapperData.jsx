@@ -42,7 +42,7 @@ export default function WrapperData() {
     <>
       <Table
         mutateData={mutateData}
-        data={dataUser.users}
+        data={dataUser}
         listRoles={dataRoles.roles}
       />
     </>

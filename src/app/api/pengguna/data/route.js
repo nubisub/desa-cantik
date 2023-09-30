@@ -14,7 +14,5 @@ export async function GET(request) {
     }
   });
 
-  return NextResponse.json({
-    users: users,
-  });
+  return NextResponse.json(users);
 }

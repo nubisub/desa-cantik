@@ -57,10 +57,6 @@ export default function TablePKH({ data, listRoles, mutateData }) {
     setDrawerOpen(true);
   }
 
-  useEffect(() => {
-    setRowData(data);
-  }, [data]);
-
   function updateRole(email, role, oldRole) {
     setLoadingUpdateRole(true);
 
@@ -112,6 +108,17 @@ export default function TablePKH({ data, listRoles, mutateData }) {
         toast.error("Gagal mengubah role pengguna");
       });
   }
+
+  useEffect(() => {
+    setRowData(data);
+    setTempData(data);
+    setRowSum(data?.length);
+    setTotalPage(Math.ceil(data?.length / 10));
+    setPage(page);
+    const start = (page - 1) * 10;
+    const end = page * 10;
+    setRowData(data.slice(start, end));
+  }, [data]);
 
   useEffect(() => {
     setRowData([]);
@@ -375,6 +382,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
           pt: 2,
           gap: 1,
           display: "flex",
+          alignItems: "center",
         }}
       >
         <Button
@@ -388,6 +396,17 @@ export default function TablePKH({ data, listRoles, mutateData }) {
           Previous
         </Button>
         <Box sx={{ flex: 1 }} />
+        <Typography
+          sx={{
+            display: {
+              xs: "block",
+              md: "none",
+            },
+            fontSize: "0.8em",
+          }}
+        >
+          {page * 10 - 9} - {page * 10} dari {rowSum}
+        </Typography>
         {renderPageNumbers()}
         <Box sx={{ flex: 1 }} />
         <Button

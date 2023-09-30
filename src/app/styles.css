@@ -137,21 +137,21 @@ main h2 {
 @keyframes shadowColorChange {
     0% {
         box-shadow: 2px 2px 100px -8px rgba(255, 77, 77, 0.7); /* Blue shadow color with 50% opacity */
-        border-color: rgba(255, 77, 77, 1);
+        border-color: rgba(255, 77, 77, 0.5);
 ;
     }
     33.3% {
                 box-shadow: 2px 2px 100px -8px rgba(0, 124, 240, 0.7); /* Back to red shadow color */
-        border-color: rgba(0, 124, 240, 1);
+        border-color: rgba(0, 124, 240, 0.5);
     }
     66.6% {
         box-shadow: 2px 2px 100px -8px rgba(255, 0, 128, 0.7); /* Back to red shadow color */
-        border-color: rgba(255, 0, 128, 1);
+        border-color: rgba(255, 0, 128, 0.5);
 
     }
     100% {
         box-shadow: 2px 2px 100px -8px rgba(255, 77, 77, 0.7); /* Blue shadow color with 50% opacity */
-        border-color: rgba(255, 77, 77, 1);
+        border-color: rgba(255, 77, 77, 0.5);
     }
 }
 

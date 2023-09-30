@@ -8,7 +8,6 @@ const MobileTypo = () => {
   return (
     <Box
       sx={{
-        mt: -4,
         display: {
           xs: "block",
           md: "none",

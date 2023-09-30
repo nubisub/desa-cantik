@@ -39,6 +39,10 @@ export default function Page1() {
     >
       <Box
         sx={{
+          display: {
+            xs: "none",
+            md: "flex",
+          },
           zIndex: 1,
           width: {
             xs: "90%",
@@ -53,7 +57,6 @@ export default function Page1() {
           },
           fontWeight: "bold",
           my: 4,
-          display: "flex",
           justifyContent: "space-between",
         }}
         className={dm_sans.className}
@@ -77,6 +80,13 @@ export default function Page1() {
               },
               borderRadius: 100,
               borderColor: "rgba(182,182,182,0.73)",
+              display: {
+                xs: "none",
+                md: "flex",
+              },
+              textDecoration: "none",
+              p: 1,
+              px: 3,
             }}
             variant="outlined"
           >
@@ -113,13 +123,7 @@ export default function Page1() {
           },
         }}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-        >
-          <MobileTypo />
-        </motion.div>
+        <MobileTypo />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -150,34 +154,7 @@ export default function Page1() {
             }}
             className={dm_sans.className}
           >
-            Desa Margoagung
-          </Typography>
-          <Typography
-            component="h2"
-            sx={{
-              display: {
-                xs: "none",
-                md: "block",
-              },
-              textAlign: {
-                xs: "center",
-                md: "left",
-              },
-              fontWeight: "normal",
-              color: "#060039",
-              lineHeight: "100%",
-              letterSpacing: "-0.02em",
-              fontSize: {
-                xs: "2rem",
-                sm: "3rem",
-                md: "5rem",
-                lg: "5rem",
-                xl: "6rem",
-              },
-            }}
-            className={dm_sans.className}
-          >
-            Kabupaten <br /> Sleman
+            Desa Margoagung <br /> Kabupaten <br /> Sleman
           </Typography>
         </motion.div>
         <motion.div
