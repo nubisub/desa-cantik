@@ -1,4 +1,8 @@
-import { DM_Sans, Lato, Roboto } from "next/font/google";
+import { DM_Sans, Inter, Lato, Roboto } from "next/font/google";
+
+export const inter = Inter({
+  subsets: ["latin"],
+});
 
 export const dm_sans = DM_Sans({
   subsets: ["latin"],

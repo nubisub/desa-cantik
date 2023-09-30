@@ -9,6 +9,7 @@ import * as React from "react";
 import { useRef } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
+import MobileTypo from "@/app/components/home/MobileTypo";
 
 const bounceTransition = {
   y: {
@@ -117,6 +118,7 @@ export default function Page1() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          <MobileTypo />
           <Typography
             component="h1"
             sx={{
@@ -135,6 +137,10 @@ export default function Page1() {
                 lg: "5rem",
                 xl: "6rem",
               },
+              display: {
+                xs: "none",
+                md: "block",
+              },
             }}
             className={dm_sans.className}
           >
@@ -143,6 +149,10 @@ export default function Page1() {
           <Typography
             component="h2"
             sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              },
               textAlign: {
                 xs: "center",
                 md: "left",
@@ -171,6 +181,10 @@ export default function Page1() {
         >
           <Typography
             sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              },
               textAlign: {
                 xs: "center",
 

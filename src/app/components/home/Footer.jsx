@@ -3,6 +3,7 @@ import { data } from "@/app/components/FooterData";
 import Link from "next/link";
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
+import { inter } from "@/app/utils/fonts";
 
 export default function Footer() {
   // check window scroll with framer motion
@@ -46,7 +47,9 @@ export default function Footer() {
           sx={{
             textAlign: "center",
             color: "#ffffff",
+            fontSize: "0.9em",
           }}
+          className={inter.className}
         >
           © 2023 - {new Date().getFullYear()} BPS Kabupaten Sleman - All Rights
           Reserved

@@ -29,11 +29,11 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import IconButton from "@mui/joy/IconButton";
 import Tooltip from "@mui/joy/Tooltip";
 
-export default function TablePKH({ data, listRoles }) {
+export default function TablePKH({ data, listRoles, mutateData }) {
   const [rowData, setRowData] = useState(data);
   const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(data.length);
+  const [rowSum, setRowSum] = useState(data?.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -56,6 +56,10 @@ export default function TablePKH({ data, listRoles }) {
     setSelectedRow(row);
     setDrawerOpen(true);
   }
+
+  useEffect(() => {
+    setRowData(data);
+  }, [data]);
 
   function updateRole(email, role, oldRole) {
     setLoadingUpdateRole(true);
@@ -92,6 +96,7 @@ export default function TablePKH({ data, listRoles }) {
             return item;
           });
           setRowData(newData);
+          mutateData(newData, false);
           toast.success("Berhasil mengubah role pengguna");
 
           setDrawerOpen(false);
@@ -122,7 +127,7 @@ export default function TablePKH({ data, listRoles }) {
     setTempData(filteredData);
     setRowData(filteredData.slice(0, 10));
     setPage(1);
-  }, [search, filterRoles, data]);
+  }, [search, filterRoles]);
 
   const renderPageNumbers = () => {
     let pages = [];
@@ -296,14 +301,14 @@ export default function TablePKH({ data, listRoles }) {
             </tr>
           </thead>
           <tbody>
-            {rowData.length === 0 && (
+            {rowData?.length === 0 && (
               <tr>
                 <td colSpan={4} style={{ textAlign: "center" }}>
                   Data tidak ditemukan
                 </td>
               </tr>
             )}
-            {rowData.map((row, index) => (
+            {rowData?.map((row, index) => (
               <tr key={index + 1}>
                 <td>
                   <Typography sx={{ pl: "16px", fontWeight: "md" }}>

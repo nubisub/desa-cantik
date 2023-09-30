@@ -43,6 +43,7 @@ export default function Page2() {
           spacing={6}
         >
           <motion.div
+            id={"kemiskinan"}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}
