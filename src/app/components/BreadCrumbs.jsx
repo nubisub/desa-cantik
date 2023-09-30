@@ -22,7 +22,7 @@ export default function BreadCrumbs({ items }) {
             <Typography
               key={index}
               color="primary"
-              fontWeight={500}
+              fontWeight={600}
               fontSize={12}
             >
               {item.label}
@@ -39,7 +39,7 @@ export default function BreadCrumbs({ items }) {
             <Typography
               underline="hover"
               key={index}
-              fontWeight={600}
+              fontWeight={700}
               fontSize={12}
             >
               {item.label}

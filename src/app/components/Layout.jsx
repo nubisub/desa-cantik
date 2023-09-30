@@ -71,8 +71,6 @@ function SidePane(props) {
 function Main(props) {
   return (
     <Box
-      component="main"
-      className="MainContent"
       sx={{
         px: {
           xs: 2,

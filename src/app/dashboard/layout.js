@@ -4,6 +4,7 @@ import * as React from "react";
 import ColorScheme from "@/app/components/ColorScheme";
 import ThemeRegistry from "@/app/ThemeRegistry";
 import Header from "@/app/components/Header";
+import "@fontsource/inter";
 
 export const metadata = {
   title: "Dashboard | Desa Cantik - Margoagung",

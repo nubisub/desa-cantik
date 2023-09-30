@@ -103,8 +103,8 @@ export default async function Home() {
             >
               <Typography
                 sx={{
-                  fontSize: "1rem",
-                  fontWeight: "500",
+                  fontSize: "0.9rem",
+                  fontWeight: "600",
                   color: "text.primary",
                 }}
                 variant="h6"

@@ -299,13 +299,17 @@ export default function TablePKH({
             "--TableCell-paddingX": "8px",
           }}
         >
-          <thead>
+          <thead
+            style={{
+              fontSize: ".9em",
+            }}
+          >
             <tr>
               <th
                 style={{
                   width: 60,
                   padding: "12px 18px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -315,7 +319,7 @@ export default function TablePKH({
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -325,7 +329,7 @@ export default function TablePKH({
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -335,7 +339,7 @@ export default function TablePKH({
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -345,7 +349,7 @@ export default function TablePKH({
                 style={{
                   width: 220,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -355,7 +359,7 @@ export default function TablePKH({
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -365,7 +369,7 @@ export default function TablePKH({
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -375,13 +379,17 @@ export default function TablePKH({
                 style={{
                   width: 60,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               ></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody
+            style={{
+              fontSize: ".9em",
+            }}
+          >
             {rowData.length === 0 && (
               <tr>
                 <td colSpan={7} style={{ textAlign: "center" }}>

@@ -94,7 +94,7 @@ export default function Header(props) {
               fontSize: { xs: "sm", md: "md" },
             }}
             component="h1"
-            fontWeight="500"
+            fontWeight="700"
           >
             Desa Cantik Margoagung
           </Typography>

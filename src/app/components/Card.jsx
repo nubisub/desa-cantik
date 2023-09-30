@@ -77,8 +77,8 @@ export default function CardDashboard({ BLT, Disabilitas }) {
             >
               <Typography
                 sx={{
-                  fontSize: "1rem",
-                  fontWeight: "500",
+                  fontSize: "0.9rem",
+                  fontWeight: "600",
                   color: "text.primary",
                 }}
                 variant="h6"
@@ -165,8 +165,8 @@ export default function CardDashboard({ BLT, Disabilitas }) {
             >
               <Typography
                 sx={{
-                  fontSize: "1rem",
-                  fontWeight: "500",
+                  fontSize: "0.9rem",
+                  fontWeight: "600",
                   color: "text.primary",
                 }}
                 variant="h6"
@@ -181,6 +181,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
                 <InfoOutlinedIcon
                   sx={{
                     fontSize: "1.1rem",
+                    cursor: "pointer",
                   }}
                 />
               </Tooltip>

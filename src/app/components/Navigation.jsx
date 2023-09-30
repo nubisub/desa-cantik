@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 // Icons import
 import Data from "./NavigationData";
 import { useSession } from "next-auth/react";
+import { inter } from "@/app/utils/fonts";
 
 export default function Navigation() {
   const { data, status } = useSession();
@@ -63,7 +64,13 @@ export default function Navigation() {
               return null;
             }
             return (
-              <ListItem key={index}>
+              <ListItem
+                sx={{
+                  fontSize: "0.9em",
+                }}
+                className={inter.className}
+                key={index}
+              >
                 <Link
                   style={{ textDecoration: "none", width: "100%" }}
                   href={item.href}

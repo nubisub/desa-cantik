@@ -247,13 +247,17 @@ export default function TablePKH({ data, listRoles, mutateData }) {
             "--TableCell-paddingX": "8px",
           }}
         >
-          <thead>
+          <thead
+            style={{
+              fontSize: ".9em",
+            }}
+          >
             <tr>
               <th
                 style={{
                   width: 60,
                   padding: "12px 18px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -263,7 +267,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
                 style={{
                   width: 140,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -274,7 +278,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
                 style={{
                   width: 240,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -284,7 +288,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
                 style={{
                   width: 100,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               >
@@ -294,13 +298,17 @@ export default function TablePKH({ data, listRoles, mutateData }) {
                 style={{
                   width: 50,
                   padding: "12px 6px",
-                  fontWeight: "500",
+                  fontWeight: "600",
                   fontSize: "1.1em",
                 }}
               ></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody
+            style={{
+              fontSize: ".9em",
+            }}
+          >
             {rowData?.length === 0 && (
               <tr>
                 <td colSpan={4} style={{ textAlign: "center" }}>
