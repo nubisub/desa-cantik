@@ -20,6 +20,7 @@
     "@nivo/bar": "^0.83.0",
     "@nivo/core": "^0.83.0",
     "@nivo/line": "^0.83.0",
+    "@vercel/og": "^0.5.17",
     "eslint": "8.48.0",
     "eslint-config-next": "^13.5.2",
     "firebase": "^10.3.1",
