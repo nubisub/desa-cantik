@@ -3,30 +3,15 @@ import Box from "@mui/joy/Box";
 import { dm_sans } from "@/app/utils/fonts";
 import Button from "@mui/joy/Button";
 import LoginIcon from "@mui/icons-material/Login";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
-import { useRef } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import MobileTypo from "@/app/components/home/MobileTypo";
+import Tooltip from "@mui/joy/Tooltip";
 
-const bounceTransition = {
-  y: {
-    duration: 0.4,
-    yoyo: Infinity,
-    ease: "easeOut",
-  },
-  backgroundColor: {
-    duration: 0,
-    yoyo: Infinity,
-    ease: "easeOut",
-    repeatDelay: 0.8,
-  },
-};
 export default function Page1() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
   return (
     <Box
       sx={{
@@ -39,9 +24,11 @@ export default function Page1() {
     >
       <Box
         sx={{
-          display: {
-            xs: "none",
-            md: "flex",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: {
+            xs: "center",
+            md: "space-between",
           },
           zIndex: 1,
           width: {
@@ -57,50 +44,143 @@ export default function Page1() {
           },
           fontWeight: "bold",
           my: 4,
-          justifyContent: "space-between",
         }}
         className={dm_sans.className}
       >
-        <Box>
-          [Desa
-          <span
-            style={{
-              fontWeight: "normal",
-            }}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 3,
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            Cantik]
-          </span>
+            <Tooltip
+              title={"Desa Cinta Statistik"}
+              arrow
+              variant="outlined"
+              size="sm"
+            >
+              <Link href={"/"}>
+                <NextImage
+                  src={"/logo-desacantik.png"}
+                  alt={"Desa Cantik Logo"}
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  style={{
+                    objectFit: "cover",
+                    maxWidth: "50px",
+                  }}
+                />
+              </Link>
+            </Tooltip>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
+            <Tooltip
+              title={"BPS Kabupaten Sleman"}
+              arrow
+              variant="outlined"
+              size="sm"
+            >
+              <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
+                <NextImage
+                  src={"/logo-bps.png"}
+                  alt={"Pemkab Sleman Logo"}
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  style={{ objectFit: "cover", maxWidth: "55px" }}
+                />
+              </Link>
+            </Tooltip>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+          >
+            <Tooltip
+              title={"Pemerintah Kabupaten Sleman"}
+              arrow
+              variant="outlined"
+              size="sm"
+            >
+              <Link href={"https://slemankab.go.id/"} target={"_blank"}>
+                <NextImage
+                  src={"/logo-sleman.png"}
+                  alt={"Pemkab Sleman Logo"}
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  style={{ objectFit: "cover", maxWidth: "40px" }}
+                />
+              </Link>
+            </Tooltip>
+          </motion.div>
+
+          {/*<Box>*/}
+          {/*  [Desa*/}
+          {/*  <span*/}
+          {/*    style={{*/}
+          {/*      fontWeight: "normal",*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Cantik]*/}
+          {/*  </span>*/}
+          {/*</Box>*/}
         </Box>
-        <Link href={"/dashboard"}>
-          <Button
-            color="neutral"
-            sx={{
-              "&:hover": {
-                bgcolor: "rgba(182,182,182,0.13)",
-              },
-              borderRadius: 100,
-              borderColor: "rgba(182,182,182,0.73)",
-              display: {
-                xs: "none",
-                md: "flex",
-              },
-              textDecoration: "none",
-              p: 1,
-              px: 3,
-            }}
-            variant="outlined"
-          >
-            Masuk
-            <LoginIcon
-              sx={{
-                ml: {
-                  xs: 0,
-                  sm: 1,
-                },
-              }}
-            />
-          </Button>
-        </Link>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Link href={"/dashboard"}>
+            <Tooltip
+              title={"Masuk ke Dashboard"}
+              arrow
+              variant="outlined"
+              size="sm"
+            >
+              <Button
+                color="neutral"
+                sx={{
+                  "&:hover": {
+                    bgcolor: "rgba(182,182,182,0.13)",
+                  },
+                  borderRadius: 100,
+                  borderColor: "rgba(182,182,182,0.73)",
+                  display: {
+                    xs: "none",
+                    md: "flex",
+                  },
+                  textDecoration: "none",
+                  p: 1,
+                  px: 3,
+                }}
+                variant="outlined"
+              >
+                Masuk
+                <LoginIcon
+                  sx={{
+                    ml: {
+                      xs: 0,
+                      sm: 1,
+                    },
+                  }}
+                />
+              </Button>
+            </Tooltip>
+          </Link>
+        </motion.div>
       </Box>
       <Box
         sx={{
@@ -143,9 +223,9 @@ export default function Page1() {
               fontSize: {
                 xs: "2rem",
                 sm: "3rem",
-                md: "5rem",
-                lg: "5rem",
-                xl: "6rem",
+                md: "4rem",
+                lg: "4rem",
+                xl: "5rem",
               },
               display: {
                 xs: "none",

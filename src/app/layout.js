@@ -18,42 +18,46 @@ export default function RootLayout({ children }) {
       }}
     >
       <head>
+        <title>Desa Cinta Statistik</title>
         <meta
-          property="twitter:image"
-          content="https://desa-cantik.vercel.app/api/og"
-        ></meta>
-        <meta property="twitter:card" content="summary"></meta>
+          name="google-site-verification"
+          content="Hu7152qpJj9Y6ul5jzX2k4B3IVxATZm21UlTbhS2iEc"
+        />
+        <meta name="title" content="Desa Cinta Statistik" />
         <meta
-          property="twitter:title"
-          content="Desa Cantik - Margoagung"
-        ></meta>
-        <meta
-          property="twitter:description"
-          content="Desa Cantik Margoagung Kabupaten Sleman"
-        ></meta>
-        <meta
-          property="og:image"
-          content="https://desa-cantik.vercel.app/api/og"
-        ></meta>
-        <meta property="og:title" content="Desa Cantik - Margoagung"></meta>
-        <meta
-          property="og:description"
-          content="Desa Cantik Margoagung Kabupaten Sleman"
+          name="description"
+          content="Jelajahi Desa Cinta Statistik: Pintu untuk Pengentasan Kemiskinan di Desa Margoagung, Kabupaten Sleman. Temukan solusi dan inisiatif berbasis data yang bertujuan untuk memberantas kemiskinan dan mendorong pembangunan berkelanjutan."
         />
 
-        <meta
-          property="og:image"
-          content="https://desa-cantik.vercel.app/api/og"
-        ></meta>
-        <meta property="og:title" content="Desa Cantik - Margoagung"></meta>
-        <meta
-          property="og:description"
-          content="Desa Cantik Margoagung Kabupaten Sleman"
-        />
+        <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://desa-cantik.vercel.app/"
-        ></meta>
+          content="https://desa-cantik.vercel.app/og.png"
+        />
+        <meta property="og:title" content="Desa Cinta Statistik" />
+        <meta
+          property="og:description"
+          content="Jelajahi Desa Cinta Statistik: Pintu untuk Pengentasan Kemiskinan di Desa Margoagung, Kabupaten Sleman. Temukan solusi dan inisiatif berbasis data yang bertujuan untuk memberantas kemiskinan dan mendorong pembangunan berkelanjutan."
+        />
+        <meta
+          property="og:image"
+          content="https://desa-cantik.vercel.app/og.png"
+        />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://desa-cantik.vercel.app/og.png"
+        />
+        <meta property="twitter:title" content="Desa Cinta Statistik" />
+        <meta
+          property="twitter:description"
+          content="Jelajahi Desa Cinta Statistik: Pintu untuk Pengentasan Kemiskinan di Desa Margoagung, Kabupaten Sleman. Temukan solusi dan inisiatif berbasis data yang bertujuan untuk memberantas kemiskinan dan mendorong pembangunan berkelanjutan."
+        />
+        <meta
+          property="twitter:image"
+          content="https://desa-cantik.vercel.app/og.png"
+        />
       </head>
       <body style={{ margin: 0 }}>
         <NextAuthProvider>

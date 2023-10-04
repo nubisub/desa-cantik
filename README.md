@@ -1,6 +1,4 @@
-# Village Data Management System
 ![Desa Cantik](/docs/readme-header.png)
-
 
 ## Introduction
 
@@ -18,12 +16,12 @@ I want to convey a strong message about the importance of addressing poverty and
 
 ## Technology Stack
 
+![Desa Cantik](/docs/readme-architecture1.png)
+
 - _Database_: Google Sheets
 - _Web App_: Next.js
 - _Hosting_: Vercel
 - _Authentication_: Google OAuth with Firebase integration using NextAuth
-
-  ![Desa Cantik](/docs/readme-architecture1.png)
 
 ## Role-Based Access Control (RBAC)
 
@@ -49,6 +47,9 @@ This application implements Role-Based Access Control (RBAC) to ensure the secur
 - [ ] Integration Testing
 - [ ] Documentation
 
+- [ ] SEO - Google Search Console
+- [ ] Google Analytics
+
 ## Contributing
 
 Feel free to contribute to this project.
@@ -64,3 +65,7 @@ This project is licensed under the terms of the [MIT License](https://opensource
 ## Security
 
 If you discover any security-related issues, please just shut the fuck up and keep it to yourself. I don't care.
+
+## See More Screenshot in [docs folder](/docs/)
+
+![Desa Cantik](/docs/readme-web-hero.png)
