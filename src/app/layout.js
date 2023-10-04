@@ -2,6 +2,7 @@ import * as React from "react";
 import { DM_Sans } from "next/font/google";
 import CssBaseline from "@mui/joy/CssBaseline";
 import { NextAuthProvider } from "./components/AuthProvider";
+import Script from "next/script";
 
 const dm_sans = DM_Sans({ weight: "400", subsets: ["latin"] });
 export const metadata = {
@@ -80,6 +81,16 @@ export default function RootLayout({ children }) {
           content="https://desa-cantik.vercel.app/og.png"
         />
       </head>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-HEPZJ11L8P" />
+      <Script id="google-analytics">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-HEPZJ11L8P');
+        `}
+      </Script>
       <body style={{ margin: 0 }}>
         <NextAuthProvider>
           <CssBaseline />
