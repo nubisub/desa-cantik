@@ -19,6 +19,11 @@ export default function RootLayout({ children }) {
     >
       <head>
         <title>Desa Cinta Statistik</title>
+        <link
+          rel="icon"
+          href="https://desa-cantik.vercel.app/favicon.ico"
+          sizes="any"
+        />
         <meta
           name="google-site-verification"
           content="Hu7152qpJj9Y6ul5jzX2k4B3IVxATZm21UlTbhS2iEc"

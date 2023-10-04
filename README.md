@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This project is the result of my internship and aims to address the challenges of managing scattered data in villages, specifically focusing on poverty and disability data. To simplify the data management process and enhance accessibility, I've created a clean and intuitive dashboard with support for both light and dark modes, ensuring easy readability and navigation.
+This project is the result of my internship and aims to address the challenges of managing scattered data in villages, specifically focusing on poverty and disability data. To simplify the data management process and enhance accessibility, I've created a clean and intuitive dashboard with support for both light and dark modes, ensuring easy readability and navigation. 
+The main goal of this project is to ensure the website remains continuously available and functional. To achieve this, I've decided not to implement a database or set up a server.
 
 ## Message
 
