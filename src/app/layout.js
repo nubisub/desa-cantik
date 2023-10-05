@@ -51,34 +51,22 @@ export default function RootLayout({ children }) {
         />
 
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://desa-cantik.vercel.app/og.png"
-        />
+        <meta property="og:url" content="/og.png" />
         <meta property="og:title" content="Desa Cinta Statistik" />
         <meta
           property="og:description"
           content="Jelajahi Desa Cinta Statistik: Pintu untuk Pengentasan Kemiskinan di Desa Margoagung, Kabupaten Sleman. Temukan solusi dan inisiatif berbasis data yang bertujuan untuk memberantas kemiskinan dan mendorong pembangunan berkelanjutan."
         />
-        <meta
-          property="og:image"
-          content="https://desa-cantik.vercel.app/og.png"
-        />
+        <meta property="og:image" content="/og.png" />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://desa-cantik.vercel.app/og.png"
-        />
+        <meta property="twitter:url" content="/og.png" />
         <meta property="twitter:title" content="Desa Cinta Statistik" />
         <meta
           property="twitter:description"
           content="Jelajahi Desa Cinta Statistik: Pintu untuk Pengentasan Kemiskinan di Desa Margoagung, Kabupaten Sleman. Temukan solusi dan inisiatif berbasis data yang bertujuan untuk memberantas kemiskinan dan mendorong pembangunan berkelanjutan."
         />
-        <meta
-          property="twitter:image"
-          content="https://desa-cantik.vercel.app/og.png"
-        />
+        <meta property="twitter:image" content="/og.png" />
       </head>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-HEPZJ11L8P" />
       <Script id="google-analytics">
