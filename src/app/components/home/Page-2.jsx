@@ -82,7 +82,7 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Kemiskinan : Sebuah Tantangan Global
+                Pencanangan Desa Cinta Statistik
               </Typography>
             </Box>
             <Box
@@ -98,12 +98,12 @@ export default function Page2() {
               }}
             >
               <NextImage
-                src="/stunting-image.jpg"
+                src="/bg-cover.jpeg"
                 alt="Indonesian Child Image"
                 width={0}
                 height={0}
                 layout="responsive"
-                style={{ objectFit: "cover", maxWidth: "400px" }}
+                style={{ objectFit: "cover", maxWidth: "420px" }}
                 quality={100}
                 blurDataURL="/stunting-image.jpg"
               />
@@ -124,16 +124,18 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Kemiskinan adalah tantangan global yang kompleks. Kemiskinan
-                struktural, salah satu bentuknya, menciptakan kesenjangan
-                ekonomi yang sulit diatasi karena faktor-faktor seperti akses
-                pendidikan dan pekerjaan yang adil tidak merata. Untuk mengatasi
-                masalah ini, diperlukan upaya kolaboratif yang fokus pada
-                perubahan struktural dalam sistem ekonomi dan sosial. Melalui
-                kebijakan yang bijak dan kesadaran akan ketidaksetaraan
-                struktural, kita dapat membangun masyarakat yang lebih inklusif
-                dan berdaya tahan, di mana setiap individu memiliki peluang yang
-                sama untuk berkembang dan berkontribusi secara positif.
+                Desa Cinta Statistik merupakan program yang dilaksanakan oleh
+                Badan Pusat Statistik (BPS). Program ini bertujuan untuk
+                memberikan literasi kepada perangkat desa/kelurahan dalam
+                memahami data dan indikator yang dicakup dalam Regsosek dan
+                melakukan identifikasi pemanfaatan data Regsosek untuk kebutuhan
+                desa dalam rangka upaya mengentaskan kemiskinan.
+                <br></br>
+                Pada tahun 2023, Kalurahan Margoagung, Kapanewon Seyegan,
+                Kabupaten Sleman terpilih sebagai Desa Cinta Statistik.
+                Pencanangan Desa Cantik dilaksanakan pada tanggal 27 September
+                2023 yang dihadiri oleh Wakil Bupati Sleman dan Kepala BPS
+                Provinsi DIY.
               </Typography>
             </Box>
           </motion.div>

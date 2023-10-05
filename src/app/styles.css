@@ -167,3 +167,9 @@ main h2 {
 /*  background-position: 90% 50%;*/
 /*    background:linear-gradient(0deg, rgba(218, 218, 218, 0.9), rgba(148, 148, 148, 0.9)), url("/bg-cover.jpeg");*/
 /*}*/
+
+/*@media screen and (max-width: 600px) {*/
+/*  #home-hero{*/
+/*      background-position: center;*/
+/*  }*/
+/*}*/

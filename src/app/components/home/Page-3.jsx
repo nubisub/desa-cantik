@@ -2,11 +2,17 @@
 import * as React from "react";
 import { useRef } from "react";
 import Box from "@mui/joy/Box";
-import NextImage from "next/image";
 import { dm_sans } from "@/app/utils/fonts";
 import Typography from "@mui/joy/Typography";
 import { Stack } from "@mui/joy";
 import { motion, useScroll, useTransform } from "framer-motion";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import CardOverflow from "@mui/joy/CardOverflow";
+import Divider from "@mui/joy/Divider";
+import NextImage from "next/image";
+import CardData from "@/app/components/home/CardData";
 
 export default function Page2() {
   const ref = useRef(null);
@@ -81,56 +87,61 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Program Keluarga Harapan
+                Latar Belakang
               </Typography>
             </Box>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-start",
-                gap: 2,
+                alignItems: "stretch",
+                gap: 3,
                 flexDirection: {
                   xs: "column",
                   sm: "row",
                 },
               }}
             >
-              <Typography
-                component="h1"
-                sx={{
-                  fontWeight: "normal",
-                  color: "text.secondary",
-                  fontSize: {
-                    xs: "1rem",
-                    sm: "1.2rem",
-                  },
-                  "@media (min-width:600px)": {
-                    fontSize: "1.1rem",
-                  },
-                }}
-                className={dm_sans.className}
-              >
-                Pemerintah Indonesia telah mengambil langkah berani dalam upaya
-                mengatasi kemiskinan melalui berbagai kebijakan, salah satunya
-                adalah Program Keluarga Harapan (PKH). PKH adalah program
-                perlindungan sosial yang dirancang untuk memberikan bantuan
-                keuangan kepada keluarga miskin dan rentan di seluruh
-                negeri.Dengan adanya PKH, pemerintah berusaha untuk mengurangi
-                tingkat kemiskinan, meningkatkan akses pendidikan, kesehatan,
-                dan nutrisi bagi keluarga miskin, serta mendorong mereka untuk
-                meningkatkan produktivitas ekonomi.
-              </Typography>
-              <NextImage
-                src="/program-keluarga-harapan.jpg"
-                alt="Indonesian Child Image"
-                width={0}
-                height={0}
-                layout="responsive"
-                style={{ objectFit: "cover", maxWidth: "350px" }}
-                quality={100}
-                blurDataURL="/stunting-image.jpg"
-              />
+              {CardData.map((item, index) => {
+                return (
+                  <Card variant="outlined" sx={{ width: 320 }}>
+                    <CardOverflow>
+                      <AspectRatio ratio="2">
+                        <NextImage
+                          src={item.logo}
+                          width={100}
+                          height={100}
+                          alt={item.altLogo}
+                          layout="responsive"
+                          quality={100}
+                          blurDataURL="/stunting-image.jpg"
+                        />
+                      </AspectRatio>
+                    </CardOverflow>
+                    <CardContent>
+                      <Typography level="title-md">{item.instansi}</Typography>
+                      <Typography level="body-sm">
+                        {item.description}
+                      </Typography>
+                    </CardContent>
+                    <CardOverflow
+                      variant="soft"
+                      sx={{ bgcolor: "background.level1" }}
+                    >
+                      <Divider inset="context" />
+                      <CardContent orientation="horizontal">
+                        <Typography
+                          level="body-xs"
+                          fontWeight="md"
+                          textColor="text.secondary"
+                        >
+                          {item.peraturan}
+                        </Typography>
+                      </CardContent>
+                    </CardOverflow>
+                  </Card>
+                );
+              })}
             </Box>
           </motion.div>
         </Stack>
