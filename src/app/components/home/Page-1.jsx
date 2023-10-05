@@ -85,7 +85,7 @@ export default function Page1() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
           >
             <Tooltip
               title={"Pemerintah Kabupaten Sleman"}
@@ -105,29 +105,76 @@ export default function Page1() {
               </Link>
             </Tooltip>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
+          <Box
+            sx={{
+              display: {
+                md: "block",
+                xs: "none",
+              },
+            }}
           >
-            <Tooltip
-              title={"BPS Kabupaten Sleman"}
-              arrow
-              variant="outlined"
-              size="sm"
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
-                <NextImage
-                  src={"/logo-bps-sleman.png"}
-                  alt={"Pemkab Sleman Logo"}
-                  width={0}
-                  height={0}
-                  layout="responsive"
-                  style={{ objectFit: "cover", maxWidth: "250px" }}
-                />
-              </Link>
-            </Tooltip>
-          </motion.div>
+              <Tooltip
+                title={"BPS Kabupaten Sleman"}
+                arrow
+                variant="outlined"
+                size="sm"
+              >
+                <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
+                  <NextImage
+                    src={"/logo-bps-sleman.png"}
+                    alt={"Pemkab Sleman Logo"}
+                    width={0}
+                    height={0}
+                    layout="responsive"
+                    style={{
+                      objectFit: "cover",
+                      maxWidth: "260px",
+                    }}
+                  />
+                </Link>
+              </Tooltip>
+            </motion.div>
+          </Box>
+          <Box
+            sx={{
+              display: {
+                xs: "block",
+                md: "none",
+              },
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
+              <Tooltip
+                title={"BPS Kabupaten Sleman"}
+                arrow
+                variant="outlined"
+                size="sm"
+              >
+                <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
+                  <NextImage
+                    src={"/logo-bps.png"}
+                    alt={"Pemkab Sleman Logo"}
+                    width={0}
+                    height={0}
+                    layout="responsive"
+                    style={{
+                      objectFit: "cover",
+                      maxWidth: "60px",
+                    }}
+                  />
+                </Link>
+              </Tooltip>
+            </motion.div>
+          </Box>
           {/*<Box>*/}
           {/*  [Desa*/}
           {/*  <span*/}
