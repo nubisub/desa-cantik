@@ -9,29 +9,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Icons import
-import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import GroupsIcon from "@mui/icons-material/Groups";
-import ChildCareIcon from "@mui/icons-material/ChildCare";
-
-const Data = [
-  {
-    label: "Beranda",
-    href: "/dashboard",
-    icon: <FolderOpenIcon fontSize="small" />,
-  },
-  {
-    label: "Program Keluarga Harapan",
-    href: "/dashboard/program-keluarga-harapan",
-    icon: <GroupsIcon fontSize="small" />,
-  },
-  {
-    label: "Kasus Stunting/Disabilitas",
-    href: "/dashboard/penyandang-disabilitas",
-    icon: <ChildCareIcon fontSize="small" />,
-  },
-];
+import Data from "./NavigationData";
+import { useSession } from "next-auth/react";
+import { inter } from "@/app/utils/fonts";
 
 export default function Navigation() {
+  const { data, status } = useSession();
+
   const pathname = usePathname();
   return (
     <List
@@ -42,6 +26,10 @@ export default function Navigation() {
         position: {
           sm: "inherit",
           md: "fixed",
+        },
+        minWidth: {
+          sm: "inherit",
+          md: "225px",
         },
         top: 80,
       }}
@@ -54,8 +42,35 @@ export default function Navigation() {
           }}
         >
           {Data.map((item, index) => {
+            //   skip if item label = "Atur Pengguna" and user role != "admin"
+            if (
+              item.label === "Kelola Pengguna" &&
+              data?.user?.role !== "Admin"
+            ) {
+              return null;
+            }
+            if (
+              item.label === "Program Keluarga Harapan" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
+            if (
+              item.label === "Penyandang Disabilitas" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
             return (
-              <ListItem key={index}>
+              <ListItem
+                sx={{
+                  fontSize: "0.9em",
+                }}
+                className={inter.className}
+                key={index}
+              >
                 <Link
                   style={{ textDecoration: "none", width: "100%" }}
                   href={item.href}

@@ -1,14 +1,13 @@
-import { Inter } from "next/font/google";
 import Layout from "@/app/components/Layout";
 import Navigation from "@/app/components/Navigation";
 import * as React from "react";
 import ColorScheme from "@/app/components/ColorScheme";
 import ThemeRegistry from "@/app/ThemeRegistry";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "@/app/components/Header";
+import "@fontsource/inter";
 
 export const metadata = {
-  title: "Desa Cantik : Margoagung",
+  title: "Dashboard | Desa Cantik - Margoagung",
   description: "Desa Cantik Margoagung Kabupaten Sleman",
 };
 
@@ -25,9 +24,9 @@ export default function RootLayout({ children }) {
               },
             }}
           >
-            <Layout.Header>
+            <Header>
               <ColorScheme />
-            </Layout.Header>
+            </Header>
             <Layout.SideNav>
               <Navigation />
             </Layout.SideNav>
