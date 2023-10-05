@@ -25,6 +25,11 @@ const Data = [
     href: "/dashboard/penyandang-disabilitas",
     icon: <AccessibleForwardIcon fontSize="small" />,
   },
+  // {
+  //   label: "Data Gabungan",
+  //   href: "/dashboard/data-gabungan",
+  //   icon: <JoinFullIcon fontSize="small" />,
+  // },
 ];
 
 export default Data;

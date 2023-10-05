@@ -14,6 +14,7 @@ import Tooltip from "@mui/joy/Tooltip";
 export default function Page1() {
   return (
     <Box
+      id={"home-hero"}
       sx={{
         minHeight: "100vh",
         bgcolor: "#EFEEED",
@@ -80,29 +81,7 @@ export default function Page1() {
               </Link>
             </Tooltip>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <Tooltip
-              title={"BPS Kabupaten Sleman"}
-              arrow
-              variant="outlined"
-              size="sm"
-            >
-              <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
-                <NextImage
-                  src={"/logo-bps.png"}
-                  alt={"Pemkab Sleman Logo"}
-                  width={0}
-                  height={0}
-                  layout="responsive"
-                  style={{ objectFit: "cover", maxWidth: "55px" }}
-                />
-              </Link>
-            </Tooltip>
-          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -126,7 +105,29 @@ export default function Page1() {
               </Link>
             </Tooltip>
           </motion.div>
-
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
+            <Tooltip
+              title={"BPS Kabupaten Sleman"}
+              arrow
+              variant="outlined"
+              size="sm"
+            >
+              <Link href={"https://slemankab.bps.go.id/"} target={"_blank"}>
+                <NextImage
+                  src={"/logo-bps-sleman.png"}
+                  alt={"Pemkab Sleman Logo"}
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  style={{ objectFit: "cover", maxWidth: "250px" }}
+                />
+              </Link>
+            </Tooltip>
+          </motion.div>
           {/*<Box>*/}
           {/*  [Desa*/}
           {/*  <span*/}

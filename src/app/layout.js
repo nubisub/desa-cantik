@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
       }}
     >
       <head>
-        <title>Desa Cinta Statistik</title>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
