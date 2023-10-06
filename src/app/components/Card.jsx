@@ -86,7 +86,7 @@ export default function CardDashboard({ BLT, Disabilitas }) {
                 Penerima BLT
               </Typography>
               <Tooltip
-                title="Jumlah Penerima Bantuan Langsung Tunai"
+                title="Jumlah Penerima Bantuan Langsung Tunai Dana Desa"
                 variant="solid"
                 placement="top"
               >

@@ -338,7 +338,7 @@ export default function Page1() {
         >
           <NextImage
             src="/bg-home.png"
-            alt="Indonesian Child Image"
+            alt="Assets"
             width={0}
             height={0}
             layout="responsive"

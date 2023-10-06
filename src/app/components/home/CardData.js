@@ -31,7 +31,7 @@ const CardData = [
     altLogo: "Logo UU",
     description:
       "Perlunya pemanfaatan data melalui sistem informasi desa dalam proses pembangunan desa yang lebih baik",
-    peraturan: "UU No.6 Tahun 2014 Tentang Desa>",
+    peraturan: "UU No.6 Tahun 2014 Tentang Desa",
   },
 ];
 

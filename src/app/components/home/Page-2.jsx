@@ -35,8 +35,7 @@ export default function Page2() {
               xs: "90%",
               sm: "90%",
               md: "85%",
-              lg: "75%",
-              xl: "70%",
+              lg: "80%",
             },
           }}
           direction="column"
@@ -47,10 +46,10 @@ export default function Page2() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}
-            ref={ref}
+            // ref={ref}
             style={{
-              scaleX: scaleX,
-              scaleY: scaleY,
+              // scaleX: scaleX,
+              // scaleY: scaleY,
               bgColor: "#ff0000",
               paddingBottom: "50px",
               "@media (min-width:600px)": {
@@ -92,21 +91,30 @@ export default function Page2() {
                 alignItems: "flex-start",
                 flexDirection: {
                   xs: "column",
-                  sm: "row",
+                  md: "row",
                 },
                 gap: 3,
               }}
             >
-              <NextImage
-                src="/bg-cover.jpeg"
-                alt="Indonesian Child Image"
-                width={0}
-                height={0}
-                layout="responsive"
-                style={{ objectFit: "cover", maxWidth: "420px" }}
-                quality={100}
-                blurDataURL="/stunting-image.jpg"
-              />
+              <Box
+                sx={{
+                  width: {
+                    xs: "100%",
+                    sm: "100%",
+                    md: "150%",
+                    lg: "150%",
+                  },
+                }}
+              >
+                <NextImage
+                  src="/bg-cover.jpeg"
+                  alt="Pencanangan Desa Cantik"
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  quality={100}
+                />
+              </Box>
 
               <Typography
                 component="h1"

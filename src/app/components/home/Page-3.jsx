@@ -40,8 +40,7 @@ export default function Page2() {
               xs: "90%",
               sm: "90%",
               md: "85%",
-              lg: "75%",
-              xl: "70%",
+              lg: "80%",
             },
           }}
           direction="column"
@@ -51,10 +50,10 @@ export default function Page2() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}
-            ref={ref}
+            // ref={ref}
             style={{
-              scaleX: scaleX,
-              scaleY: scaleY,
+              // scaleX: scaleX,
+              // scaleY: scaleY,
               bgColor: "#ff0000",
               paddingBottom: "50px",
               "@media (min-width:600px)": {
@@ -93,9 +92,11 @@ export default function Page2() {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+
                 alignItems: "stretch",
-                gap: 3,
+                gap: 2,
                 flexDirection: {
                   xs: "column",
                   sm: "row",
@@ -104,7 +105,18 @@ export default function Page2() {
             >
               {CardData.map((item, index) => {
                 return (
-                  <Card variant="outlined" sx={{ width: 320 }}>
+                  <Card
+                    key={index}
+                    variant="outlined"
+                    sx={{
+                      width: {
+                        xs: "100%",
+                        sm: "48%",
+                        md: "48%",
+                        lg: "23.5%",
+                      },
+                    }}
+                  >
                     <CardOverflow>
                       <AspectRatio ratio="2">
                         <NextImage
@@ -119,7 +131,13 @@ export default function Page2() {
                       </AspectRatio>
                     </CardOverflow>
                     <CardContent>
-                      <Typography level="title-md">{item.instansi}</Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "500",
+                        }}
+                      >
+                        {item.instansi}
+                      </Typography>
                       <Typography level="body-sm">
                         {item.description}
                       </Typography>
