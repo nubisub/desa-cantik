@@ -163,7 +163,7 @@ export default function Header(props) {
               return null;
             }
             if (
-              item.label === "Program Keluarga Harapan" &&
+              item.label === "Bantuan Langsung Tunai DD" &&
               (data?.user?.role === "Guest" ||
                 typeof data?.user?.role === "undefined")
             ) {

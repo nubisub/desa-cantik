@@ -32,7 +32,7 @@ export default withAuth(
     if (
       (role === "Guest" || typeof role === "undefined") &&
       (req.nextUrl.pathname === "/dashboard/penyandang-disabilitas" ||
-        req.nextUrl.pathname === "/dashboard/program-keluarga-harapan")
+        req.nextUrl.pathname === "/dashboard/bantuan-langsung-tunai")
     ) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }

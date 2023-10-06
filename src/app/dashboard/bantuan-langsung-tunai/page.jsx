@@ -3,8 +3,8 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
-import Add from "@/app/dashboard/program-keluarga-harapan/Add";
-import WrapperData from "@/app/dashboard/program-keluarga-harapan/WrapperData";
+import Add from "@/app/dashboard/bantuan-langsung-tunai/Add";
+import WrapperData from "@/app/dashboard/bantuan-langsung-tunai/WrapperData";
 
 export default function ProgramKeluargaHarapan() {
   return (
@@ -17,8 +17,8 @@ export default function ProgramKeluargaHarapan() {
               href: "/dashboard",
             },
             {
-              label: "Program Keluarga Harapan",
-              href: "/program-keluarga-harapan",
+              label: "Bantuan Langsung Tunai DD",
+              href: "/bantuan-langsung-tunai",
             },
           ]}
         />
@@ -35,7 +35,7 @@ export default function ProgramKeluargaHarapan() {
         }}
       >
         <Typography level="h2">
-          Daftar Penerima Program Keluarga Harapan
+          Daftar Penerima Bantuan Langsung Tunai DD
         </Typography>
         <Add />
       </Box>

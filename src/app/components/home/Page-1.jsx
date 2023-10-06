@@ -199,11 +199,8 @@ export default function Page1() {
               size="sm"
             >
               <Button
-                color="neutral"
+                color="primary"
                 sx={{
-                  "&:hover": {
-                    bgcolor: "rgba(182,182,182,0.13)",
-                  },
                   borderRadius: 100,
                   borderColor: "rgba(182,182,182,0.73)",
                   display: {
@@ -214,7 +211,7 @@ export default function Page1() {
                   p: 1,
                   px: 3,
                 }}
-                variant="outlined"
+                variant="solid"
               >
                 Masuk
                 <LoginIcon
@@ -341,7 +338,7 @@ export default function Page1() {
         >
           <NextImage
             src="/bg-home.png"
-            alt="Indonesian Child Image"
+            alt="Assets"
             width={0}
             height={0}
             layout="responsive"

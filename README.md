@@ -69,4 +69,4 @@ If you discover any security-related issues, please just shut the fuck up and ke
 
 ## See More Screenshot in [docs folder](/docs/)
 
-![Desa Cantik](/docs/readme-web-hero.png)
+![Desa Cantik](/docs/dashboard-web.png)

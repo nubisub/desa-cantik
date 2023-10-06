@@ -16,8 +16,8 @@ const Data = [
     icon: <AdminPanelSettingsIcon fontSize="small" />,
   },
   {
-    label: "Program Keluarga Harapan",
-    href: "/dashboard/program-keluarga-harapan",
+    label: "Bantuan Langsung Tunai DD",
+    href: "/dashboard/bantuan-langsung-tunai",
     icon: <GroupsIcon fontSize="small" />,
   },
   {
