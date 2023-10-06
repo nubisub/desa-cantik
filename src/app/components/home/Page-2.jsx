@@ -35,8 +35,7 @@ export default function Page2() {
               xs: "90%",
               sm: "90%",
               md: "85%",
-              lg: "75%",
-              xl: "70%",
+              lg: "80%",
             },
           }}
           direction="column"
@@ -47,10 +46,10 @@ export default function Page2() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}
-            ref={ref}
+            // ref={ref}
             style={{
-              scaleX: scaleX,
-              scaleY: scaleY,
+              // scaleX: scaleX,
+              // scaleY: scaleY,
               bgColor: "#ff0000",
               paddingBottom: "50px",
               "@media (min-width:600px)": {
@@ -82,7 +81,7 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Kemiskinan : Sebuah Tantangan Global
+                Pencanangan Desa Cinta Statistik
               </Typography>
             </Box>
             <Box
@@ -92,21 +91,30 @@ export default function Page2() {
                 alignItems: "flex-start",
                 flexDirection: {
                   xs: "column",
-                  sm: "row",
+                  md: "row",
                 },
                 gap: 3,
               }}
             >
-              <NextImage
-                src="/stunting-image.jpg"
-                alt="Indonesian Child Image"
-                width={0}
-                height={0}
-                layout="responsive"
-                style={{ objectFit: "cover", maxWidth: "400px" }}
-                quality={100}
-                blurDataURL="/stunting-image.jpg"
-              />
+              <Box
+                sx={{
+                  width: {
+                    xs: "100%",
+                    sm: "100%",
+                    md: "150%",
+                    lg: "150%",
+                  },
+                }}
+              >
+                <NextImage
+                  src="/bg-cover.jpeg"
+                  alt="Pencanangan Desa Cantik"
+                  width={0}
+                  height={0}
+                  layout="responsive"
+                  quality={100}
+                />
+              </Box>
 
               <Typography
                 component="h1"
@@ -124,16 +132,18 @@ export default function Page2() {
                 }}
                 className={dm_sans.className}
               >
-                Kemiskinan adalah tantangan global yang kompleks. Kemiskinan
-                struktural, salah satu bentuknya, menciptakan kesenjangan
-                ekonomi yang sulit diatasi karena faktor-faktor seperti akses
-                pendidikan dan pekerjaan yang adil tidak merata. Untuk mengatasi
-                masalah ini, diperlukan upaya kolaboratif yang fokus pada
-                perubahan struktural dalam sistem ekonomi dan sosial. Melalui
-                kebijakan yang bijak dan kesadaran akan ketidaksetaraan
-                struktural, kita dapat membangun masyarakat yang lebih inklusif
-                dan berdaya tahan, di mana setiap individu memiliki peluang yang
-                sama untuk berkembang dan berkontribusi secara positif.
+                Desa Cinta Statistik merupakan program yang dilaksanakan oleh
+                Badan Pusat Statistik (BPS). Program ini bertujuan untuk
+                memberikan literasi kepada perangkat desa/kelurahan dalam
+                memahami data dan indikator yang dicakup dalam Regsosek dan
+                melakukan identifikasi pemanfaatan data Regsosek untuk kebutuhan
+                desa dalam rangka upaya mengentaskan kemiskinan.
+                <br></br>
+                Pada tahun 2023, Kalurahan Margoagung, Kapanewon Seyegan,
+                Kabupaten Sleman terpilih sebagai Desa Cinta Statistik.
+                Pencanangan Desa Cantik dilaksanakan pada tanggal 27 September
+                2023 yang dihadiri oleh Wakil Bupati Sleman dan Kepala BPS
+                Provinsi DIY.
               </Typography>
             </Box>
           </motion.div>

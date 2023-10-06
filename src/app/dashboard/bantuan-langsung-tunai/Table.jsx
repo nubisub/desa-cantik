@@ -188,7 +188,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
         }}
       >
         <FormControl sx={{ flex: 1 }} size="sm">
-          <FormLabel>Cari Keluarga Penerima PKH</FormLabel>
+          <FormLabel>Cari Penerima Bantuan Langsung Tunai DD</FormLabel>
           <Input
             size="sm"
             placeholder="Search"
@@ -369,7 +369,8 @@ export default function TablePKH({ dataPKH, mutateData }) {
             fontSize: "0.8em",
           }}
         >
-          {page * 10 - 9} - {page * 10} dari {rowSum}
+          {page * 10 - 9} -{" "}
+          {page === Math.ceil(rowSum / 10) ? rowSum : page * 10} dari {rowSum}
         </Typography>
         {renderPageNumbers()}
         {/*iterate */}

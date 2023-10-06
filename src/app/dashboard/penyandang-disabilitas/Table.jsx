@@ -490,7 +490,8 @@ export default function TablePKH({
             fontSize: "0.8em",
           }}
         >
-          {page * 10 - 9} - {page * 10} dari {rowSum}
+          {page * 10 - 9} -{" "}
+          {page === Math.ceil(rowSum / 10) ? rowSum : page * 10} dari {rowSum}
         </Typography>
         {renderPageNumbers()}
         {/*iterate */}

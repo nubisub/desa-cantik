@@ -52,7 +52,17 @@ export default function Footer() {
           className={inter.className}
         >
           © 2023 - {new Date().getFullYear()} BPS Kabupaten Sleman - All Rights
-          Reserved
+          Reserved - Developed by{" "}
+          <Link
+            style={{
+              fontWeight: "bold",
+              color: "#3694ff",
+            }}
+            href="https://github.com/nubisub"
+            target="_blank"
+          >
+            @nubisub
+          </Link>
         </Typography>
       </Stack>
     </Box>
