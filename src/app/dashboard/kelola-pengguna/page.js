@@ -8,7 +8,12 @@ import WrapperData from "@/app/dashboard/kelola-pengguna/WrapperData";
 export default async function KelolaPengguna() {
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <Breadcrumbs
           items={[
             {

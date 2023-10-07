@@ -1,4 +1,5 @@
 "use client";
+import * as React from "react";
 import { useEffect, useState } from "react";
 import Table from "@mui/joy/Table";
 import Sheet from "@mui/joy/Sheet";
@@ -27,7 +28,7 @@ import { useSession } from "next-auth/react";
 import Tooltip from "@mui/joy/Tooltip";
 import IconButton from "@mui/joy/IconButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
+import SkeletonTable from "./SkeletonTable";
 // const data = [
 //   {
 //     NIK: "246.10.249.100/12",
@@ -36,12 +37,12 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 //   },
 // ];
 
-export default function TablePKH({ dataPKH, mutateData }) {
+export default function TablePKH({ dataPKH, mutateData, isLoading }) {
   const { data, status } = useSession();
-
-  const [rowData, setRowData] = useState([]);
+  const [downloadData, setDownloadData] = useState(dataPKH);
+  const [rowData, setRowData] = useState(dataPKH);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(dataPKH.length);
+  const [rowSum, setRowSum] = useState(dataPKH?.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -142,31 +143,31 @@ export default function TablePKH({ dataPKH, mutateData }) {
       setMaxPage(Math.ceil(filteredData.length / 10));
     } else {
       setRowData(dataPKH);
-      setRowSum(dataPKH.length);
-      setTotalPage(Math.ceil(dataPKH.length / 10));
+      setRowSum(dataPKH?.length);
+      setTotalPage(Math.ceil(dataPKH?.length / 10));
       setPage(1);
       const start = (page - 1) * 10;
       const end = page * 10;
-      setRowData(dataPKH.slice(start, end));
-      setMaxPage(Math.ceil(dataPKH.length / 10));
+      setRowData(dataPKH?.slice(start, end));
+      setMaxPage(Math.ceil(dataPKH?.length / 10));
     }
   }, [search]);
 
   useEffect(() => {
     setRowData(dataPKH);
-    setRowSum(dataPKH.length);
-    setTotalPage(Math.ceil(dataPKH.length / 10));
+    setRowSum(dataPKH?.length);
+    setTotalPage(Math.ceil(dataPKH?.length / 10));
     setPage(page);
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(dataPKH.slice(start, end));
+    setRowData(dataPKH?.slice(start, end));
   }, [dataPKH]);
 
   useEffect(() => {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(dataPKH.slice(start, end));
+    setRowData(dataPKH?.slice(start, end));
     setMaxPage(Math.ceil(rowSum / 10));
   }, [page]);
   return (
@@ -190,6 +191,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
         <FormControl sx={{ flex: 1 }} size="sm">
           <FormLabel>Cari Penerima Bantuan Langsung Tunai DD</FormLabel>
           <Input
+            disabled={isLoading}
             size="sm"
             placeholder="Search"
             startDecorator={<SearchIcon />}
@@ -210,135 +212,146 @@ export default function TablePKH({ dataPKH, mutateData }) {
           minHeight: 0,
         }}
       >
-        <Table
-          aria-labelledby="tableTitle"
-          stickyHeader
-          hoverRow
-          sx={{
-            "--TableCell-headBackground":
-              "var(--joy-palette-background-level1)",
-            "--Table-headerUnderlineThickness": "1px",
-            "--TableRow-hoverBackground":
-              "var(--joy-palette-background-level1)",
-            "--TableCell-paddingY": "4px",
-            "--TableCell-paddingX": "8px",
-          }}
-        >
-          <thead
-            style={{
-              fontSize: ".9em",
+        {isLoading ? (
+          <SkeletonTable />
+        ) : (
+          <Table
+            aria-labelledby="tableTitle"
+            stickyHeader
+            hoverRow
+            sx={{
+              "--TableCell-headBackground":
+                "var(--joy-palette-background-level1)",
+              "--Table-headerUnderlineThickness": "1px",
+              "--TableRow-hoverBackground":
+                "var(--joy-palette-background-level1)",
+              "--TableCell-paddingY": "4px",
+              "--TableCell-paddingX": "8px",
             }}
           >
-            <tr>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 18px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No
-              </th>
-              <th
-                style={{
-                  width: 170,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Kepala Keluarga
-              </th>
-              <th
-                style={{
-                  width: 150,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                NIK
-              </th>
+            <thead
+              style={{
+                fontSize: ".9em",
+              }}
+            >
+              <tr>
+                <th
+                  style={{
+                    width: 60,
+                    padding: "12px 18px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  No
+                </th>
+                <th
+                  style={{
+                    width: 170,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Kepala Keluarga
+                </th>
+                <th
+                  style={{
+                    width: 150,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  NIK
+                </th>
 
-              <th
-                style={{
-                  width: 300,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Alamat
-              </th>
-              <th
-                style={{
-                  width: 50,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              ></th>
-            </tr>
-          </thead>
-          <tbody
-            style={{
-              fontSize: ".9em",
-            }}
-          >
-            {rowData.map((row, index) => (
-              <tr key={index + 1}>
-                <td>
-                  <Typography sx={{ pl: "16px", fontWeight: "md" }}>
-                    {page * 10 - 10 + index + 1}
-                  </Typography>
-                </td>
-                <td>
-                  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    <Avatar size="sm">
-                      {row.KepalaKeluarga?.split(" ").map((item) => item[0])}
-                    </Avatar>
-                    <div>
-                      <Typography sx={{ textTransform: "capitalize" }}>
-                        {row.KepalaKeluarga?.toLowerCase()}
-                      </Typography>
-                    </div>
-                  </Box>
-                </td>
-                <td>
-                  <Typography>{row.NIK}</Typography>
-                </td>
-
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Alamat?.toLowerCase()}
-                  </Typography>
-                </td>
-                <td>
-                  {data.user?.role === "Viewer" ? null : (
-                    <Tooltip
-                      title={"Hapus"}
-                      arrow
-                      color="danger"
-                      placement="right"
-                      size="sm"
-                      variant="solid"
-                    >
-                      <IconButton
-                        onClick={() => handleHapusButton(row.indexRow)}
-                        size="sm"
-                        variant="soft"
-                        color="danger"
-                      >
-                        <DeleteOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                </td>
+                <th
+                  style={{
+                    width: 300,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Alamat
+                </th>
+                <th
+                  style={{
+                    width: 50,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                ></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody
+              style={{
+                fontSize: ".9em",
+              }}
+            >
+              {rowData?.length === 0 && (
+                <tr>
+                  <td colSpan={5} style={{ textAlign: "center" }}>
+                    Data tidak ditemukan
+                  </td>
+                </tr>
+              )}
+              {rowData?.map((row, index) => (
+                <tr key={index + 1}>
+                  <td>
+                    <Typography sx={{ pl: "16px", fontWeight: "md" }}>
+                      {page * 10 - 10 + index + 1}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                      <Avatar size="sm">
+                        {row.KepalaKeluarga?.split(" ").map((item) => item[0])}
+                      </Avatar>
+                      <div>
+                        <Typography sx={{ textTransform: "capitalize" }}>
+                          {row.KepalaKeluarga?.toLowerCase()}
+                        </Typography>
+                      </div>
+                    </Box>
+                  </td>
+                  <td>
+                    <Typography>{row.NIK}</Typography>
+                  </td>
+
+                  <td>
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {row.Alamat?.toLowerCase()}
+                    </Typography>
+                  </td>
+                  <td>
+                    {data.user?.role === "Viewer" ? null : (
+                      <Tooltip
+                        title={"Hapus"}
+                        arrow
+                        color="danger"
+                        placement="right"
+                        size="sm"
+                        variant="solid"
+                      >
+                        <IconButton
+                          onClick={() => handleHapusButton(row.indexRow)}
+                          size="sm"
+                          variant="soft"
+                          color="danger"
+                        >
+                          <DeleteOutlineIcon />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Sheet>
       <Box
         className="Pagination-laptopUp"
@@ -398,7 +411,7 @@ export default function TablePKH({ dataPKH, mutateData }) {
           color="neutral"
           endDecorator={<KeyboardArrowRightIcon />}
           onClick={nextButton}
-          disabled={page === Math.ceil(rowSum / 10)}
+          disabled={page === Math.ceil(rowSum / 10) || isLoading}
         >
           Next
         </Button>

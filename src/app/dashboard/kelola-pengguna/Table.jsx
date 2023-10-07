@@ -28,8 +28,15 @@ import { toast, Toaster } from "sonner";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import IconButton from "@mui/joy/IconButton";
 import Tooltip from "@mui/joy/Tooltip";
+import SkeletonTable from "@/app/dashboard/kelola-pengguna/SkeletonTable";
 
-export default function TablePKH({ data, listRoles, mutateData }) {
+export default function TablePKH({
+  data,
+  listRoles,
+  mutateData,
+  isLoadingUser,
+  isLoadingRoles,
+}) {
   const [rowData, setRowData] = useState(data);
   const [tempData, setTempData] = useState(data);
   const [search, setSearch] = useState("");
@@ -110,6 +117,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
   }
 
   useEffect(() => {
+    isLoadingUser = true;
     setRowData(data);
     setTempData(data);
     setRowSum(data?.length);
@@ -117,22 +125,22 @@ export default function TablePKH({ data, listRoles, mutateData }) {
     setPage(page);
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(data.slice(start, end));
+    setRowData(data?.slice(start, end));
   }, [data]);
 
   useEffect(() => {
     setRowData([]);
-    const filteredData = data.filter((item) => {
+    const filteredData = data?.filter((item) => {
       return (
         (item.name.toLowerCase().includes(search.toLowerCase()) ||
           item.email.toLowerCase().includes(search.toLowerCase())) &&
         item.role.toLowerCase().includes(filterRoles.toLowerCase())
       );
     });
-    setRowSum(filteredData.length);
-    setTotalPage(Math.ceil(filteredData.length / 10));
+    setRowSum(filteredData?.length);
+    setTotalPage(Math.ceil(filteredData?.length / 10));
     setTempData(filteredData);
-    setRowData(filteredData.slice(0, 10));
+    setRowData(filteredData?.slice(0, 10));
     setPage(1);
   }, [search, filterRoles]);
 
@@ -176,7 +184,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(tempData.slice(start, end));
+    setRowData(tempData?.slice(start, end));
   }, [page]);
   return (
     <>
@@ -199,6 +207,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
         <FormControl sx={{ flex: 1 }} size="sm">
           <FormLabel>Cari Pengguna</FormLabel>
           <Input
+            disabled={isLoadingUser}
             size="sm"
             placeholder="Search"
             startDecorator={<SearchIcon />}
@@ -209,6 +218,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
         <FormControl size="sm">
           <FormLabel>Role</FormLabel>
           <Select
+            disabled={isLoadingUser || isLoadingRoles}
             size="sm"
             defaultValue="Semua"
             slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
@@ -232,149 +242,153 @@ export default function TablePKH({ data, listRoles, mutateData }) {
         className="OrderTableContainer"
         variant="outlined"
         sx={{
+          minHeight: "70vh",
           display: "initial",
           width: "100%",
           borderRadius: "sm",
           flexShrink: 1,
           overflow: "auto",
-          minHeight: 0,
         }}
       >
-        <Table
-          aria-labelledby="tableTitle"
-          stickyHeader
-          hoverRow
-          sx={{
-            "--TableCell-headBackground":
-              "var(--joy-palette-background-level1)",
-            "--Table-headerUnderlineThickness": "1px",
-            "--TableRow-hoverBackground":
-              "var(--joy-palette-background-level1)",
-            "--TableCell-paddingY": "4px",
-            "--TableCell-paddingX": "8px",
-          }}
-        >
-          <thead
-            style={{
-              fontSize: ".9em",
+        {isLoadingUser && isLoadingRoles ? (
+          <SkeletonTable />
+        ) : (
+          <Table
+            aria-labelledby="tableTitle"
+            stickyHeader
+            hoverRow
+            sx={{
+              "--TableCell-headBackground":
+                "var(--joy-palette-background-level1)",
+              "--Table-headerUnderlineThickness": "1px",
+              "--TableRow-hoverBackground":
+                "var(--joy-palette-background-level1)",
+              "--TableCell-paddingY": "4px",
+              "--TableCell-paddingX": "8px",
             }}
           >
-            <tr>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 18px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Nama
-              </th>
-
-              <th
-                style={{
-                  width: 240,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Email
-              </th>
-              <th
-                style={{
-                  width: 100,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Role
-              </th>
-              <th
-                style={{
-                  width: 50,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              ></th>
-            </tr>
-          </thead>
-          <tbody
-            style={{
-              fontSize: ".9em",
-            }}
-          >
-            {rowData?.length === 0 && (
+            <thead
+              style={{
+                fontSize: ".9em",
+              }}
+            >
               <tr>
-                <td colSpan={4} style={{ textAlign: "center" }}>
-                  Data tidak ditemukan
-                </td>
+                <th
+                  style={{
+                    width: 60,
+                    padding: "12px 18px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  No
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Nama
+                </th>
+
+                <th
+                  style={{
+                    width: 240,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Email
+                </th>
+                <th
+                  style={{
+                    width: 100,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Role
+                </th>
+                <th
+                  style={{
+                    width: 50,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                ></th>
               </tr>
-            )}
-            {rowData?.map((row, index) => (
-              <tr key={index + 1}>
-                <td>
-                  <Typography sx={{ pl: "16px", fontWeight: "md" }}>
-                    {page * 10 - 10 + index + 1}
-                  </Typography>
-                </td>
-                <td>
-                  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    <Avatar
+            </thead>
+            <tbody
+              style={{
+                fontSize: ".9em",
+              }}
+            >
+              {rowData?.length === 0 && (
+                <tr>
+                  <td colSpan={4} style={{ textAlign: "center" }}>
+                    Data tidak ditemukan
+                  </td>
+                </tr>
+              )}
+              {rowData?.map((row, index) => (
+                <tr key={index + 1}>
+                  <td>
+                    <Typography sx={{ pl: "16px", fontWeight: "md" }}>
+                      {page * 10 - 10 + index + 1}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                      <Avatar
+                        size="sm"
+                        variant="outlined"
+                        alt={row.name + "Profile Picture"}
+                        src={row.image}
+                      />
+                      <div>
+                        <Typography>{row.name}</Typography>
+                      </div>
+                    </Box>
+                  </td>
+                  <td>
+                    <Typography>{row.email}</Typography>
+                  </td>
+                  <td>
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {row.role || "Guest"}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Tooltip
+                      arrow
+                      title="Kelola Akun"
+                      placement="left"
                       size="sm"
                       variant="outlined"
-                      alt={row.name + "Profile Picture"}
-                      src={row.image}
-                    />
-                    <div>
-                      <Typography>{row.name}</Typography>
-                    </div>
-                  </Box>
-                </td>
-                <td>
-                  <Typography>{row.email}</Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.role || "Guest"}
-                  </Typography>
-                </td>
-                <td>
-                  <Tooltip
-                    arrow
-                    title="Kelola Akun"
-                    placement="left"
-                    size="sm"
-                    variant="outlined"
-                  >
-                    <IconButton
-                      onClick={() => {
-                        selectRow(row);
-                      }}
-                      color={"primary"}
-                      size={"sm"}
-                      variant={"soft"}
                     >
-                      <ManageAccountsIcon />
-                    </IconButton>
-                  </Tooltip>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                      <IconButton
+                        onClick={() => {
+                          selectRow(row);
+                        }}
+                        color={"primary"}
+                        size={"sm"}
+                        variant={"soft"}
+                      >
+                        <ManageAccountsIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Sheet>
       <Box
         className="Pagination-laptopUp"
@@ -416,7 +430,7 @@ export default function TablePKH({ data, listRoles, mutateData }) {
           color="neutral"
           endDecorator={<KeyboardArrowRightIcon />}
           onClick={nextButton}
-          disabled={page === Math.ceil(rowSum / 10)}
+          disabled={page === Math.ceil(rowSum / 10) || isLoadingUser}
         >
           Next
         </Button>

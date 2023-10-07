@@ -191,7 +191,7 @@ export default function Page1() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <Link href={"/dashboard"}>
+          <Link style={{ textDecoration: "none" }} href={"/dashboard"}>
             <Tooltip
               title={"Masuk ke Dashboard"}
               arrow
