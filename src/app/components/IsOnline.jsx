@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast, Toaster } from "sonner";
 
 export default function IsOnline() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(true);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
