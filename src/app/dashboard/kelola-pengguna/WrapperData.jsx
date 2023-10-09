@@ -32,18 +32,15 @@ const GetRoles = () => {
 export default function WrapperData() {
   const { dataUser, isLoadingUser, mutateData } = GetData();
   const { dataRoles, isLoadingRoles } = GetRoles();
-  if (isLoadingUser) {
-    return <div>Loading...</div>;
-  }
-  if (isLoadingRoles) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <>
       <Table
         mutateData={mutateData}
         data={dataUser}
-        listRoles={dataRoles.roles}
+        listRoles={dataRoles?.roles}
+        isLoadingUser={isLoadingUser}
+        isLoadingRoles={isLoadingRoles}
       />
     </>
   );

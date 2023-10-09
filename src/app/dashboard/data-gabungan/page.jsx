@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import Breadcrumbs from "/src/app/components/BreadCrumbs";
 import Typography from "@mui/joy/Typography";
 // icons
-import WrapperData from "@/app/dashboard/penyandang-disabilitas/WrapperData";
+import WrapperData from "@/app/dashboard/data-gabungan/WrapperData";
 
 export default async function ProgramKeluargaHarapan() {
   return (
