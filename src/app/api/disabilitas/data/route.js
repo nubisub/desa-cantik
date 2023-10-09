@@ -38,8 +38,8 @@ export async function GET(request) {
   const sheets = google.sheets({ version: "v4", auth });
 
   const includedColumns = [
-    "Nama",
     "NIK",
+    "Nama",
     "NOKK",
     "Alamat",
     "Kedisabilitasan",
