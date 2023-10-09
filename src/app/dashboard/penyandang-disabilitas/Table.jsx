@@ -29,9 +29,11 @@ import Modal from "@mui/joy/Modal";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { Transition } from "react-transition-group";
 import { toast } from "sonner";
+import SkeletonTable from "@/app/dashboard/penyandang-disabilitas/SkeletonTable";
 
 export default function TablePKH({
   data: dataDisabilitas,
+  isLoading,
   listKemiskinan,
   listDisabilitas,
   mutateData,
@@ -42,7 +44,7 @@ export default function TablePKH({
   const [rowData, setRowData] = useState(dataDisabilitas);
   const [tempData, setTempData] = useState(dataDisabilitas);
   const [search, setSearch] = useState("");
-  const [rowSum, setRowSum] = useState(dataDisabilitas.length);
+  const [rowSum, setRowSum] = useState(dataDisabilitas?.length);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(Math.ceil(rowSum / 10));
   const [totalPage, setTotalPage] = useState(Math.ceil(rowSum / 10));
@@ -97,7 +99,7 @@ export default function TablePKH({
 
   useEffect(() => {
     //     filter data with search, filterKemiskinan, filterKedisabilitasan
-    const filteredData = dataDisabilitas.filter((item) => {
+    const filteredData = dataDisabilitas?.filter((item) => {
       if (filterKemiskinan === "") {
         return (
           (item.Nama.toLowerCase().includes(search.toLowerCase()) ||
@@ -113,10 +115,10 @@ export default function TablePKH({
         item.Kedisabilitasan.includes(filterKedisabilitasan)
       );
     });
-    setRowSum(filteredData.length);
-    setTotalPage(Math.ceil(filteredData.length / 10));
+    setRowSum(filteredData?.length);
+    setTotalPage(Math.ceil(filteredData?.length / 10));
     setTempData(filteredData);
-    setRowData(filteredData.slice(0, 10));
+    setRowData(filteredData?.slice(0, 10));
     setPage(1);
   }, [search, filterKemiskinan, filterKedisabilitasan]);
 
@@ -159,19 +161,19 @@ export default function TablePKH({
   useEffect(() => {
     setRowData(dataDisabilitas);
     setTempData(dataDisabilitas);
-    setRowSum(dataDisabilitas.length);
-    setTotalPage(Math.ceil(dataDisabilitas.length / 10));
+    setRowSum(dataDisabilitas?.length);
+    setTotalPage(Math.ceil(dataDisabilitas?.length / 10));
     setPage(page);
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(dataDisabilitas.slice(start, end));
+    setRowData(dataDisabilitas?.slice(start, end));
   }, [dataDisabilitas]);
 
   useEffect(() => {
     //   pagination
     const start = (page - 1) * 10;
     const end = page * 10;
-    setRowData(tempData.slice(start, end));
+    setRowData(tempData?.slice(start, end));
   }, [page]);
   return (
     <>
@@ -202,6 +204,7 @@ export default function TablePKH({
         >
           <FormLabel>Cari Penyandang Disabilitas</FormLabel>
           <Input
+            disabled={isLoading}
             size="sm"
             placeholder="Search"
             startDecorator={<SearchIcon />}
@@ -212,6 +215,7 @@ export default function TablePKH({
         <FormControl size="sm">
           <FormLabel>Kedisabilitasan</FormLabel>
           <Select
+            disabled={isLoading}
             size="sm"
             value={valueFilterKedisabilitasan}
             slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
@@ -243,6 +247,7 @@ export default function TablePKH({
         <FormControl size="sm">
           <FormLabel>Kemiskinan</FormLabel>
           <Select
+            disabled={isLoading}
             value={valueFilterKemiskinan}
             size="sm"
             slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
@@ -257,7 +262,7 @@ export default function TablePKH({
             >
               Semua
             </Option>
-            {listKemiskinan.map((item) => (
+            {listKemiskinan?.map((item) => (
               <Option
                 sx={{ textTransform: "capitalize" }}
                 key={item.Kemiskinan}
@@ -285,181 +290,185 @@ export default function TablePKH({
           minHeight: 0,
         }}
       >
-        <Table
-          aria-labelledby="tableTitle"
-          stickyHeader
-          hoverRow
-          sx={{
-            "--TableCell-headBackground":
-              "var(--joy-palette-background-level1)",
-            "--Table-headerUnderlineThickness": "1px",
-            "--TableRow-hoverBackground":
-              "var(--joy-palette-background-level1)",
-            "--TableCell-paddingY": "4px",
-            "--TableCell-paddingX": "8px",
-          }}
-        >
-          <thead
-            style={{
-              fontSize: ".9em",
+        {isLoading ? (
+          <SkeletonTable />
+        ) : (
+          <Table
+            aria-labelledby="tableTitle"
+            stickyHeader
+            hoverRow
+            sx={{
+              "--TableCell-headBackground":
+                "var(--joy-palette-background-level1)",
+              "--Table-headerUnderlineThickness": "1px",
+              "--TableRow-hoverBackground":
+                "var(--joy-palette-background-level1)",
+              "--TableCell-paddingY": "4px",
+              "--TableCell-paddingX": "8px",
             }}
           >
-            <tr>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 18px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Nama
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                NIK
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No KK
-              </th>
-              <th
-                style={{
-                  width: 220,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Alamat
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Kedisabilitasan
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Kemiskinan
-              </th>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              ></th>
-            </tr>
-          </thead>
-          <tbody
-            style={{
-              fontSize: ".9em",
-            }}
-          >
-            {rowData.length === 0 && (
+            <thead
+              style={{
+                fontSize: ".9em",
+              }}
+            >
               <tr>
-                <td colSpan={7} style={{ textAlign: "center" }}>
-                  Data tidak ditemukan
-                </td>
+                <th
+                  style={{
+                    width: 60,
+                    padding: "12px 18px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  No
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Nama
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  NIK
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  No KK
+                </th>
+                <th
+                  style={{
+                    width: 220,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Alamat
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Kedisabilitasan
+                </th>
+                <th
+                  style={{
+                    width: 140,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Kemiskinan
+                </th>
+                <th
+                  style={{
+                    width: 60,
+                    padding: "12px 6px",
+                    fontWeight: "600",
+                    fontSize: "1.1em",
+                  }}
+                ></th>
               </tr>
-            )}
-            {rowData.map((row, index) => (
-              <tr key={index + 1}>
-                <td>
-                  <Typography sx={{ pl: "16px", fontWeight: "md" }}>
-                    {page * 10 - 10 + index + 1}
-                  </Typography>
-                </td>
-                <td>
-                  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    {/*<Avatar size="sm">*/}
-                    {/*  {row.Nama.split(" ").map((item) => item[0])}*/}
-                    {/*</Avatar>*/}
-                    <div>
-                      <Typography>{row.Nama}</Typography>
-                    </div>
-                  </Box>
-                </td>
-                <td>
-                  <Typography>{row.NIK}</Typography>
-                </td>
-                <td>
-                  <Typography>{row.NOKK}</Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Alamat}
-                  </Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Kedisabilitasan}
-                  </Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Kemiskinan}
-                  </Typography>
-                </td>
-                <td>
-                  {data.user?.role === "Viewer" ? null : (
-                    <Tooltip
-                      title={"Hapus"}
-                      arrow
-                      color="danger"
-                      placement="right"
-                      size="sm"
-                      variant="solid"
-                    >
-                      <IconButton
-                        onClick={() => handleHapusButton(row.indexRow)}
-                        size="sm"
-                        variant="soft"
+            </thead>
+            <tbody
+              style={{
+                fontSize: ".9em",
+              }}
+            >
+              {rowData?.length === 0 && (
+                <tr>
+                  <td colSpan={7} style={{ textAlign: "center" }}>
+                    Data tidak ditemukan
+                  </td>
+                </tr>
+              )}
+              {rowData?.map((row, index) => (
+                <tr key={index + 1}>
+                  <td>
+                    <Typography sx={{ pl: "16px", fontWeight: "md" }}>
+                      {page * 10 - 10 + index + 1}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                      {/*<Avatar size="sm">*/}
+                      {/*  {row.Nama.split(" ").map((item) => item[0])}*/}
+                      {/*</Avatar>*/}
+                      <div>
+                        <Typography>{row.Nama}</Typography>
+                      </div>
+                    </Box>
+                  </td>
+                  <td>
+                    <Typography>{row.NIK}</Typography>
+                  </td>
+                  <td>
+                    <Typography>{row.NOKK}</Typography>
+                  </td>
+                  <td>
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {row.Alamat}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {row.Kedisabilitasan}
+                    </Typography>
+                  </td>
+                  <td>
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {row.Kemiskinan}
+                    </Typography>
+                  </td>
+                  <td>
+                    {data.user?.role === "Viewer" ? null : (
+                      <Tooltip
+                        title={"Hapus"}
+                        arrow
                         color="danger"
+                        placement="right"
+                        size="sm"
+                        variant="solid"
                       >
-                        <DeleteOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                        <IconButton
+                          onClick={() => handleHapusButton(row.indexRow)}
+                          size="sm"
+                          variant="soft"
+                          color="danger"
+                        >
+                          <DeleteOutlineIcon />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Sheet>
       <Box
         className="Pagination-laptopUp"
@@ -519,7 +528,7 @@ export default function TablePKH({
           color="neutral"
           endDecorator={<KeyboardArrowRightIcon />}
           onClick={nextButton}
-          disabled={page === Math.ceil(rowSum / 10)}
+          disabled={page === Math.ceil(rowSum / 10) || isLoading}
         >
           Next
         </Button>

@@ -1,33 +1,11 @@
 "use client";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import Table from "@mui/joy/Table";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
-import {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  FormControl,
-  FormLabel,
-  Input,
-  ModalDialog,
-  Select,
-} from "@mui/joy";
+import { FormControl, FormLabel, Input } from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/joy/Button";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import Option from "@mui/joy/Option";
-import Tooltip from "@mui/joy/Tooltip";
-import IconButton from "@mui/joy/IconButton";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useSession } from "next-auth/react";
-import Modal from "@mui/joy/Modal";
-import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import { Transition } from "react-transition-group";
 import { toast } from "sonner";
 
 export default function TablePKH({
@@ -173,6 +151,19 @@ export default function TablePKH({
     const end = page * 10;
     setRowData(tempData.slice(start, end));
   }, [page]);
+  function handleSearchButton(e) {
+    e.preventDefault();
+    console.log("NIK");
+    console.log(search);
+  }
+  function handleSearch(e) {
+    setSearch(e.target.value);
+    // if e 16 digit number
+    if (e.target.value.length === 16 && !isNaN(e.target.value)) {
+      console.log("NIK");
+      console.log(e.target.value);
+    }
+  }
   return (
     <>
       <Box
@@ -191,404 +182,362 @@ export default function TablePKH({
           },
         }}
       >
-        <FormControl
-          sx={{
-            flex: {
-              xs: "1 1 100%",
-              md: "1",
-            },
+        <form
+          onSubmit={handleSearchButton}
+          style={{
+            display: "flex",
+            width: "100%",
           }}
-          size="sm"
+          id="demo"
         >
-          <FormLabel>Cari Penyandang Disabilitas</FormLabel>
-          <Input
-            size="sm"
-            placeholder="Search"
-            startDecorator={<SearchIcon />}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </FormControl>
-        <FormControl size="sm">
-          <FormLabel>Kedisabilitasan</FormLabel>
-          <Select
-            size="sm"
-            value={valueFilterKedisabilitasan}
-            slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
-          >
-            <Option
-              default
-              value={"Semua"}
-              onClick={() => {
-                setFilterKedisabilitasan("");
-                setValueFilterKedisabilitasan("Semua");
-              }}
-            >
-              Semua
-            </Option>
-            {listDisabilitas?.map((item) => (
-              <Option
-                key={item.Kedisabilitasan}
-                onClick={() => {
-                  setFilterKedisabilitasan(item.Kedisabilitasan);
-                  setValueFilterKedisabilitasan(item.Kedisabilitasan);
-                }}
-                value={item.Kedisabilitasan}
-              >
-                {item.Kedisabilitasan}
-              </Option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl size="sm">
-          <FormLabel>Kemiskinan</FormLabel>
-          <Select
-            value={valueFilterKemiskinan}
-            size="sm"
-            slotProps={{ button: { sx: { whiteSpace: "nowrap" } } }}
-          >
-            <Option
-              default
-              value={"Semua"}
-              onClick={() => {
-                setFilterKemiskinan("");
-                setValueFilterKemiskinan("Semua");
-              }}
-            >
-              Semua
-            </Option>
-            {listKemiskinan.map((item) => (
-              <Option
-                sx={{ textTransform: "capitalize" }}
-                key={item.Kemiskinan}
-                onClick={() => {
-                  setFilterKemiskinan(item.Kemiskinan);
-                  setValueFilterKemiskinan(item.Kemiskinan);
-                }}
-                value={item.Kemiskinan}
-              >
-                {item.Kemiskinan}
-              </Option>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      <Sheet
-        className="OrderTableContainer"
-        variant="outlined"
-        sx={{
-          display: "initial",
-          width: "100%",
-          borderRadius: "sm",
-          flexShrink: 1,
-          overflow: "auto",
-          minHeight: 0,
-        }}
-      >
-        <Table
-          aria-labelledby="tableTitle"
-          stickyHeader
-          hoverRow
-          sx={{
-            "--TableCell-headBackground":
-              "var(--joy-palette-background-level1)",
-            "--Table-headerUnderlineThickness": "1px",
-            "--TableRow-hoverBackground":
-              "var(--joy-palette-background-level1)",
-            "--TableCell-paddingY": "4px",
-            "--TableCell-paddingX": "8px",
-          }}
-        >
-          <thead
-            style={{
-              fontSize: ".9em",
-            }}
-          >
-            <tr>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 18px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Nama
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                NIK
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                No KK
-              </th>
-              <th
-                style={{
-                  width: 220,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Alamat
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Kedisabilitasan
-              </th>
-              <th
-                style={{
-                  width: 140,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              >
-                Kemiskinan
-              </th>
-              <th
-                style={{
-                  width: 60,
-                  padding: "12px 6px",
-                  fontWeight: "600",
-                  fontSize: "1.1em",
-                }}
-              ></th>
-            </tr>
-          </thead>
-          <tbody
-            style={{
-              fontSize: ".9em",
-            }}
-          >
-            {rowData.length === 0 && (
-              <tr>
-                <td colSpan={7} style={{ textAlign: "center" }}>
-                  Data tidak ditemukan
-                </td>
-              </tr>
-            )}
-            {rowData.map((row, index) => (
-              <tr key={index + 1}>
-                <td>
-                  <Typography sx={{ pl: "16px", fontWeight: "md" }}>
-                    {page * 10 - 10 + index + 1}
-                  </Typography>
-                </td>
-                <td>
-                  <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    {/*<Avatar size="sm">*/}
-                    {/*  {row.Nama.split(" ").map((item) => item[0])}*/}
-                    {/*</Avatar>*/}
-                    <div>
-                      <Typography>{row.Nama}</Typography>
-                    </div>
-                  </Box>
-                </td>
-                <td>
-                  <Typography>{row.NIK}</Typography>
-                </td>
-                <td>
-                  <Typography>{row.NOKK}</Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Alamat}
-                  </Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Kedisabilitasan}
-                  </Typography>
-                </td>
-                <td>
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {row.Kemiskinan}
-                  </Typography>
-                </td>
-                <td>
-                  {data.user?.role === "Viewer" ? null : (
-                    <Tooltip
-                      title={"Hapus"}
-                      arrow
-                      color="danger"
-                      placement="right"
-                      size="sm"
-                      variant="solid"
-                    >
-                      <IconButton
-                        onClick={() => handleHapusButton(row.indexRow)}
-                        size="sm"
-                        variant="soft"
-                        color="danger"
-                      >
-                        <DeleteOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Sheet>
-      <Box
-        className="Pagination-laptopUp"
-        sx={{
-          pt: 2,
-          gap: 1,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Button
-          size="sm"
-          variant="outlined"
-          color="neutral"
-          startDecorator={<KeyboardArrowLeftIcon />}
-          onClick={previousButton}
-          disabled={page === 1 || page === 0}
-        >
-          Previous
-        </Button>
-        <Box sx={{ flex: 1 }} />
-        <Typography
-          sx={{
-            display: {
-              xs: "block",
-              md: "none",
-            },
-            fontSize: "0.8em",
-          }}
-        >
-          {page * 10 - 9} -{" "}
-          {page === Math.ceil(rowSum / 10) ? rowSum : page * 10} dari {rowSum}
-        </Typography>
-        {renderPageNumbers()}
-        {/*iterate */}
-
-        {/*  iterate over 10 times*/}
-
-        {/*{["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].map((page) => (*/}
-        {/*  <IconButton*/}
-        {/*    onClick={() => setPage(Number(page))}*/}
-        {/*    sx={{*/}
-        {/*      borderRadius: "50%",*/}
-        {/*    }}*/}
-        {/*    key={page}*/}
-        {/*    size="sm"*/}
-        {/*    variant={Number(page) ? "outlined" : "plain"}*/}
-        {/*    color="neutral"*/}
-        {/*  >*/}
-        {/*    {page}*/}
-        {/*  </IconButton>*/}
-        {/*))}*/}
-        <Box sx={{ flex: 1 }} />
-        <Button
-          size="sm"
-          variant="outlined"
-          color="neutral"
-          endDecorator={<KeyboardArrowRightIcon />}
-          onClick={nextButton}
-          disabled={page === Math.ceil(rowSum / 10)}
-        >
-          Next
-        </Button>
-      </Box>
-      <Transition in={open} timeout={400}>
-        {(state) => (
-          <Modal
-            keepMounted
-            open={!["exited", "exiting"].includes(state)}
-            onClose={() => setOpen(false)}
-            slotProps={{
-              backdrop: {
-                sx: {
-                  opacity: 0,
-                  backdropFilter: "none",
-                  transition: `opacity 400ms, backdrop-filter 400ms`,
-                  ...{
-                    entering: { opacity: 1, backdropFilter: "blur(8px)" },
-                    entered: { opacity: 1, backdropFilter: "blur(8px)" },
-                  }[state],
-                },
+          <FormControl
+            sx={{
+              flex: {
+                xs: "1 1 100%",
+                md: "1",
               },
             }}
-            sx={{
-              visibility: state === "exited" ? "hidden" : "visible",
-            }}
+            size="sm"
           >
-            <ModalDialog
-              sx={{
-                opacity: 0,
-                transition: `opacity 300ms`,
-                ...{
-                  entering: { opacity: 1 },
-                  entered: { opacity: 1 },
-                }[state],
-              }}
-              variant="outlined"
-              role="alertdialog"
-            >
-              <DialogTitle>
-                <WarningRoundedIcon />
-                Konfirmasi
-              </DialogTitle>
-              <Divider />
-              <DialogContent>
-                Apakah anda yakin ingin menghapus data ini?
-              </DialogContent>
-              <DialogActions>
+            <FormLabel>Cari Berdasarkan NIK</FormLabel>
+            <Input
+              sx={{ "--Input-decoratorChildHeight": "45px" }}
+              size="lg"
+              placeholder="Search"
+              startDecorator={<SearchIcon />}
+              value={search}
+              onChange={handleSearch}
+              endDecorator={
                 <Button
                   variant="solid"
-                  color="danger"
-                  loading={loading}
-                  onClick={() => handleHapus()}
+                  color="primary"
+                  loading={data.status === "loading"}
+                  type="submit"
+                  sx={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
                 >
-                  Hapus
+                  Cari
                 </Button>
-                <Button
-                  variant="plain"
-                  color="neutral"
-                  disabled={loading}
-                  onClick={() => setOpen(false)}
-                >
-                  Kembali
-                </Button>
-              </DialogActions>
-            </ModalDialog>
-          </Modal>
-        )}
-      </Transition>
+              }
+            />
+          </FormControl>
+        </form>
+      </Box>
+      {/*<Sheet*/}
+      {/*  className="OrderTableContainer"*/}
+      {/*  variant="outlined"*/}
+      {/*  sx={{*/}
+      {/*    display: "initial",*/}
+      {/*    width: "100%",*/}
+      {/*    borderRadius: "sm",*/}
+      {/*    flexShrink: 1,*/}
+      {/*    overflow: "auto",*/}
+      {/*    minHeight: 0,*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <Table*/}
+      {/*    aria-labelledby="tableTitle"*/}
+      {/*    stickyHeader*/}
+      {/*    hoverRow*/}
+      {/*    sx={{*/}
+      {/*      "--TableCell-headBackground":*/}
+      {/*        "var(--joy-palette-background-level1)",*/}
+      {/*      "--Table-headerUnderlineThickness": "1px",*/}
+      {/*      "--TableRow-hoverBackground":*/}
+      {/*        "var(--joy-palette-background-level1)",*/}
+      {/*      "--TableCell-paddingY": "4px",*/}
+      {/*      "--TableCell-paddingX": "8px",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <thead*/}
+      {/*      style={{*/}
+      {/*        fontSize: ".9em",*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      <tr>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 60,*/}
+      {/*            padding: "12px 18px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          No*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 140,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          Nama*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 140,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          NIK*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 140,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          No KK*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 220,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          Alamat*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 140,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          Kedisabilitasan*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 140,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          Kemiskinan*/}
+      {/*        </th>*/}
+      {/*        <th*/}
+      {/*          style={{*/}
+      {/*            width: 60,*/}
+      {/*            padding: "12px 6px",*/}
+      {/*            fontWeight: "600",*/}
+      {/*            fontSize: "1.1em",*/}
+      {/*          }}*/}
+      {/*        ></th>*/}
+      {/*      </tr>*/}
+      {/*    </thead>*/}
+      {/*    <tbody*/}
+      {/*      style={{*/}
+      {/*        fontSize: ".9em",*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      {rowData.length === 0 && (*/}
+      {/*        <tr>*/}
+      {/*          <td colSpan={7} style={{ textAlign: "center" }}>*/}
+      {/*            Data tidak ditemukan*/}
+      {/*          </td>*/}
+      {/*        </tr>*/}
+      {/*      )}*/}
+      {/*      {rowData.map((row, index) => (*/}
+      {/*        <tr key={index + 1}>*/}
+      {/*          <td>*/}
+      {/*            <Typography sx={{ pl: "16px", fontWeight: "md" }}>*/}
+      {/*              {page * 10 - 10 + index + 1}*/}
+      {/*            </Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>*/}
+      {/*              /!*<Avatar size="sm">*!/*/}
+      {/*              /!*  {row.Nama.split(" ").map((item) => item[0])}*!/*/}
+      {/*              /!*</Avatar>*!/*/}
+      {/*              <div>*/}
+      {/*                <Typography>{row.Nama}</Typography>*/}
+      {/*              </div>*/}
+      {/*            </Box>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Typography>{row.NIK}</Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Typography>{row.NOKK}</Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Typography sx={{ textTransform: "capitalize" }}>*/}
+      {/*              {row.Alamat}*/}
+      {/*            </Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Typography sx={{ textTransform: "capitalize" }}>*/}
+      {/*              {row.Kedisabilitasan}*/}
+      {/*            </Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            <Typography sx={{ textTransform: "capitalize" }}>*/}
+      {/*              {row.Kemiskinan}*/}
+      {/*            </Typography>*/}
+      {/*          </td>*/}
+      {/*          <td>*/}
+      {/*            {data.user?.role === "Viewer" ? null : (*/}
+      {/*              <Tooltip*/}
+      {/*                title={"Hapus"}*/}
+      {/*                arrow*/}
+      {/*                color="danger"*/}
+      {/*                placement="right"*/}
+      {/*                size="sm"*/}
+      {/*                variant="solid"*/}
+      {/*              >*/}
+      {/*                <IconButton*/}
+      {/*                  onClick={() => handleHapusButton(row.indexRow)}*/}
+      {/*                  size="sm"*/}
+      {/*                  variant="soft"*/}
+      {/*                  color="danger"*/}
+      {/*                >*/}
+      {/*                  <DeleteOutlineIcon />*/}
+      {/*                </IconButton>*/}
+      {/*              </Tooltip>*/}
+      {/*            )}*/}
+      {/*          </td>*/}
+      {/*        </tr>*/}
+      {/*      ))}*/}
+      {/*    </tbody>*/}
+      {/*  </Table>*/}
+      {/*</Sheet>*/}
+      {/*<Box*/}
+      {/*  className="Pagination-laptopUp"*/}
+      {/*  sx={{*/}
+      {/*    pt: 2,*/}
+      {/*    gap: 1,*/}
+      {/*    display: "flex",*/}
+      {/*    alignItems: "center",*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <Button*/}
+      {/*    size="sm"*/}
+      {/*    variant="outlined"*/}
+      {/*    color="neutral"*/}
+      {/*    startDecorator={<KeyboardArrowLeftIcon />}*/}
+      {/*    onClick={previousButton}*/}
+      {/*    disabled={page === 1 || page === 0}*/}
+      {/*  >*/}
+      {/*    Previous*/}
+      {/*  </Button>*/}
+      {/*  <Box sx={{ flex: 1 }} />*/}
+      {/*  <Typography*/}
+      {/*    sx={{*/}
+      {/*      display: {*/}
+      {/*        xs: "block",*/}
+      {/*        md: "none",*/}
+      {/*      },*/}
+      {/*      fontSize: "0.8em",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    {page * 10 - 9} -{" "}*/}
+      {/*    {page === Math.ceil(rowSum / 10) ? rowSum : page * 10} dari {rowSum}*/}
+      {/*  </Typography>*/}
+      {/*  {renderPageNumbers()}*/}
+      {/*  /!*iterate *!/*/}
+
+      {/*  /!*  iterate over 10 times*!/*/}
+
+      {/*  /!*{["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].map((page) => (*!/*/}
+      {/*  /!*  <IconButton*!/*/}
+      {/*  /!*    onClick={() => setPage(Number(page))}*!/*/}
+      {/*  /!*    sx={{*!/*/}
+      {/*  /!*      borderRadius: "50%",*!/*/}
+      {/*  /!*    }}*!/*/}
+      {/*  /!*    key={page}*!/*/}
+      {/*  /!*    size="sm"*!/*/}
+      {/*  /!*    variant={Number(page) ? "outlined" : "plain"}*!/*/}
+      {/*  /!*    color="neutral"*!/*/}
+      {/*  /!*  >*!/*/}
+      {/*  /!*    {page}*!/*/}
+      {/*  /!*  </IconButton>*!/*/}
+      {/*  /!*))}*!/*/}
+      {/*  <Box sx={{ flex: 1 }} />*/}
+      {/*  <Button*/}
+      {/*    size="sm"*/}
+      {/*    variant="outlined"*/}
+      {/*    color="neutral"*/}
+      {/*    endDecorator={<KeyboardArrowRightIcon />}*/}
+      {/*    onClick={nextButton}*/}
+      {/*    disabled={page === Math.ceil(rowSum / 10)}*/}
+      {/*  >*/}
+      {/*    Next*/}
+      {/*  </Button>*/}
+      {/*</Box>*/}
+      {/*<Transition in={open} timeout={400}>*/}
+      {/*  {(state) => (*/}
+      {/*    <Modal*/}
+      {/*      keepMounted*/}
+      {/*      open={!["exited", "exiting"].includes(state)}*/}
+      {/*      onClose={() => setOpen(false)}*/}
+      {/*      slotProps={{*/}
+      {/*        backdrop: {*/}
+      {/*          sx: {*/}
+      {/*            opacity: 0,*/}
+      {/*            backdropFilter: "none",*/}
+      {/*            transition: `opacity 400ms, backdrop-filter 400ms`,*/}
+      {/*            ...{*/}
+      {/*              entering: { opacity: 1, backdropFilter: "blur(8px)" },*/}
+      {/*              entered: { opacity: 1, backdropFilter: "blur(8px)" },*/}
+      {/*            }[state],*/}
+      {/*          },*/}
+      {/*        },*/}
+      {/*      }}*/}
+      {/*      sx={{*/}
+      {/*        visibility: state === "exited" ? "hidden" : "visible",*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      <ModalDialog*/}
+      {/*        sx={{*/}
+      {/*          opacity: 0,*/}
+      {/*          transition: `opacity 300ms`,*/}
+      {/*          ...{*/}
+      {/*            entering: { opacity: 1 },*/}
+      {/*            entered: { opacity: 1 },*/}
+      {/*          }[state],*/}
+      {/*        }}*/}
+      {/*        variant="outlined"*/}
+      {/*        role="alertdialog"*/}
+      {/*      >*/}
+      {/*        <DialogTitle>*/}
+      {/*          <WarningRoundedIcon />*/}
+      {/*          Konfirmasi*/}
+      {/*        </DialogTitle>*/}
+      {/*        <Divider />*/}
+      {/*        <DialogContent>*/}
+      {/*          Apakah anda yakin ingin menghapus data ini?*/}
+      {/*        </DialogContent>*/}
+      {/*        <DialogActions>*/}
+      {/*          <Button*/}
+      {/*            variant="solid"*/}
+      {/*            color="danger"*/}
+      {/*            loading={loading}*/}
+      {/*            onClick={() => handleHapus()}*/}
+      {/*          >*/}
+      {/*            Hapus*/}
+      {/*          </Button>*/}
+      {/*          <Button*/}
+      {/*            variant="plain"*/}
+      {/*            color="neutral"*/}
+      {/*            disabled={loading}*/}
+      {/*            onClick={() => setOpen(false)}*/}
+      {/*          >*/}
+      {/*            Kembali*/}
+      {/*          </Button>*/}
+      {/*        </DialogActions>*/}
+      {/*      </ModalDialog>*/}
+      {/*    </Modal>*/}
+      {/*  )}*/}
+      {/*</Transition>*/}
     </>
   );
 }

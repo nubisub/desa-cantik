@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Sheet from "@mui/joy/Sheet";
+import IsOnline from "@/app/components/IsOnline";
 
 function Root(props) {
   return (
@@ -72,6 +73,7 @@ function Main(props) {
   return (
     <Box
       sx={{
+        minHeight: "100vh",
         px: {
           xs: 2,
           md: 6,
@@ -94,6 +96,7 @@ function Main(props) {
       }}
     >
       {props.children}
+      <IsOnline />
     </Box>
   );
 }
