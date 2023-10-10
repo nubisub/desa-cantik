@@ -91,7 +91,7 @@ export default function TablePKH({ dataPKH, mutateData, isLoading }) {
     let pages = [];
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <Button
+        <IconButton
           onClick={() => setPage(i)}
           sx={{
             display: {
@@ -106,7 +106,7 @@ export default function TablePKH({ dataPKH, mutateData, isLoading }) {
           color="neutral"
         >
           {i}
-        </Button>
+        </IconButton>
       );
     }
     return pages;
