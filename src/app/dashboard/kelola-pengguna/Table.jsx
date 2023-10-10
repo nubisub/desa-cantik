@@ -491,11 +491,18 @@ export default function TablePKH({
                   value={change}
                   onChange={handleChange}
                 >
-                  {listRole?.map((item) => (
-                    <Option key={item.role} value={item.role}>
-                      {item.role}
-                    </Option>
-                  ))}
+                  <Option key="Admin" value="Admin">
+                    Admin
+                  </Option>
+                  <Option key="Editor" value="Editor">
+                    Editor
+                  </Option>
+                  <Option key="Viewer" value="Viewer">
+                    Viewer
+                  </Option>
+                  <Option key="Guest" value="Guest">
+                    Guest
+                  </Option>
                 </Select>
               </Box>
             </FormControl>
