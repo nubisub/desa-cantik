@@ -4,8 +4,11 @@ import Button from "@mui/joy/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { Toaster } from "sonner";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function Add() {
+  const { data, status } = useSession();
+
   // const [drawerOpen, setDrawerOpen] = React.useState(false); const [NIK, setNIK] = React.useState(""); const
   // [KepalaKeluarga, setKepalaKeluarga] = React.useState(""); const [Alamat, setAlamat] = React.useState(""); const
   // [loading, setLoading] = React.useState(false);
@@ -52,6 +55,9 @@ export default function Add() {
   //   setLoading(false);
   // };
   // const SPID = process.env.GOOGLE_SPREADSHEET_SHEET2;
+  if (data.user.role === "Viewer") {
+    return null;
+  }
 
   return (
     <>

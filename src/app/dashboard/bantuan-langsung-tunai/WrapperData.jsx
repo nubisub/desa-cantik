@@ -48,6 +48,7 @@ export const GetData = () => {
 
 export default function WrapperData() {
   const { dataBantuan, isLoadingPKH, mutateData } = GetData();
+  const [toLastPage, setToLastPage] = React.useState(false);
 
   const exportFile = useCallback(() => {
     const wscols = [{ wch: 5 }, { wch: 20 }, { wch: 30 }, { wch: 35 }];
@@ -103,7 +104,12 @@ export default function WrapperData() {
               Download Data
             </Button>
 
-            <Add />
+            <Add
+              setToLastPage={setToLastPage}
+              toLastPage={toLastPage}
+              mutateData={mutateData}
+              dataPKH={dataBantuan}
+            />
           </Box>
         )}
       </Box>
@@ -111,6 +117,8 @@ export default function WrapperData() {
         dataPKH={dataBantuan}
         mutateData={mutateData}
         isLoading={isLoadingPKH}
+        setToLastPage={setToLastPage}
+        toLastPage={toLastPage}
       />
     </>
   );

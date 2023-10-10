@@ -37,7 +37,12 @@ import SkeletonTable from "./SkeletonTable";
 //   },
 // ];
 
-export default function TablePKH({ dataPKH, mutateData, isLoading }) {
+export default function TablePKH({
+  dataPKH,
+  mutateData,
+  isLoading,
+  toLastPage,
+}) {
   const { data, status } = useSession();
   const [downloadData, setDownloadData] = useState(dataPKH);
   const [rowData, setRowData] = useState(dataPKH);
@@ -50,6 +55,10 @@ export default function TablePKH({ dataPKH, mutateData, isLoading }) {
   const [open, setOpen] = useState(false);
   const [hapus, setHapus] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setPage(Math.ceil(rowSum / 10));
+  }, [toLastPage]);
 
   const handleHapusButton = (e) => {
     setHapus(e);

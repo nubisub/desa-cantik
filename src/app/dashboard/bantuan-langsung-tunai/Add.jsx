@@ -14,7 +14,12 @@ import { ModalClose } from "@mui/joy";
 import { toast, Toaster } from "sonner";
 import { useSession } from "next-auth/react";
 
-export default function Add() {
+export default function Add({
+  setToLastPage,
+  toLastPage,
+  mutateData,
+  dataPKH,
+}) {
   const { data, status } = useSession();
 
   const [open, setOpen] = React.useState(false);
@@ -56,13 +61,23 @@ export default function Add() {
     );
     if (res.ok) {
       toast.success("Data Berhasil Ditambahkan");
+      // add to dataPKH
+      const newData = {
+        NIK,
+        KepalaKeluarga,
+        Alamat,
+        rowIndex: dataPKH.length + 1,
+      };
+      mutateData([...dataPKH, newData], false);
 
       setOpen(false);
       setNIK("");
       setKepalaKeluarga("");
       setAlamat("");
+      setToLastPage(!toLastPage);
+      ``;
       // refresh page window
-      window.location.reload();
+      // window.location.reload();
     }
     setOpen(false);
     setLoading(false);
