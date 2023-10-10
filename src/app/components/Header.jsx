@@ -176,6 +176,13 @@ export default function Header(props) {
             ) {
               return null;
             }
+            if (
+              item.label === "Data Gabungan" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
             return (
               <ListItem key={index}>
                 <Link

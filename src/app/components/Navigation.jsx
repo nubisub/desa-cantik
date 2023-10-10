@@ -63,6 +63,13 @@ export default function Navigation() {
             ) {
               return null;
             }
+            if (
+              item.label === "Data Gabungan" &&
+              (data?.user?.role === "Guest" ||
+                typeof data?.user?.role === "undefined")
+            ) {
+              return null;
+            }
             return (
               <ListItem
                 sx={{

@@ -32,7 +32,8 @@ export default withAuth(
     if (
       (role === "Guest" || typeof role === "undefined") &&
       (req.nextUrl.pathname === "/dashboard/penyandang-disabilitas" ||
-        req.nextUrl.pathname === "/dashboard/bantuan-langsung-tunai")
+        req.nextUrl.pathname === "/dashboard/bantuan-langsung-tunai" ||
+        req.nextUrl.pathname === "/dashboard/data-gabungan")
     ) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
@@ -40,7 +41,8 @@ export default withAuth(
     if (
       (role === "Guest" || typeof role === "undefined") &&
       (req.nextUrl.pathname === "/api/bantuan/data" ||
-        req.nextUrl.pathname === "/api/disabilitas/data")
+        req.nextUrl.pathname === "/api/disabilitas/data" ||
+        req.nextUrl.pathname === "/api/gabungan/data")
     ) {
       return NextResponse.json(
         {
@@ -71,5 +73,6 @@ export const config = {
     "/api/disabilitas/data",
     "/api/pengguna/data",
     "/api/pengguna/roles",
+    "/api/gabungan/data",
   ],
 };

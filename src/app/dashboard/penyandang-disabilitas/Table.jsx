@@ -102,10 +102,10 @@ export default function TablePKH({
     const filteredData = dataDisabilitas?.filter((item) => {
       if (filterKemiskinan === "") {
         return (
-          (item.Nama.toLowerCase().includes(search.toLowerCase()) ||
-            item.NIK.toLowerCase().includes(search.toLowerCase()) ||
-            item.NOKK.toLowerCase().includes(search.toLowerCase()) ||
-            item.Alamat.toLowerCase().includes(search.toLowerCase())) &&
+          (item.Nama?.toLowerCase().includes(search.toLowerCase()) ||
+            item.NIK?.toLowerCase().includes(search.toLowerCase()) ||
+            item.NOKK?.toLowerCase().includes(search.toLowerCase()) ||
+            item.Alamat?.toLowerCase().includes(search.toLowerCase())) &&
           item.Kedisabilitasan?.includes(filterKedisabilitasan)
         );
       }
@@ -126,7 +126,7 @@ export default function TablePKH({
     let pages = [];
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <Button
+        <IconButton
           onClick={() => setPage(i)}
           sx={{
             display: {
@@ -141,7 +141,7 @@ export default function TablePKH({
           color="neutral"
         >
           {i}
-        </Button>
+        </IconButton>
       );
     }
     return pages;

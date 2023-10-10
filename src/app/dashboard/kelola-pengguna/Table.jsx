@@ -148,7 +148,7 @@ export default function TablePKH({
     let pages = [];
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <Button
+        <IconButton
           onClick={() => setPage(i)}
           sx={{
             borderRadius: "50%",
@@ -163,7 +163,7 @@ export default function TablePKH({
           color="neutral"
         >
           {i}
-        </Button>
+        </IconButton>
       );
     }
     return pages;
@@ -242,7 +242,6 @@ export default function TablePKH({
         className="OrderTableContainer"
         variant="outlined"
         sx={{
-          minHeight: "70vh",
           display: "initial",
           width: "100%",
           borderRadius: "sm",
