@@ -314,9 +314,9 @@ export default function Page1() {
             className={dm_sans.className}
           >
             Tempat di mana data dan perubahan bertemu, fokus pada upaya
-            mengatasi kemiskinan dan pelaksanaan Program Keluarga Harapan (PKH).
-            Memperhatikan penyandang disabilitas dan dampak program inklusif
-            terhadap masyarakat yang membutuhkan.
+            mengatasi kemiskinan dan pelaksanaan Bantuan Langsung Tunai Dana
+            Desa. Memperhatikan penyandang disabilitas dan dampak program
+            inklusif terhadap masyarakat yang membutuhkan.
           </Typography>
         </motion.div>
       </Box>
