@@ -10,6 +10,7 @@ export default function Aggregate({ data }) {
       className="OrderTableContainer"
       variant="outlined"
       sx={{
+        mt: 2,
         display: "initial",
         width: "100%",
         borderRadius: "sm",
@@ -80,11 +81,11 @@ export default function Aggregate({ data }) {
                           style={{
                             backgroundColor:
                               "var(--joy-palette-background-level1)",
-                            fontWeight: "600",
+                            fontWeight: "700",
                             fontSize: "1em",
                             padding: "12px 12px",
                           }}
-                          colSpan={3}
+                          colSpan={2}
                         >
                           {item[key]}
                         </td>
@@ -98,7 +99,24 @@ export default function Aggregate({ data }) {
                           <td>{key}</td>
                           <td>{item[key]}</td>
                         </>
-                      ) : null}
+                      ) : (
+                        <td
+                          style={{
+                            backgroundColor:
+                              "var(--joy-palette-background-level1)",
+                            fontWeight: "700",
+                            fontSize: "1em",
+                          }}
+                        >
+                          {
+                            //     sum of all items in the object if  key !== "JenisDisabilitas" string to int
+                            Object.values(item).reduce(
+                              (a, b) => a + (isNaN(b) ? 0 : b),
+                              0
+                            )
+                          }
+                        </td>
+                      )}
                     </tr>
                   )}
                 </>

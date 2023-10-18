@@ -13,62 +13,7 @@ import Box from "@mui/joy/Box";
 
 function ChartCard({ tipeDisabilitas, chartDisabilitas }) {
   return (
-    <Card
-      sx={{
-        height: {
-          xs: 400,
-          sm: 400,
-          xl: 500,
-        },
-        width: "100%",
-        pb: 8,
-      }}
-      variant="outlined"
-      invertedColors
-    >
-      <CardContent
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "100%",
-        }}
-        orientation="horizontal"
-      >
-        <CardContent
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "0.9rem",
-              fontWeight: "600",
-              color: "text.primary",
-            }}
-            variant="h6"
-          >
-            Ragam Penyandang Disabilitas
-          </Typography>
-          <Tooltip
-            title="Jumlah Penyandang Disabilitas Menurut Jenisnya"
-            variant="solid"
-            placement="top"
-          >
-            <InfoOutlinedIcon
-              sx={{
-                fontSize: "1.1rem",
-                cursor: "pointer",
-              }}
-            />
-          </Tooltip>
-        </CardContent>
-        <Chart tipeDisabilitas={tipeDisabilitas} chartData={chartDisabilitas} />
-      </CardContent>
-    </Card>
+    <Chart tipeDisabilitas={tipeDisabilitas} chartData={chartDisabilitas} />
   );
 }
 
@@ -83,33 +28,99 @@ export default function CardWrapper({ tipeDisabilitas, chartDisabilitas }) {
           mt: 2,
         }}
       >
-        <Select defaultValue="Grafik">
-          <Option
-            value="Grafik"
-            onClick={() => {
-              setTipe("Grafik");
+        <Card
+          sx={{
+            height: {
+              xs: tipe === "Grafik" ? 400 : "auto",
+              sm: tipe === "Grafik" ? 400 : "auto",
+              xl: tipe === "Grafik" ? 500 : "auto",
+            },
+            width: "100%",
+            pb: tipe === "Grafik" ? 8 : 2,
+          }}
+          variant="outlined"
+          invertedColors
+        >
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "100%",
             }}
+            orientation="horizontal"
           >
-            Grafik
-          </Option>
-          <Option
-            onClick={() => {
-              setTipe("Tabulasi");
-            }}
-            value="Tabulasi"
-          >
-            Tabulasi
-          </Option>
-        </Select>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 1,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "0.9rem",
+                    fontWeight: "600",
+                    color: "text.primary",
+                  }}
+                  variant="h6"
+                >
+                  Ragam Penyandang Disabilitas
+                </Typography>
+                <Tooltip
+                  title="Jumlah Penyandang Disabilitas Menurut Jenisnya"
+                  variant="solid"
+                  placement="top"
+                >
+                  <InfoOutlinedIcon
+                    sx={{
+                      fontSize: "1.1rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Tooltip>
+              </Box>
+
+              <Select defaultValue="Grafik">
+                <Option
+                  value="Grafik"
+                  onClick={() => {
+                    setTipe("Grafik");
+                  }}
+                >
+                  Grafik
+                </Option>
+                <Option
+                  onClick={() => {
+                    setTipe("Tabulasi");
+                  }}
+                  value="Tabulasi"
+                >
+                  Tabulasi
+                </Option>
+              </Select>
+            </CardContent>
+            {tipe === "Grafik" ? (
+              <ChartCard
+                tipeDisabilitas={tipeDisabilitas}
+                chartDisabilitas={chartDisabilitas}
+              />
+            ) : (
+              <Aggregate data={chartDisabilitas} />
+            )}
+          </CardContent>
+        </Card>
       </Box>
-      {tipe === "Grafik" ? (
-        <ChartCard
-          tipeDisabilitas={tipeDisabilitas}
-          chartDisabilitas={chartDisabilitas}
-        />
-      ) : (
-        <Aggregate data={chartDisabilitas} />
-      )}
     </>
   );
 }
