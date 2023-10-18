@@ -1,11 +1,7 @@
 import Breadcrumbs from "@/app/components/BreadCrumbs";
 import Box from "@mui/joy/Box";
 import CardDashboard from "@/app/components/Card";
-import { Card, CardContent } from "@mui/joy";
-import Typography from "@mui/joy/Typography";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import Tooltip from "@mui/joy/Tooltip";
-import Chart from "@/app/components/Chart";
+import CardWrapper from "@/app/components/CardWrapper";
 
 export const revalidate = 1800;
 async function getDataBLT() {
@@ -66,71 +62,11 @@ export default async function Home() {
           Disabilitas={countDisabilitas?.count}
         />
       </Box>
-      <Box
-        sx={{
-          my: 2,
-        }}
-      >
-        <Card
-          sx={{
-            height: {
-              xs: 400,
-              sm: 400,
-              xl: 500,
-            },
-            width: "100%",
-            pb: 8,
-          }}
-          variant="outlined"
-          invertedColors
-        >
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: "100%",
-            }}
-            orientation="horizontal"
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
-                  color: "text.primary",
-                }}
-                variant="h6"
-              >
-                Ragam Penyandang Disabilitas
-              </Typography>
-              <Tooltip
-                title="Jumlah Penyandang Disabilitas Menurut Jenisnya"
-                variant="solid"
-                placement="top"
-              >
-                <InfoOutlinedIcon
-                  sx={{
-                    fontSize: "1.1rem",
-                    cursor: "pointer",
-                  }}
-                />
-              </Tooltip>
-            </CardContent>
-            <Chart
-              tipeDisabilitas={tipeDisabilitas}
-              chartData={chartDisabilitas}
-            />
-          </CardContent>
-        </Card>
-      </Box>
+
+      <CardWrapper
+        tipeDisabilitas={tipeDisabilitas}
+        chartDisabilitas={chartDisabilitas}
+      />
     </>
   );
 }
