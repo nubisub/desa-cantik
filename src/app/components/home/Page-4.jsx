@@ -60,10 +60,12 @@ export default function Page4() {
         spacing={6}
       >
         <motion.div
-        // initial={{ opacity: 0, scale: 0.9 }}
-        // whileInView={{ opacity: 1, scale: 1 }}
-        // viewport={{ once: true }}
-        // transition={{ duration: 0.6 }}
+          id={"tujuan-desa-cantik"}
+
+          // initial={{ opacity: 0, scale: 0.9 }}
+          // whileInView={{ opacity: 1, scale: 1 }}
+          // viewport={{ once: true }}
+          // transition={{ duration: 0.6 }}
         >
           <Box>
             <Typography

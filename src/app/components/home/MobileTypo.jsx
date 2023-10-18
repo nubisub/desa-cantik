@@ -26,7 +26,7 @@ const MobileTypo = () => {
           Luas di Komunitas Pedesaan.
         </h2>
         <Box>
-          <Link href={"#kemiskinan"}>
+          <Link href={"#pencanangan-desa-cantik"}>
             <Button
               className={inter.className}
               sx={{

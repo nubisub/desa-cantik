@@ -10,6 +10,7 @@ export default function Footer() {
 
   return (
     <Box
+      id={"footer-desa-cantik"}
       sx={{
         py: 4,
         px: {
