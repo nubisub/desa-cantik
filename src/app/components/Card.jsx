@@ -4,11 +4,11 @@ import Typography from "@mui/joy/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Tooltip from "@mui/joy/Tooltip";
 import AccessibleIcon from "@mui/icons-material/Accessible";
-import IconButton from "@mui/joy/IconButton";
 import Box from "@mui/joy/Box";
 import { lato } from "@/app/utils/fonts";
 import { Paid } from "@mui/icons-material";
 import useSWR from "swr";
+import Link from "next/link";
 
 const noPointer = { cursor: "default" };
 const fetcher = (url) => fetch(url).then((r) => r.json());
@@ -44,181 +44,208 @@ export default function CardDashboard({ BLT, Disabilitas }) {
   const { dataDisabilitas, isLoadingDisabilitas } = GetJumlahDisabilitas();
   return (
     <>
-      <Card
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-        invertedColors
+      <Link
+        style={{ textDecoration: "none" }}
+        href="/dashboard/bantuan-langsung-tunai"
       >
-        <CardContent
+        <Card
           sx={{
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            height: "100%",
+            flexDirection: "column",
+            backgroundColor: "background.body",
+            "&:hover": {
+              border: "1px solid var(--joy-palette-primary-500, #0B6BCB)",
+              backgroundColor: "primary.outlinedActiveBg",
+            },
           }}
-          orientation="horizontal"
+          invertedColors={false}
         >
           <CardContent
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              height: "100%",
             }}
+            orientation="horizontal"
           >
-            <Box
+            <CardContent
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 1,
+                flexDirection: "column",
+                alignItems: "flex-start",
               }}
             >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "0.9rem",
+                    fontWeight: "600",
+                    color: "text.primary",
+                  }}
+                  variant="h6"
+                >
+                  Penerima BLT
+                </Typography>
+                <Tooltip
+                  title="Jumlah Penerima Bantuan Langsung Tunai Dana Desa"
+                  variant="solid"
+                  placement="top"
+                >
+                  <InfoOutlinedIcon
+                    sx={{
+                      fontSize: "1.1rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Tooltip>
+              </Box>
               <Typography
                 sx={{
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
+                  fontSize: "2rem",
+                  fontWeight: "500",
                   color: "text.primary",
                 }}
                 variant="h6"
               >
-                Penerima BLT
+                {isLoadingBantuan ? (
+                  <span className={lato.className}>{BLT}</span>
+                ) : (
+                  <span className={lato.className}>{dataBantuan?.count}</span>
+                )}
               </Typography>
-              <Tooltip
-                title="Jumlah Penerima Bantuan Langsung Tunai Dana Desa"
-                variant="solid"
-                placement="top"
-              >
-                <InfoOutlinedIcon
+            </CardContent>
+            {/*<Divider orientation="horizontal" />*/}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                p: 0.5,
+                alignItems: "flex-start",
+              }}
+            >
+              <Box>
+                <Paid
+                  color="primary"
+                  variant="soft"
                   sx={{
-                    fontSize: "1.1rem",
-                    cursor: "pointer",
+                    fontSize: "1.5rem",
                   }}
                 />
-              </Tooltip>
+              </Box>
             </Box>
-            <Typography
-              sx={{
-                fontSize: "2rem",
-                fontWeight: "500",
-                color: "text.primary",
-              }}
-              variant="h6"
-            >
-              {isLoadingBantuan ? (
-                <span className={lato.className}>{BLT}</span>
-              ) : (
-                <span className={lato.className}>{dataBantuan?.count}</span>
-              )}
-            </Typography>
           </CardContent>
-          {/*<Divider orientation="horizontal" />*/}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              p: 0.5,
-              alignItems: "flex-start",
-            }}
-          >
-            <IconButton style={noPointer} color="primary" variant="soft">
-              <Paid
-                sx={{
-                  fontSize: "1.5rem",
-                }}
-              />
-            </IconButton>
-          </Box>
-        </CardContent>
-      </Card>
-      <Card
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-        invertedColors
+        </Card>
+      </Link>
+
+      <Link
+        style={{ textDecoration: "none" }}
+        href={"/dashboard/penyandang-disabilitas"}
       >
-        <CardContent
+        <Card
           sx={{
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            height: "100%",
+            flexDirection: "column",
+            backgroundColor: "background.body",
+            "&:hover": {
+              border: "1px solid var(--joy-palette-primary-500, #0B6BCB)",
+              backgroundColor: "primary.outlinedActiveBg",
+            },
           }}
-          orientation="horizontal"
+          invertedColors={false}
         >
           <CardContent
             sx={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              height: "100%",
             }}
+            orientation="horizontal"
           >
-            <Box
+            <CardContent
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 1,
+                flexDirection: "column",
+                alignItems: "flex-start",
               }}
             >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "0.9rem",
+                    fontWeight: "600",
+                    color: "text.primary",
+                  }}
+                  variant="h6"
+                >
+                  Penyandang Disabilitas
+                </Typography>
+                <Tooltip
+                  title="Jumlah Penyandang Disabilitas"
+                  variant="solid"
+                  placement="top"
+                >
+                  <InfoOutlinedIcon
+                    sx={{
+                      fontSize: "1.1rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Tooltip>
+              </Box>
               <Typography
                 sx={{
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
+                  fontSize: "2rem",
+                  fontWeight: "500",
                   color: "text.primary",
                 }}
                 variant="h6"
               >
-                Penyandang Disabilitas
+                {isLoadingDisabilitas ? (
+                  <span className={lato.className}>{Disabilitas}</span>
+                ) : (
+                  <span className={lato.className}>
+                    {dataDisabilitas?.count}
+                  </span>
+                )}
               </Typography>
-              <Tooltip
-                title="Jumlah Penyandang Disabilitas"
-                variant="solid"
-                placement="top"
-              >
-                <InfoOutlinedIcon
+            </CardContent>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                p: 0.5,
+                alignItems: "flex-start",
+              }}
+            >
+              <Box>
+                <AccessibleIcon
+                  color="warning"
+                  variant="soft"
                   sx={{
-                    fontSize: "1.1rem",
-                    cursor: "pointer",
+                    fontSize: "1.5rem",
                   }}
                 />
-              </Tooltip>
+              </Box>
             </Box>
-            <Typography
-              sx={{
-                fontSize: "2rem",
-                fontWeight: "500",
-                color: "text.primary",
-              }}
-              variant="h6"
-            >
-              {isLoadingDisabilitas ? (
-                <span className={lato.className}>{Disabilitas}</span>
-              ) : (
-                <span className={lato.className}>{dataDisabilitas?.count}</span>
-              )}
-            </Typography>
           </CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              p: 0.5,
-              alignItems: "flex-start",
-            }}
-          >
-            <IconButton style={noPointer} color="warning" variant="soft">
-              <AccessibleIcon
-                sx={{
-                  fontSize: "1.5rem",
-                }}
-              />
-            </IconButton>
-          </Box>
-        </CardContent>
-      </Card>
+        </Card>
+      </Link>
     </>
   );
 }
