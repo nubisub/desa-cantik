@@ -6,6 +6,7 @@ import Page4 from "@/app/components/home/Page-4";
 import Footer from "@/app/components/home/Footer";
 import BackToTop from "@/app/components/home/BackToTop";
 import ProgressBar from "@/app/components/home/ProgressBar";
+import Page5 from "@/app/components/home/Page-5";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Page2 />
       <Page3 />
       <Page4 />
+      <Page5 />
       <Footer />
       <BackToTop />
     </>
