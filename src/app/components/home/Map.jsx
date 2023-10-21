@@ -2,10 +2,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const icon = dynamic(() => import("leaflet").then((module) => module.icon), {
-  ssr: false,
-});
-
 // Dynamic import of react-leaflet components
 const MapContainer = dynamic(
   () => import("react-leaflet").then((module) => module.MapContainer),
@@ -202,10 +198,6 @@ const polygon = [
   [-7.7082456, 110.2905488],
 ];
 
-const ICON = icon({
-  iconUrl: "/marker.png",
-  iconSize: [32, 32],
-});
 const purpleOptions = { color: "purple" };
 const position = [-7.7083, 110.3077];
 
@@ -216,7 +208,7 @@ export default function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker icon={ICON} position={position}>
+      <Marker position={position}>
         <Popup>Kantor Kalurahan Margoagung</Popup>
       </Marker>
       <Polygon pathOptions={purpleOptions} positions={polygon} />
