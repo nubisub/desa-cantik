@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-HEPZJ11L8P');
         `}
       </Script>
-      <body style={{ margin: 0 }}>
+      <body id={"beranda-desa-cantik"} style={{ margin: 0 }}>
         <NextAuthProvider>
           <CssBaseline />
           {children}

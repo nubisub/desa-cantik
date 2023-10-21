@@ -7,9 +7,10 @@ import CardContent from "@mui/joy/CardContent";
 import TentangData from "@/app/components/home/TentangData";
 import Map from "@/app/components/home/Map";
 
-export default function Page5() {
+export default function Page5(props) {
   return (
     <Box
+      id={"tentang-desa-cantik"}
       sx={{
         borderTop: "1px solid #e0e0e0",
         bgcolor: "#ffffff",
