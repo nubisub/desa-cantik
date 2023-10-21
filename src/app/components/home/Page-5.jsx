@@ -1,35 +1,25 @@
-"use client";
 import { Stack } from "@mui/joy";
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
-import { dm_sans } from "@/app/utils/fonts";
 import * as React from "react";
-import { motion, useScroll } from "framer-motion";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import CardOverflow from "@mui/joy/CardOverflow";
-import TujuanData from "@/app/components/home/TujuanData";
+import TentangData from "@/app/components/home/TentangData";
+import Map from "@/app/components/home/Map";
 
-export default function Page4() {
-  const { scrollYProgress } = useScroll();
-
+export default function Page5() {
   return (
     <Box
       sx={{
-        bgcolor: "#EFEEED",
+        borderTop: "1px solid #e0e0e0",
+        bgcolor: "#ffffff",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-
-        py: {
-          xs: 4,
-          sm: 6,
-          md: 8,
-          lg: 12,
-        },
       }}
     >
+      <Map />
       {/*<NextImage*/}
       {/*  src="/disabilitas.jpg"*/}
       {/*  width={0}*/}
@@ -46,8 +36,6 @@ export default function Page4() {
       {/*/>*/}
       <Stack
         sx={{
-          my: 2,
-
           width: {
             xs: "90%",
             sm: "90%",
@@ -56,39 +44,22 @@ export default function Page4() {
           },
         }}
         direction="column"
-        f
-        spacing={6}
       >
-        <motion.div
-          id={"tujuan-desa-cantik"}
+        <div
+          id={"hubungi-desa-cantik"}
 
           // initial={{ opacity: 0, scale: 0.9 }}
           // whileInView={{ opacity: 1, scale: 1 }}
           // viewport={{ once: true }}
           // transition={{ duration: 0.6 }}
         >
-          <Box>
-            <Typography
-              component="h1"
-              sx={{
-                fontWeight: "normal",
-                color: "text.primary",
-                lineHeight: "100%",
-                letterSpacing: "-0.02em",
-                fontSize: "2rem",
-                mb: 4,
-                "@media (min-width:600px)": {
-                  fontSize: "3rem",
-                },
-              }}
-              className={dm_sans.className}
-            >
-              Tujuan
-            </Typography>
-          </Box>
           <Box
             sx={{
-              mb: 4,
+              my: {
+                xs: 4,
+                sm: 6,
+                md: 12,
+              },
               display: "flex",
               flexWrap: "wrap",
               gap: "1rem",
@@ -100,49 +71,73 @@ export default function Page4() {
               },
             }}
           >
-            {TujuanData.map((item, index) => (
+            {TentangData.map((item, index) => (
               <Card
                 key={index}
-                orientation="horizontal"
-                variant="outlined"
+                orientation="vertical"
+                variant="plain"
                 sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
                   width: {
                     xs: "100%",
-                    sm: "48%",
-                    md: "48%",
+                    sm: "30%",
+                    md: "30%",
                   },
                 }}
               >
-                <CardOverflow
-                  variant="soft"
-                  color={item.color}
+                {/*<CardOverflow*/}
+                {/*  variant="soft"*/}
+                {/*  color={item.color}*/}
+                {/*  sx={{*/}
+                {/*    width: "50px",*/}
+                {/*    px: 0.2,*/}
+                {/*    display: "flex",*/}
+                {/*    alignItems: "center",*/}
+                {/*    justifyContent: "center",*/}
+                {/*    textAlign: "center",*/}
+                {/*    fontWeight: "xl",*/}
+                {/*    letterSpacing: "1px",*/}
+                {/*    textTransform: "uppercase",*/}
+                {/*    borderColor: "divider",*/}
+                {/*  }}*/}
+                {/*>*/}
+                {/*  {item.icon}*/}
+                {/*</CardOverflow>*/}
+
+                <Box
                   sx={{
-                    width: "50px",
-                    px: 0.2,
+                    backgroundColor: "rgba(0,0,0,0.08)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    textAlign: "center",
-                    fontWeight: "xl",
-                    letterSpacing: "1px",
-                    textTransform: "uppercase",
-                    borderColor: "divider",
+                    p: 1,
+                    borderRadius: "50%",
                   }}
                 >
                   {item.icon}
-                </CardOverflow>
+                </Box>
+
                 <CardContent
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                   }}
                 >
-                  <Typography>{item.tujuan}</Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  {item.description}
                 </CardContent>
               </Card>
             ))}
           </Box>
-        </motion.div>
+        </div>
       </Stack>
     </Box>
   );

@@ -79,6 +79,12 @@ export default function RootLayout({ children }) {
           property="twitter:image"
           content="https://desa-cantik.vercel.app/og.png"
         />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossOrigin=""
+        />
       </head>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-HEPZJ11L8P" />
       <Script id="google-analytics">

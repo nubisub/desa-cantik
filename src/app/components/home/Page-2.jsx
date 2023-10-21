@@ -42,7 +42,7 @@ export default function Page2() {
           spacing={6}
         >
           <motion.div
-            id={"kemiskinan"}
+            id={"pencanangan-desa-cantik"}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}
