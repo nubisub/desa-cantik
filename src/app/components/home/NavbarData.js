@@ -12,7 +12,7 @@ const NavbarData = [
     path: "/#tujuan-desa-cantik",
   },
   {
-    title: "Tentang",
+    title: "Hubungi Kami",
     path: "/#tentang-desa-cantik",
   },
 ];

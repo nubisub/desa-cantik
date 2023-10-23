@@ -8,15 +8,9 @@ import Page4 from "@/app/components/home/Page-4";
 import Page5 from "@/app/components/home/Page-5";
 import Footer from "@/app/components/home/Footer";
 import * as React from "react";
-import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const [idPath, setIdPath] = React.useState("");
-  const router = useRouter();
-
-  const setPath = (path) => {
-    router.replace(`/#${path}`, undefined, { scroll: false });
-  };
 
   return (
     <>

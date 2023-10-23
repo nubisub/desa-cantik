@@ -8,8 +8,20 @@ import Button from "@mui/joy/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import Typography from "@mui/joy/Typography";
 import NavbarData from "@/app/components/home/NavbarData";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 
 export default function Navbar(props) {
+  const { scrollYProgress } = useScroll();
+  const [isSticky, setIsSticky] = React.useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (latest > 0.22) {
+      setIsSticky(true);
+      console.log("true");
+    } else {
+      setIsSticky(false);
+      console.log("false");
+    }
+  });
   return (
     <Box
       component="header"
@@ -34,6 +46,12 @@ export default function Navbar(props) {
           top: 0,
           width: "100%",
           zIndex: 1100,
+          transition: "all 0.3s ease-in-out",
+          ...(isSticky && {
+            backgroundColor: "#ffffff",
+            borderBottom: "1px solid #E0E0E0",
+            boxShadow: "0px 1px 1px rgba(0, 0, 0, 0.1)",
+          }),
         },
         ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
       ]}

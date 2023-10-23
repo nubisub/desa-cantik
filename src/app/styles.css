@@ -8,6 +8,7 @@
   border-bottom-right-radius: 50px;
   border-top-right-radius: 50px;
   transform-origin: 0%;
+    z-index: 999999;
 }
 
 @-webkit-keyframes colorCycle {

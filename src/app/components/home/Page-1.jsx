@@ -7,7 +7,7 @@ import * as React from "react";
 import NextImage from "next/image";
 import MobileTypo from "@/app/components/home/MobileTypo";
 
-export default function Page1() {
+export default function Page1(props) {
   return (
     <Box
       id={"home-hero"}
