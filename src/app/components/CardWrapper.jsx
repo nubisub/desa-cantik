@@ -10,10 +10,13 @@ import Card from "@mui/joy/Card";
 import { useState } from "react";
 import Aggregate from "@/app/components/Aggregate";
 import Box from "@mui/joy/Box";
+import { useColorScheme } from "@mui/joy/styles";
 
 function ChartCard({ tipeDisabilitas, chartDisabilitas }) {
+  const { mode } = useColorScheme();
   return (
     <Chart
+      modeColor={mode}
       tipeDisabilitas={tipeDisabilitas}
       chartDisabilitas={chartDisabilitas}
     />
