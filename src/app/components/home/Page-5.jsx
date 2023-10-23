@@ -7,6 +7,8 @@ import CardContent from "@mui/joy/CardContent";
 import TentangData from "@/app/components/home/TentangData";
 import Map from "@/app/components/home/Map";
 import { dm_sans } from "@/app/utils/fonts";
+import IconButton from "@mui/joy/IconButton";
+import Link from "next/link";
 
 export default function Page5(props) {
   return (
@@ -109,37 +111,20 @@ export default function Page5(props) {
                   },
                 }}
               >
-                {/*<CardOverflow*/}
-                {/*  variant="soft"*/}
-                {/*  color={item.color}*/}
-                {/*  sx={{*/}
-                {/*    width: "50px",*/}
-                {/*    px: 0.2,*/}
-                {/*    display: "flex",*/}
-                {/*    alignItems: "center",*/}
-                {/*    justifyContent: "center",*/}
-                {/*    textAlign: "center",*/}
-                {/*    fontWeight: "xl",*/}
-                {/*    letterSpacing: "1px",*/}
-                {/*    textTransform: "uppercase",*/}
-                {/*    borderColor: "divider",*/}
-                {/*  }}*/}
-                {/*>*/}
-                {/*  {item.icon}*/}
-                {/*</CardOverflow>*/}
-
-                <Box
-                  sx={{
-                    backgroundColor: "rgba(0,0,0,0.08)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    p: 1,
-                    borderRadius: "50%",
-                  }}
-                >
-                  {item.icon}
-                </Box>
+                <Link target={"_blank"} href={item.href}>
+                  <IconButton
+                    variant="soft"
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      p: 1,
+                      borderRadius: "50%",
+                    }}
+                  >
+                    {item.icon}
+                  </IconButton>
+                </Link>
 
                 <CardContent
                   sx={{

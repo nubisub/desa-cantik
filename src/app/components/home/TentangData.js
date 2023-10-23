@@ -4,10 +4,12 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import Typography from "@mui/joy/Typography";
 import Link from "next/link";
+import { pink } from "@mui/material/colors";
 
 const TentangData = [
   {
-    icon: <PlaceIcon />,
+    icon: <PlaceIcon color="primary" />,
+    href: "https://maps.app.goo.gl/1e7kM2GPa1GEZiH26",
     color: "success",
     title: "Alamat",
     description: (
@@ -18,7 +20,8 @@ const TentangData = [
     ),
   },
   {
-    icon: <PhoneIcon />,
+    icon: <PhoneIcon color="success" />,
+    href: "tel:0274868405",
     color: "success",
     title: "Telepon/HP",
     description: (
@@ -36,7 +39,8 @@ const TentangData = [
     ),
   },
   {
-    icon: <EmailIcon />,
+    icon: <EmailIcon sx={{ color: pink[500] }} />,
+    href: "mailto:margoagungjogja@gmail.com",
     color: "success",
     title: "Email",
     description: (

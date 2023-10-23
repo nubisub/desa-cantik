@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { useColorScheme } from "@mui/joy/styles";
 import Box from "@mui/joy/Box";
 import { ResponsiveBar } from "@nivo/bar";
 import useSWR from "swr";
+import { useColorScheme } from "@mui/joy/styles";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -33,8 +33,12 @@ const GetTipeDisabilitas = () => {
   };
 };
 
-export default function Chart({ chartData, tipeDisabilitas }) {
-  const { mode, systemMode } = useColorScheme();
+export default function Chart({
+  chartDisabilitas,
+  tipeDisabilitas,
+  modeColor,
+}) {
+  const { mode, systemMode } = modeColor ? modeColor : useColorScheme();
   const { tipeDisabilitasSWR, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
   const { chartDataSWR, isLoadingChartData } = GetChartData();
   // get window width
@@ -43,7 +47,7 @@ export default function Chart({ chartData, tipeDisabilitas }) {
     setWindowWidth(window.innerWidth);
   }, []);
 
-  const data = isLoadingChartData ? chartData : chartDataSWR;
+  const data = isLoadingChartData ? chartDisabilitas : chartDataSWR;
   const dataTipeDisabilitas = isLoadingTipeDisabilitas
     ? tipeDisabilitas
     : tipeDisabilitasSWR;
