@@ -3,7 +3,6 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import { ResponsiveBar } from "@nivo/bar";
 import useSWR from "swr";
-import { useColorScheme } from "@mui/joy/styles";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -38,7 +37,7 @@ export default function Chart({
   tipeDisabilitas,
   modeColor,
 }) {
-  const { mode, systemMode } = modeColor ? modeColor : useColorScheme();
+  const mode = modeColor;
   const { tipeDisabilitasSWR, isLoadingTipeDisabilitas } = GetTipeDisabilitas();
   const { chartDataSWR, isLoadingChartData } = GetChartData();
   // get window width
