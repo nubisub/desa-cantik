@@ -6,10 +6,12 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import TentangData from "@/app/components/home/TentangData";
 import Map from "@/app/components/home/Map";
+import { dm_sans } from "@/app/utils/fonts";
 
-export default function Page5() {
+export default function Page5(props) {
   return (
     <Box
+      id={"tentang-desa-cantik"}
       sx={{
         borderTop: "1px solid #e0e0e0",
         bgcolor: "#ffffff",
@@ -45,21 +47,41 @@ export default function Page5() {
         }}
         direction="column"
       >
-        <div
+        <Box
           id={"hubungi-desa-cantik"}
-
+          sx={{
+            my: {
+              xs: 4,
+              sm: 6,
+              md: 12,
+            },
+          }}
           // initial={{ opacity: 0, scale: 0.9 }}
           // whileInView={{ opacity: 1, scale: 1 }}
           // viewport={{ once: true }}
           // transition={{ duration: 0.6 }}
         >
+          <Box>
+            <Typography
+              component="h1"
+              sx={{
+                fontWeight: "normal",
+                color: "text.primary",
+                lineHeight: "100%",
+                letterSpacing: "-0.02em",
+                fontSize: "2rem",
+                mb: 4,
+                "@media (min-width:600px)": {
+                  fontSize: "3rem",
+                },
+              }}
+              className={dm_sans.className}
+            >
+              Hubungi Kami
+            </Typography>
+          </Box>
           <Box
             sx={{
-              my: {
-                xs: 4,
-                sm: 6,
-                md: 12,
-              },
               display: "flex",
               flexWrap: "wrap",
               gap: "1rem",
@@ -137,7 +159,7 @@ export default function Page5() {
               </Card>
             ))}
           </Box>
-        </div>
+        </Box>
       </Stack>
     </Box>
   );

@@ -1,11 +1,10 @@
 "use client";
 import * as React from "react";
-import { useRef } from "react";
 import Box from "@mui/joy/Box";
 import { dm_sans } from "@/app/utils/fonts";
 import Typography from "@mui/joy/Typography";
 import { Stack } from "@mui/joy";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -14,18 +13,11 @@ import Divider from "@mui/joy/Divider";
 import NextImage from "next/image";
 import CardData from "@/app/components/home/CardData";
 
-export default function Page2() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end end"],
-  });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const scaleY = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-
+export default function Page2(props) {
   return (
     <>
       <Box
+        id={"latar-belakang-desa-cantik"}
         sx={{
           minHeight: "100vh",
           display: "flex",
@@ -47,7 +39,6 @@ export default function Page2() {
           spacing={6}
         >
           <motion.div
-            id={"latar-belakang-desa-cantik"}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             viewport={{ once: true }}

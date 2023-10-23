@@ -4,17 +4,16 @@ import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
 import { dm_sans } from "@/app/utils/fonts";
 import * as React from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import TujuanData from "@/app/components/home/TujuanData";
 
-export default function Page4() {
-  const { scrollYProgress } = useScroll();
-
+export default function Page4(props) {
   return (
     <Box
+      id={"tujuan-desa-cantik"}
       sx={{
         bgcolor: "#EFEEED",
         display: "flex",
