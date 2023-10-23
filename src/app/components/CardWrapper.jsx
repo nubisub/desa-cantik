@@ -13,7 +13,10 @@ import Box from "@mui/joy/Box";
 
 function ChartCard({ tipeDisabilitas, chartDisabilitas }) {
   return (
-    <Chart tipeDisabilitas={tipeDisabilitas} chartData={chartDisabilitas} />
+    <Chart
+      tipeDisabilitas={tipeDisabilitas}
+      chartDisabilitas={chartDisabilitas}
+    />
   );
 }
 

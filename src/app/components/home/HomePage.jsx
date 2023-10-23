@@ -8,8 +8,9 @@ import Page4 from "@/app/components/home/Page-4";
 import Page5 from "@/app/components/home/Page-5";
 import Footer from "@/app/components/home/Footer";
 import * as React from "react";
+import PageChart from "@/app/components/home/Page-Chart";
 
-export default function HomePage() {
+export default function HomePage({ tipeDisabilitas, chartDisabilitas }) {
   const [idPath, setIdPath] = React.useState("");
 
   return (
@@ -20,6 +21,10 @@ export default function HomePage() {
       <Page2 />
       <Page3 />
       <Page4 />
+      <PageChart
+        tipeDisabilitas={tipeDisabilitas}
+        chartDisabilitas={chartDisabilitas}
+      />
       <Page5 />
       <Footer />
     </>
